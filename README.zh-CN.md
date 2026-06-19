@@ -37,6 +37,40 @@
 
 ---
 
+## 截图预览
+
+| 浅色 Reading View | 浅色 Editing View |
+|---|---|
+| ![Light Reading](./screenshots/light-reading.png) | ![Light Editing](./screenshots/light-editing.png) |
+
+| 深色 Reading View | Callout 严重度梯度 |
+|---|---|
+| ![Dark Reading](./screenshots/dark-reading.png) | ![Callouts](./screenshots/callouts.png) |
+
+| Featured Card 嵌入 | 命令面板 | 设置面板 |
+|---|---|---|
+| ![Embed](./screenshots/embed-featured-card.png) | ![Command Palette](./screenshots/command-palette.png) | ![Settings](./screenshots/settings-panel.png) |
+
+截图尚未拍摄 —— 见 [`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) 的清单。按精确文件名拍摄后，本章节自动渲染。
+
+---
+
+## Style Settings
+
+本主题内置 [Style Settings](https://github.com/obsidianmd/obsidian-style-settings) 配置 schema（`data-theme.json`），暴露最高杠杆的几个变量给用户调——无需改 CSS。
+
+装好 Style Settings 社区插件后，进入 **Settings → Style Settings → Kami Reader**，可调：
+
+- **正文字体栈** —— 把 LXGW WenKai Screen（楷书）换成思源宋体等印刷宋体，缓解楷书阅读疲劳
+- **正文行距** —— 默认 1.55，范围 1.3–1.9
+- **笔记最大宽度** —— 默认 700px
+- **强调色**（浅色 + 深色）—— 单色替换，瞬间改变主题气质
+- **主背景**（浅色 + 深色）—— 调 parchment 暖度
+
+Schema 刻意只暴露 5 个变量。其他保持 `theme.css` 内固定，以维护 kami 的克制原则——过度可配置会稀释设计系统的统一性。
+
+---
+
 ## 字体系统
 
 ```css
@@ -131,21 +165,40 @@ Phase 1 目标是完整的视觉覆盖：
 
 ## Phase 2 —— 发布
 
-仅当 Phase 1 一周 dogfooding 确认视觉迁移成立后才触发。
+Phase 1 dogfooding 已确认视觉迁移成立。Phase 2 切成三段独立可发布阶段。
 
-Phase 2 工作：
-1. **解决终端用户的沙盒安装问题。** Vault-API 注入流程只对开发者本人有效。
-   终端用户在 App Store 版 Obsidian 上会遇到同样的 provenance 墙。备选方案：
-   - 把 snippet 工作流文档化作为安装路径（笨但能用）。
-   - 提交到 Theme Gallery，验证 Obsidian 自己的下载器写出的文件 provenance
-     是否正确（大概率是 —— Obsidian 自己写的文件它自己认）。
-   - 做成 community plugin，让 plugin 自己注入 CSS。
-2. 把硬编码的字体名暴露成 Style Settings 可配置项。
-3. 写 `data-theme.json` Style Settings schema。
-4. 截图集（浅色 reading view、editing view、命令面板、设置面板）。
-5. 提 PR 到 `obsidianmd/obsidian-releases` → `community-css.json`。
-6. 可选：把 LXGW WenKai Screen Regular 子集化到常用 3500 字 + 打包成
-   woff2（约 1MB），让用户开箱即用原版视觉。
+### Phase 2a —— 打磨与文档（✅ 本次提交完成）
+
+- ✅ **Style Settings schema**（`data-theme.json`）—— 暴露 5 个高杠杆变量
+  （字体栈、行距、笔记宽度、强调色、主背景）
+- ✅ **截图清单**（`screenshots/SCREENSHOTS.md`）—— 7 张截图清单已嵌入中英
+  README。文件名预留好，按名拍完即自动渲染
+- ⏸ **LXGW WenKai Screen woff2 打包** —— 推迟。需要 `fonttools` /
+  `cn-font-split` 工具链 + OFL 许可文件处理；Phase 2a 单 session 内风险
+  过高。README 仍以手动装字体路径为主
+
+### Phase 2b —— 验证 Theme Gallery 沙盒兼容性（用户手工）
+
+Phase 2 的命门假设：**Obsidian 自己的 Theme Gallery 下载器写出的文件
+provenance 是 Obsidian 本身，能绕过 macOS Sequoia 沙盒墙吗？**
+
+验证是 30 分钟的手工测试：
+1. 新建一个 vault（或用非关键 vault）
+2. Settings → Community plugins → Browse → 装一个你还没有的小主题
+3. `xattr -l <vault>/.obsidian/themes/<刚装的主题>/theme.css`
+4. 输出空（没有 `com.apple.provenance`）→ Phase 2c 安全
+   有 `com.apple.provenance` → Phase 2c 必须走 plugin 路径（见下文 plan B）
+
+### Phase 2c —— 提交 Obsidian Theme Gallery（仅当 2b 通过）
+
+Plan A（首选）：提主题 PR 到
+[`obsidianmd/obsidian-releases`](https://github.com/obsidianmd/obsidian-releases) →
+`community-css.json`。Obsidian 自己的下载器写文件；如果 2b 确认 provenance
+正确，App Store 用户能干净安装。
+
+Plan B（2b 失败时的备选）：做成 community plugin 而非主题。`onload()` 时
+通过 `app.customCss` 注入 CSS。Plugin 加载机制跟主题不同，可能不受沙盒墙
+影响。前期工程量更大，但解锁 App Store 用户。
 
 ---
 
@@ -193,8 +246,10 @@ Phase 2 工作：
 kami-obsidian/
 ├── manifest.json              # Phase 2 Theme Gallery 提交所需的元数据
 ├── theme.css                  # 所有 kami 样式的唯一源文件
+├── data-theme.json            # Style Settings schema（5 个面向用户的变量）
 ├── sync.sh                    # 从 theme.css 重新生成 inject-kami-snippet.js
 ├── inject-kami-snippet.js     # sync.sh 的产物 —— 粘贴到 Obsidian Console 用
+├── screenshots/               # Phase 2a 截图集（见 SCREENSHOTS.md）
 ├── README.md                  # 英文文档
 └── README.zh-CN.md            # 本文件
 ```

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://raw.githubusercontent.com/obsidianmd/obsidian-style-settings-plugin/main/data-schema.json",
+  "name": "Kami Reader",
+  "description": "微调字体、行距、强调色和阅读宽度，无需改 CSS。• Adjust typography, accent color, and reading width without touching CSS.",
+  "sections": [
+    {
+      "name": "Typography · 字体与节奏",
+      "settings": [
+        {
+          "id": "font-text-theme",
+          "title": "正文字体栈 · Body font family",
+          "description": "整体标题和正文使用的字体栈。默认：Charter (EN serif) + LXGW WenKai Screen (CJK 楷书)。如果楷书阅读疲劳，可改成 Charter + Source Han Serif SC（思源宋体）等印刷宋体。",
+          "type": "variable-text",
+          "default": ""
+        },
+        {
+          "id": "line-height-normal",
+          "title": "正文行距 · Body line-height",
+          "description": "kami 阅读型默认 1.55。更紧凑可调到 1.45（密排模式），更宽松可调到 1.75。",
+          "type": "variable-number-slider",
+          "min": 1.3,
+          "max": 1.9,
+          "step": 0.05,
+          "default": 1.55,
+          "format": "factor"
+        },
+        {
+          "id": "file-line-width",
+          "title": "笔记最大宽度 · Note max width",
+          "description": "kami 默认 700px。更窄更聚焦阅读，更宽更宽敞适合双栏布局。",
+          "type": "variable-text",
+          "default": "700px"
+        }
+      ]
+    },
+    {
+      "name": "Accent · 强调色",
+      "settings": [
+        {
+          "id": "text-accent",
+          "title": "强调色 · Accent color",
+          "description": "标题、链接、选区、CTA 按钮的统一色。kami 默认 Light: 油墨蓝 #1B365D，Dark: Ink Light #2D5A8A。改成其他单色（如森林绿 #2d4a2b）可瞬间换主题气质，但破坏 kami 单色克制原则。",
+          "type": "variable-themed-color",
+          "default": {
+            "light": "#1B365D",
+            "dark": "#2D5A8A"
+          },
+          "format": "hex",
+          "opacity": false
+        },
+        {
+          "id": "text-on-accent",
+          "title": "强调色上的文字色 · Text on accent",
+          "description": "Primary 按钮、tag 上面的文字色。默认 ivory #faf9f5。",
+          "type": "variable-themed-color",
+          "default": {
+            "light": "#faf9f5",
+            "dark": "#f4f3ee"
+          },
+          "format": "hex",
+          "opacity": false
+        }
+      ]
+    },
+    {
+      "name": "Surface · 背景表面",
+      "settings": [
+        {
+          "id": "background-primary",
+          "title": "主背景 · Primary background",
+          "description": "笔记主区域背景色。kami 默认 Light: parchment #f5f4ed（暖米纸），Dark: Deep Dark #141413（橄榄近黑）。如果觉得 parchment 太黄，可调成更中性的 #faf8f1 或纯一点的 ivory #faf9f5。",
+          "type": "variable-themed-color",
+          "default": {
+            "light": "#f5f4ed",
+            "dark": "#141413"
+          },
+          "format": "hex",
+          "opacity": false
+        }
+      ]
+    },
+    {
+      "name": "Info · 说明",
+      "settings": [
+        {
+          "id": "info-kami-credits",
+          "title": "About this theme",
+          "description": "Kami Reader 是 tw93/kami 设计系统在 Obsidian 上的衍生适配。所有视觉 token 溯源至 kami v1.1.0 (MIT)。本主题 Phase 1 已公开，Phase 2 (Theme Gallery 提交) 待验证 macOS Sequoia sandbox 兼容性后进行。",
+          "type": "info-text"
+        }
+      ]
+    }
+  ]
+}

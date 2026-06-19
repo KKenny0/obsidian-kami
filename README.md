@@ -38,6 +38,40 @@ is relaxed for the editor context but the intent holds: accent only, never chrom
 
 ---
 
+## Screenshots
+
+| Reading View (Light) | Editing View (Light) |
+|---|---|
+| ![Light Reading](./screenshots/light-reading.png) | ![Light Editing](./screenshots/light-editing.png) |
+
+| Reading View (Dark) | Callout Severity Ladder |
+|---|---|
+| ![Dark Reading](./screenshots/dark-reading.png) | ![Callouts](./screenshots/callouts.png) |
+
+| Featured Card Embed | Command Palette | Settings Panel |
+|---|---|---|
+| ![Embed](./screenshots/embed-featured-card.png) | ![Command Palette](./screenshots/command-palette.png) | ![Settings](./screenshots/settings-panel.png) |
+
+Screenshots not captured yet — see [`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) for the shot list. Once captured with the exact filenames, this section renders automatically.
+
+---
+
+## Style Settings
+
+This theme ships a [Style Settings](https://github.com/obsidianmd/obsidian-style-settings) schema (`data-theme.json`) exposing the highest-leverage variables for user tuning — no CSS editing required.
+
+After installing the Style Settings community plugin, go to **Settings → Style Settings → Kami Reader** to adjust:
+
+- **Body font family** — swap LXGW WenKai Screen (kaiti) for Source Han Serif (songti) if kaiti fatigues
+- **Body line-height** — 1.55 default, range 1.3–1.9
+- **Note max width** — 700px default
+- **Accent color** (light + dark) — single accent swap, instantly re-themes
+- **Primary background** (light + dark) — tune parchment warmth
+
+The schema intentionally exposes only 5 variables. Everything else stays fixed in `theme.css` to honor kami's restraint principle — over-configurability would dilute the design system.
+
+---
+
 ## Typography
 
 ```css
@@ -137,23 +171,46 @@ Not covered (deferred):
 
 ## Phase 2 — Publishing
 
-Triggered only if Phase 1 one-week dogfooding confirms the visual transfer holds.
+Phase 1 dogfooding confirmed the visual transfer holds. Phase 2 is sliced
+into three independently-shippable stages.
 
-Phase 2 work:
-1. **Solve the sandbox install problem for end users.** The Vault-API inject
-   flow only works for the developer. End users on App Store Obsidian will
-   hit the same provenance wall. Options to evaluate:
-   - Document the snippet workflow as the install path (clunky but works).
-   - Submit to Theme Gallery and verify whether Obsidian's own downloader
-     produces files with the right provenance (likely yes — Obsidian writes
-     them itself).
-   - Ship as a community plugin that injects the CSS programmatically.
-2. Audit hardcoded font names → expose via Style Settings.
-3. Write `data-theme.json` Style Settings schema.
-4. Screenshot set (light reading view, editing view, command palette, settings).
-5. Submit PR to `obsidianmd/obsidian-releases` → `community-css.json`.
-6. Optional: subset LXGW WenKai Screen Regular to top-3500 characters and
-   bundle as woff2 (~1MB) for the intended look out-of-the-box.
+### Phase 2a — Polish & docs (✅ done in this commit)
+
+- ✅ **Style Settings schema** (`data-theme.json`) — 5 high-leverage variables
+  exposed (font stack, line-height, note width, accent color, primary bg).
+- ✅ **Screenshot checklist** (`screenshots/SCREENSHOTS.md`) — 7-shot list
+  embedded in both READMEs. Filenames reserved; capture to render.
+- ⏸ **LXGW WenKai Screen woff2 bundling** — deferred. Needs `fonttools` /
+  `cn-font-split` toolchain + OFL license-file handling; not worth the risk
+  in a single Phase 2a session. README documents manual font install path
+  instead.
+
+### Phase 2b — Verify Theme Gallery sandbox compatibility (user action)
+
+The single load-bearing assumption of Phase 2: **does Obsidian's own Theme
+Gallery downloader write files with Obsidian provenance, bypassing the
+macOS Sequoia sandbox wall?**
+
+Verification is a 30-minute manual test:
+1. Create a fresh vault (or use a non-critical one).
+2. Settings → Community plugins → Browse → install Style Settings or any
+   small theme you don't already have.
+3. `xattr -l <vault>/.obsidian/themes/<installed-theme>/theme.css`
+4. If output is empty (no `com.apple.provenance`) → Phase 2c is safe.
+   If `com.apple.provenance` is present → Phase 2c must use the plugin path
+   (see Phase 2c plan B below).
+
+### Phase 2c — Submit to Obsidian Theme Gallery (only after 2b passes)
+
+Plan A (preferred): submit theme PR to
+[`obsidianmd/obsidian-releases`](https://github.com/obsidianmd/obsidian-releases) →
+`community-css.json`. Obsidian's own downloader writes the files; if 2b
+confirms provenance is correct, App Store users install cleanly.
+
+Plan B (fallback if 2b fails): ship as a community plugin instead of a
+theme. `onload()` injects CSS via `app.customCss`. Plugin loading mechanism
+is separate from theme loading and likely unaffected by the sandbox wall.
+Higher upfront engineering cost but unblocks App Store users.
 
 ---
 
@@ -206,8 +263,10 @@ Phase 2 work:
 kami-obsidian/
 ├── manifest.json              # Phase 2 Theme Gallery submission metadata
 ├── theme.css                  # Source of truth for all kami styles
+├── data-theme.json            # Style Settings schema (5 user-facing variables)
 ├── sync.sh                    # Regenerates inject-kami-snippet.js from theme.css
 ├── inject-kami-snippet.js     # Generated by sync.sh — paste into Obsidian Console
+├── screenshots/               # Phase 2a screenshot set (see SCREENSHOTS.md)
 ├── README.md                  # English docs (this file)
 └── README.zh-CN.md            # 简体中文文档
 ```
