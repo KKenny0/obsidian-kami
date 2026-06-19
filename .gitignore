@@ -1,0 +1,12 @@
+# macOS metadata
+.DS_Store
+
+# Editor swap files
+*.swp
+*~
+.vscode/
+.idea/
+
+# Note: inject-kami-snippet.js is intentionally committed. It is the install
+# mechanism for users on macOS Sequoia sandboxed Obsidian — without it, those
+# users cannot install the theme. Do NOT gitignore it.
