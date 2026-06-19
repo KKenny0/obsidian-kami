@@ -55,21 +55,19 @@ settings:
     title: 强调色 · Accent color
     description: 标题、链接、选区、CTA 按钮的统一色。默认 Light 油墨蓝 #1B365D，Dark Ink Light #2D5A8A。改色瞬间换主题气质，但破坏 kami 单色克制。
     type: variable-themed-color
-    default:
-      light: "#1B365D"
-      dark: "#2D5A8A"
     format: hex
     opacity: false
+    default-light: '#1B365D'
+    default-dark: '#2D5A8A'
   -
     id: text-on-accent
     title: 强调色上的文字色 · Text on accent
     description: Primary 按钮、tag 上的文字色。默认 ivory #faf9f5。
     type: variable-themed-color
-    default:
-      light: "#faf9f5"
-      dark: "#f4f3ee"
     format: hex
     opacity: false
+    default-light: '#faf9f5'
+    default-dark: '#f4f3ee'
   -
     id: surface-heading
     title: Surface · 背景表面
@@ -80,11 +78,10 @@ settings:
     title: 主背景 · Primary background
     description: 笔记主区域背景色。默认 Light parchment #f5f4ed（暖米纸），Dark Deep Dark #141413（橄榄近黑）。parchment 太黄可调到 #faf8f1 或 ivory #faf9f5。
     type: variable-themed-color
-    default:
-      light: "#f5f4ed"
-      dark: "#141413"
     format: hex
     opacity: false
+    default-light: '#f5f4ed'
+    default-dark: '#141413'
   -
     id: info-heading
     title: About · 关于
