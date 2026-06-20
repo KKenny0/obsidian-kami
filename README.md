@@ -12,7 +12,7 @@ An Obsidian theme inspired by [tw93/kami](https://github.com/tw93/kami). Transla
 kami's print-grade typographic system — warm parchment surface, ink-blue accent,
 serif-led hierarchy, warm-gray neutrals — onto the Obsidian editor.
 
-> Status: **Phase 2c — submitted to community.obsidian.md, awaiting Obsidian team review.**
+> Status: **Published on the [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader).**
 > Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.1.2`
 
 ---
@@ -107,21 +107,31 @@ Only LXGW WenKai Screen needs manual install. Without it, CJK falls back to
 
 ---
 
-## Installation (macOS Sequoia + App Store Obsidian)
+## Installation
 
-> ⚠️ **Why this isn't a normal "drop folder in themes/" install.**
->
-> Mac App Store Obsidian runs in a sandbox. macOS Sequoia 15+ tags every file
-> created by `cp` from Terminal with `com.apple.provenance`. The sandbox then
-> refuses to load those files as theme resources — Obsidian silently skips the
-> theme folder and falls back to whatever it last loaded successfully.
-> `xattr -cr` cannot remove `com.apple.provenance` (SIP-protected).
->
-> The workaround: ship kami as a **CSS snippet** instead of a theme, and inject
-> it via Obsidian's own Vault API from the DevTools console. Files written by
-> `app.vault` carry Obsidian provenance and load normally.
+### From Obsidian Theme Gallery (recommended)
 
-### One-time setup
+1. Obsidian → **Settings → Appearance** → click **Manage** next to Themes
+2. **Browse** → search "Kami Reader" → **Install** → **Use**
+3. (Optional) Install the [Style Settings](https://obsidian.md/plugins?id=obsidian-style-settings) community plugin for the 5 tunable variables (font, line-height, width, accent, background)
+
+Phase 2b verified Obsidian's own Gallery downloader writes files with Obsidian provenance — App Store users install cleanly with no macOS Sequoia sandbox issue.
+
+### Manual install / developer iteration (macOS Sequoia sandbox workaround)
+
+> ⚠️ **Why this section exists.** Mac App Store Obsidian runs in a sandbox.
+> macOS Sequoia 15+ tags every file created by `cp` from Terminal with
+> `com.apple.provenance`. The sandbox then refuses to load those files as
+> theme resources — Obsidian silently skips the theme folder. This matters
+> for **developers iterating on theme.css** who copy files into their own
+> vault's `.obsidian/themes/` directory. End users installing via Gallery
+> (the path above) are not affected.
+
+The workaround for local iteration: ship kami as a **CSS snippet** instead of a
+theme, and inject it via Obsidian's own Vault API from the DevTools console.
+Files written by `app.vault` carry Obsidian provenance and load normally.
+
+#### One-time setup
 
 1. Confirm Appearance → Themes is set to **Default** (no other theme should
    be active; another theme's `body.<name>-theme` class will out-spec kami's
@@ -135,7 +145,7 @@ Only LXGW WenKai Screen needs manual install. Without it, CJK falls back to
    You should see `✓ kami.css created (... chars)`.
 5. Settings → Appearance → scroll to **CSS Snippets** → enable **kami**.
 
-### Iterating on the CSS
+#### Iterating on the CSS
 
 ```bash
 # Edit theme.css, then:
@@ -174,10 +184,10 @@ Not covered (deferred):
 
 ---
 
-## Phase 2 — Publishing
+## Phase 2 — Publishing (✅ complete, theme live on Gallery)
 
-Phase 1 dogfooding confirmed the visual transfer holds. Phase 2 is sliced
-into three independently-shippable stages.
+Phase 1 dogfooding confirmed the visual transfer holds. Phase 2 is complete;
+the theme is live at https://community.obsidian.md/themes/kami-reader.
 
 ### Phase 2a — Polish & docs (✅ done in this commit)
 
@@ -201,7 +211,11 @@ fresh vault, ran `xattr -l` on the downloaded `theme.css` — output was empty
 (no `com.apple.provenance`). Obsidian's own downloader writes Obsidian-provenance
 files; App Store users install cleanly from Gallery. Plan A is safe.
 
-### Phase 2c — Submit to Obsidian Theme Gallery (✅ Phase 2b passed, in submission)
+### Phase 2c — Submit to Obsidian Theme Gallery (✅ published 2026-06-20)
+
+Live at https://community.obsidian.md/themes/kami-reader. Auto-synced to
+`obsidianmd/obsidian-releases/community-css-themes.json` via the hourly
+mirror workflow.
 
 **Plan A (preferred, in progress): submit via community.obsidian.md developer form.**
 

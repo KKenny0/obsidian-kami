@@ -11,7 +11,7 @@
 把 [tw93/kami](https://github.com/tw93/kami) 的印刷级排版系统——暖米纸底色、
 油墨蓝点缀、衬线主导的层级、暖调中性灰——搬到 Obsidian 编辑器上。
 
-> 当前状态：**Phase 2c —— 已提交 community.obsidian.md，等 Obsidian 团队审核。**
+> 当前状态：**已上线 [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader)。**
 > 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.2`
 
 ---
@@ -104,20 +104,29 @@ Schema 刻意只暴露 5 个变量。其他保持 `theme.css` 内固定，以维
 
 ---
 
-## 安装（macOS Sequoia + App Store 版 Obsidian）
+## 安装
 
-> ⚠️ **为什么这不是常见的"把文件夹丢进 themes/"那种安装方式。**
->
-> App Store 版 Obsidian 跑在沙盒里。macOS Sequoia 15+ 会给所有从终端用 `cp`
-> 创建的文件打上 `com.apple.provenance` 属性，沙盒据此拒绝把这些文件当作
-> 主题资源加载——Obsidian 静默跳过这个主题文件夹，回退到上次成功加载的主题。
-> `xattr -cr` 也清不掉 `com.apple.provenance`（受 SIP 保护）。
->
-> 绕过方案：把 kami 作为 **CSS snippet** 发布（不是主题），通过 Obsidian 自己
-> 的 Vault API 从 DevTools console 注入。`app.vault` 写入的文件 provenance 是
-> Obsidian 本身，沙盒正常放行。
+### 从 Obsidian Theme Gallery 安装（推荐）
 
-### 一次性配置
+1. Obsidian → **Settings → Appearance** → Themes 旁点 **Manage**
+2. **Browse** → 搜索 "Kami Reader" → **Install** → **Use**
+3. （可选）装 [Style Settings](https://obsidian.md/plugins?id=obsidian-style-settings) 社区插件，启用 5 个可调变量（字体、行距、宽度、强调色、背景）
+
+Phase 2b 已验证 Obsidian 自己的 Gallery 下载器写出的文件无 `com.apple.provenance`——App Store 用户从 Gallery 装干净，无 macOS Sequoia 沙盒问题。
+
+### 手动安装 / 开发者迭代（macOS Sequoia 沙盒绕过）
+
+> ⚠️ **这一节存在的理由。** App Store 版 Obsidian 跑在沙盒里。macOS Sequoia
+> 15+ 会给所有从终端用 `cp` 创建的文件打上 `com.apple.provenance` 属性，沙盒
+> 据此拒绝加载这些文件作为主题资源——Obsidian 静默跳过这个主题文件夹。这只
+> 影响**在本地 vault 里迭代 theme.css 的开发者**。从 Gallery 安装的终端用户
+> （上面那条路径）不受影响。
+
+本地迭代的绕过方案：把 kami 作为 **CSS snippet** 发布（不是主题），通过
+Obsidian 自己的 Vault API 从 DevTools console 注入。`app.vault` 写入的文件
+provenance 是 Obsidian 本身，沙盒正常放行。
+
+#### 一次性配置
 
 1. 确认 Settings → Appearance → Themes 设为 **Default**（不要保留其他主题；
    其他主题的 `body.<name>-theme` class 选择器特异性高于 kami 的
@@ -131,7 +140,7 @@ Schema 刻意只暴露 5 个变量。其他保持 `theme.css` 内固定，以维
    看到提示 `✓ kami.css created (... chars)` 即成功。
 5. Settings → Appearance → 滑到底部 **CSS Snippets** → 开启 **kami** 开关。
 
-### 改 CSS 后的迭代流程
+#### 改 CSS 后的迭代流程
 
 ```bash
 # 编辑 theme.css 后：
@@ -168,9 +177,10 @@ Phase 1 目标是完整的视觉覆盖：
 
 ---
 
-## Phase 2 —— 发布
+## Phase 2 —— 发布（✅ 完成，主题已上线 Gallery）
 
-Phase 1 dogfooding 已确认视觉迁移成立。Phase 2 切成三段独立可发布阶段。
+Phase 1 dogfooding 已确认视觉迁移成立。Phase 2 已完成；主题已上线
+https://community.obsidian.md/themes/kami-reader。
 
 ### Phase 2a —— 打磨与文档（✅ 本次提交完成）
 
@@ -192,7 +202,10 @@ provenance 是 Obsidian 本身，能绕过 macOS Sequoia 沙盒墙吗？**
 Obsidian 自己的下载器写出 Obsidian-provenance 文件，App Store 用户从 Gallery
 安装干净。Plan A 安全。
 
-### Phase 2c —— 提交 Obsidian Theme Gallery（✅ 2b 通过，正在提交）
+### Phase 2c —— 提交 Obsidian Theme Gallery（✅ 2026-06-20 上线）
+
+已上线 https://community.obsidian.md/themes/kami-reader。通过每小时一次的
+mirror workflow 自动同步到 `obsidianmd/obsidian-releases/community-css-themes.json`。
 
 **Plan A（首选，进行中）：通过 community.obsidian.md 开发者表单提交。**
 
