@@ -2,7 +2,7 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-> Last updated: 2026-06-19
+> Last updated: 2026-06-20
 
 > **Inspired by [tw93/kami](https://github.com/tw93/kami). Not affiliated with or
 > endorsed by tw93. All visual design tokens trace to the original kami project
@@ -12,8 +12,8 @@ An Obsidian theme inspired by [tw93/kami](https://github.com/tw93/kami). Transla
 kami's print-grade typographic system — warm parchment surface, ink-blue accent,
 serif-led hierarchy, warm-gray neutrals — onto the Obsidian editor.
 
-> Status: **Phase 1 — personal use, validating the visual transfer.**
-> Not yet submitted to the Obsidian Theme Gallery.
+> Status: **Phase 2c — submitted to community.obsidian.md, awaiting Obsidian team review.**
+> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.1.2`
 
 ---
 
@@ -58,12 +58,17 @@ Screenshots not captured yet — see [`screenshots/SCREENSHOTS.md`](./screenshot
 
 ## Style Settings
 
-This theme ships a [Style Settings](https://github.com/obsidianmd/obsidian-style-settings) schema (`data-theme.json`) exposing the highest-leverage variables for user tuning — no CSS editing required.
+This theme ships a [Style Settings](https://github.com/obsidianmd/obsidian-style-settings) schema exposing the highest-leverage variables for user tuning — no CSS editing required.
+
+**Dual schema mode** (both kept in sync):
+
+- **Snippet mode** (current install path on macOS Sequoia): schema embedded as `/* @settings ... */` YAML comment at the top of `theme.css`. Style Settings does not scan `.obsidian/snippets/` for standalone JSON files, so the schema must live inside the CSS.
+- **Theme mode** (after Phase 2c Gallery install): schema in root `data-theme.json`. Used when Obsidian loads the theme from `.obsidian/themes/kami-reader/`.
 
 After installing the Style Settings community plugin, go to **Settings → Style Settings → Kami Reader** to adjust:
 
 - **Body font family** — swap LXGW WenKai Screen (kaiti) for Source Han Serif (songti) if kaiti fatigues
-- **Body line-height** — 1.55 default, range 1.3–1.9
+- **Body line-height** — 1.55 default, range 1.3–1.9 (Live Preview needs Cmd+E toggle after change; Reading View updates instantly)
 - **Note max width** — 700px default
 - **Accent color** (light + dark) — single accent swap, instantly re-themes
 - **Primary background** (light + dark) — tune parchment warmth
@@ -185,32 +190,62 @@ into three independently-shippable stages.
   in a single Phase 2a session. README documents manual font install path
   instead.
 
-### Phase 2b — Verify Theme Gallery sandbox compatibility (user action)
+### Phase 2b — Verify Theme Gallery sandbox compatibility (✅ passed)
 
 The single load-bearing assumption of Phase 2: **does Obsidian's own Theme
 Gallery downloader write files with Obsidian provenance, bypassing the
 macOS Sequoia sandbox wall?**
 
-Verification is a 30-minute manual test:
-1. Create a fresh vault (or use a non-critical one).
-2. Settings → Community plugins → Browse → install Style Settings or any
-   small theme you don't already have.
-3. `xattr -l <vault>/.obsidian/themes/<installed-theme>/theme.css`
-4. If output is empty (no `com.apple.provenance`) → Phase 2c is safe.
-   If `com.apple.provenance` is present → Phase 2c must use the plugin path
-   (see Phase 2c plan B below).
+**Verified 2026-06-20**: installed Shade Sanctuary from Browse Themes in a
+fresh vault, ran `xattr -l` on the downloaded `theme.css` — output was empty
+(no `com.apple.provenance`). Obsidian's own downloader writes Obsidian-provenance
+files; App Store users install cleanly from Gallery. Plan A is safe.
 
-### Phase 2c — Submit to Obsidian Theme Gallery (only after 2b passes)
+### Phase 2c — Submit to Obsidian Theme Gallery (✅ Phase 2b passed, in submission)
 
-Plan A (preferred): submit theme PR to
-[`obsidianmd/obsidian-releases`](https://github.com/obsidianmd/obsidian-releases) →
-`community-css.json`. Obsidian's own downloader writes the files; if 2b
-confirms provenance is correct, App Store users install cleanly.
+**Plan A (preferred, in progress): submit via community.obsidian.md developer form.**
 
-Plan B (fallback if 2b fails): ship as a community plugin instead of a
-theme. `onload()` injects CSS via `app.customCss`. Plugin loading mechanism
-is separate from theme loading and likely unaffected by the sandbox wall.
-Higher upfront engineering cost but unblocks App Store users.
+The official "Submit your theme" doc on docs.obsidian.md is stale — it still
+says PR to obsidian-releases, but that repo closed PRs and switched to an hourly
+mirror workflow. The actual source of truth is
+[`community.obsidian.md`](https://community.obsidian.md), a Next.js app that
+mirrors to `obsidianmd/obsidian-releases` hourly via the
+`mirror-community-json.yml` workflow. Recent obsidian-releases commits are all
+"chore: Mirror community plugins and themes" by Obsidian Bot — no human PRs.
+
+**Submission steps:**
+1. Sign in to community.obsidian.md with an obsidian.md account.
+2. Open the developer submission form (in account menu).
+3. Submit:
+   ```
+   name: Kami Reader
+   repo: KKenny0/obsidian-kami
+   screenshot: screenshots/light-reading.png
+   modes: light, dark
+   ```
+4. Ensure a GitHub release tagged exactly with `manifest.json` version (no `v`
+   prefix). Obsidian pulls theme files from that release's tag.
+5. Obsidian team reviews (1-2 weeks typical), then auto-syncs to obsidian-releases.
+
+Phase 2b confirmed Obsidian's Gallery downloader writes files without
+`com.apple.provenance` — App Store users install cleanly with no sandbox issue.
+
+**Plan B (fallback if Plan A rejects): ship as a community plugin.**
+`onload()` injects CSS via `app.customCss`. Plugin loading mechanism is separate
+from theme loading and likely unaffected by the sandbox wall. Higher upfront
+engineering cost but unblocks App Store users if Plan A fails.
+
+### Phase 2c submission lint history
+
+community.obsidian.md runs automated lint on submission. Each warning required
+its own fix and a new release tag:
+
+| Release | Lint warning | Fix |
+|---|---|---|
+| `0.1.0` | No release matches manifest version | Created GitHub release tagged `0.1.0` (no `v` prefix) |
+| `0.1.1` | Repository has no recognized license | Restored pure MIT LICENSE (GitHub licensee strictly matches MIT template; attribution appended after standard text broke the match) |
+| `0.1.1` | `css-scrollbar` partially supported by Obsidian 1.4.5 | Dropped CSS Scrollbars spec properties (`scrollbar-width`, `scrollbar-color`); kept webkit `::-webkit-scrollbar` vendor extension |
+| `0.1.2` | Avoid `!important` at theme.css:788, 1105, 1106 | CodeMirror selection uses 0,3,0 specificity compound selector; reduced-motion uses explicit selector list instead of `* !important` |
 
 ---
 
@@ -261,18 +296,48 @@ Higher upfront engineering cost but unblocks App Store users.
 
 ```
 kami-obsidian/
-├── manifest.json              # Phase 2 Theme Gallery submission metadata
-├── theme.css                  # Source of truth for all kami styles
-├── data-theme.json            # Style Settings schema (5 user-facing variables)
+├── manifest.json              # Theme metadata (name, version, minAppVersion)
+├── theme.css                  # Source of truth for all kami styles + inline @settings YAML
+├── data-theme.json            # Style Settings schema for theme-folder mode (Phase 2c)
 ├── sync.sh                    # Regenerates inject-kami-snippet.js from theme.css
 ├── inject-kami-snippet.js     # Generated by sync.sh — paste into Obsidian Console
-├── screenshots/               # Phase 2a screenshot set (see SCREENSHOTS.md)
+├── screenshots/               # 7-shot set (see SCREENSHOTS.md)
+├── LICENSE                    # MIT (pure text so GitHub licensee detects SPDX:MIT)
 ├── README.md                  # English docs (this file)
 └── README.zh-CN.md            # 简体中文文档
 ```
 
 `inject-kami-snippet.js` is a **build artifact**, not source. Regenerate via
 `./sync.sh` after any `theme.css` change.
+
+---
+
+## Releases
+
+| Tag | Notes |
+|---|---|
+| [0.1.0](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.0) | Phase 1: visual system + dark variant + atomic components + Style Settings |
+| [0.1.1](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.1) | Compat: drop CSS Scrollbars spec for Obsidian 1.4.5; restore pure MIT LICENSE |
+| [0.1.2](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.2) | Lint compliance: remove !important from CodeMirror selection + reduced-motion |
+
+Release tags match `manifest.json` version exactly (no `v` prefix) — Obsidian
+pulls theme files from the GitHub release tagged with the manifest version.
+
+---
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
+
+Visual design system source: [tw93/kami](https://github.com/tw93/kami) (MIT).
+This theme is a derivative adaptation; all design token values trace to the
+original kami project.
+
+Fonts referenced but not bundled:
+- Charter (OFL, macOS-native)
+- LXGW WenKai / LXGW WenKai Screen (OFL, https://github.com/lxgw/LxgwWenKai)
+- JetBrains Mono (OFL)
+- Inter (OFL)
 
 ---
 
