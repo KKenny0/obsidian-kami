@@ -1021,17 +1021,7 @@ textarea:focus,
 }
 
 /* =========================================================================
-   7. Scrollbars inside leaves
-   ========================================================================= */
-.markdown-source-view,
-.markdown-preview-view,
-.workspace-leaf-content {
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar-thumb-bg) transparent;
-}
-
-/* =========================================================================
-   8. Dark Variant — Deep Dark (#141413) + Ink Light (#2D5A8A)
+   7. Dark Variant — Deep Dark (#141413) + Ink Light (#2D5A8A)
    ========================================================================= */
 /* Aligned to kami v1.1.0 spec:
    - Background uses Deep Dark #141413 (near-black with olive undertone, not
