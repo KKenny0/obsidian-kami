@@ -19,16 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-Visual design system source: tw93/kami (https://github.com/tw93/kami) — MIT.
-This theme is a derivative adaptation; all design token values trace to the
-original kami project. Kami's MIT license terms apply to the design system
-portions; see https://github.com/tw93/kami/blob/main/LICENSE for details.
-
-Fonts referenced but not bundled:
-- Charter (OFL, macOS-native)
-- LXGW WenKai / LXGW WenKai Screen (OFL, https://github.com/lxgw/LxgwWenKai)
-- JetBrains Mono (OFL)
-- Inter (OFL)
