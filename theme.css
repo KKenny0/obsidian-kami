@@ -781,11 +781,15 @@ tbody tr:hover {
     color: var(--text-muted);
 }
 
-/* Selection — ink-blue translucent */
-.cm-s-obsidian .cm-selectionBackground,
+/* Selection — ink-blue translucent.
+   Triple-class compound selector (specificity 0,3,0) beats CodeMirror's
+   per-line cm-selectionBackground without resorting to !important. */
+.cm-s-obsidian .cm-line .cm-selectionBackground,
 .cm-s-obsidian .cm-line .cm-selection,
-.cm-s-obsidian ::selection {
-    background-color: var(--text-selection) !important;
+.cm-s-obsidian .cm-content .cm-selection,
+.cm-s-obsidian .cm-content ::selection,
+.cm-s-obsidian .cm-lines .cm-selection {
+    background-color: var(--text-selection);
 }
 
 /* Cursor — ink blue, soft blink */
@@ -1098,11 +1102,28 @@ body.theme-dark {
 /* =========================================================================
    9. Reduced motion — respect user OS preference
    ========================================================================= */
+/* Scoped to elements where kami itself defines transitions (120ms ease
+   etc.). Avoids universal `* { ... !important }` pattern flagged by
+   community lint. Specificity 0,0,1 covers kami's own transition rules
+   without polluting the cascade for plugins. */
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
+    button,
+    input,
+    textarea,
+    .dropdown,
+    .callout,
+    .markdown-embed,
+    .file-embed,
+    .workspace-tab-header,
+    .nav-file-title,
+    .nav-folder-title,
+    .suggestion-item,
+    .vertical-tab-nav-item,
+    .menu-item,
+    a,
+    .cm-hmd-internal-link,
+    .cm-link {
+        transition-duration: 0.01ms;
+        animation-duration: 0.01ms;
     }
 }
