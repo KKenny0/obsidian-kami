@@ -2,7 +2,7 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-> Last updated: 2026-06-20
+> Last updated: 2026-06-24
 
 > **Inspired by [tw93/kami](https://github.com/tw93/kami). Not affiliated with or
 > endorsed by tw93. All visual design tokens trace to the original kami project
@@ -13,7 +13,7 @@ kami's print-grade typographic system — warm parchment surface, ink-blue accen
 serif-led hierarchy, warm-gray neutrals — onto the Obsidian editor.
 
 > Status: **Published on the [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader).**
-> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.1.2`
+> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.1.3`
 
 ---
 
@@ -52,7 +52,13 @@ is relaxed for the editor context but the intent holds: accent only, never chrom
 |---|---|---|
 | ![Embed](./screenshots/embed-featured-card.png) | ![Command Palette](./screenshots/command-palette.png) | ![Settings](./screenshots/settings-panel.png) |
 
-Screenshots not captured yet — see [`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) for the shot list. Once captured with the exact filenames, this section renders automatically.
+| Task Completion in Nested Lists |
+|---|
+| ![Task completion in nested lists](./screenshots/checkbox-completion.png) |
+
+Screenshots are captured in [`screenshots/`](./screenshots/). See
+[`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) when refreshing
+the set for a new release.
 
 ---
 
@@ -167,7 +173,7 @@ Phase 1 targets full visual coverage:
 - ✅ Base color tokens (60+ variables, both light and dark palettes)
 - ✅ **Dark variant** — Deep Dark `#141413` + Ink Light `#2D5A8A`, preserving
   the same yellow-brown undertone and single-accent restraint as light mode.
-- ✅ Reading View: headings, body, lists (em-dash markers), tables, blockquote
+- ✅ Reading View: headings, body, lists (native markers), tables, blockquote
   (2pt ink-blue rail + olive text, no bg), code, frontmatter, embeds
 - ✅ Editing View (CodeMirror 6): syntax tokens, cursor, selection, active
   line, formatting marks
@@ -177,8 +183,6 @@ Phase 1 targets full visual coverage:
 
 Not covered (deferred):
 - PDF Export stylesheet (kami is print-native; this is a Phase 1.5 candidate)
-- Style Settings plugin schema (Phase 2 — lets users tune color temperature,
-  font, contrast)
 - Plugin-specific overrides (Dataview, Templater, Excalidraw) — verify as
   encountered
 
@@ -279,8 +283,9 @@ its own fix and a new release tag:
    rgba tag backgrounds (WeasyPrint double-rect bug in PDF export).
 5. **Ring + whisper shadows, never hard drop shadows.** kami spec; hard
    drop shadows look heavy in print and on screen.
-6. **Em-dash list markers, not bullets.** kami Dash List — "短横线代替圆点，
-   更书卷气".
+6. **Native list markers across Reading and Live Preview.** A Reading-only
+   em-dash marker looked elegant but made editing and reading disagree; kami's
+   restraint now comes from quiet marker color and tighter nested spacing.
 7. **Blockquote: 2pt ink-blue rail + olive text, no background, no italic.**
    Restraint over decoration.
 8. **LXGW WenKai Screen over Source Han Serif.** Kami's original (仓耳今楷02)
@@ -333,6 +338,7 @@ kami-obsidian/
 | [0.1.0](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.0) | Phase 1: visual system + dark variant + atomic components + Style Settings |
 | [0.1.1](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.1) | Compat: drop CSS Scrollbars spec for Obsidian 1.4.5; restore pure MIT LICENSE |
 | [0.1.2](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.2) | Lint compliance: remove !important from CodeMirror selection + reduced-motion |
+| [0.1.3](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.3) | Polish: align nested list typography, prevent external-link icon overlap, and keep completed parent tasks from striking through child content |
 
 Release tags match `manifest.json` version exactly (no `v` prefix) — Obsidian
 pulls theme files from the GitHub release tagged with the manifest version.

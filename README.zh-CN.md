@@ -6,13 +6,13 @@
 > 未受其背书。所有视觉设计 token 均溯源至原 kami 项目（MIT 许可）；本仓库
 > 是 kami 设计系统在 Obsidian 端的衍生适配。**
 
-> 最后更新：2026-06-20 · Last updated: 2026-06-20
+> 最后更新：2026-06-24 · Last updated: 2026-06-24
 
 把 [tw93/kami](https://github.com/tw93/kami) 的印刷级排版系统——暖米纸底色、
 油墨蓝点缀、衬线主导的层级、暖调中性灰——搬到 Obsidian 编辑器上。
 
 > 当前状态：**已上线 [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader)。**
-> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.2`
+> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.3`
 
 ---
 
@@ -51,7 +51,12 @@
 |---|---|---|
 | ![Embed](./screenshots/embed-featured-card.png) | ![Command Palette](./screenshots/command-palette.png) | ![Settings](./screenshots/settings-panel.png) |
 
-截图尚未拍摄 —— 见 [`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) 的清单。按精确文件名拍摄后，本章节自动渲染。
+| 嵌套列表任务完成态 |
+|---|
+| ![嵌套列表任务完成态](./screenshots/checkbox-completion.png) |
+
+截图已保存在 [`screenshots/`](./screenshots/)。后续发布前如需重拍，按
+[`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) 的清单刷新。
 
 ---
 
@@ -162,7 +167,7 @@ Phase 1 目标是完整的视觉覆盖：
 - ✅ 基础色板（60+ 变量，浅色 + 深色双套）
 - ✅ **深色模式** —— Deep Dark `#141413` + Ink Light `#2D5A8A`，保留同样的
   yellow-brown 暖调底色和单色克制原则
-- ✅ Reading View：标题、正文、列表（em-dash 短横线 marker）、表格、引用块
+- ✅ Reading View：标题、正文、列表（原生 marker）、表格、引用块
   （2pt 油墨蓝实线 + olive 文字，无背景）、代码、frontmatter、嵌入块
 - ✅ Editing View（CodeMirror 6）：语法 token、光标、选区、当前行高亮、
   格式化符号
@@ -172,7 +177,6 @@ Phase 1 目标是完整的视觉覆盖：
 
 未覆盖（暂缓）：
 - PDF 导出样式（kami 本身是印刷优先；这是 Phase 1.5 候选）
-- Style Settings 插件 schema（Phase 2 —— 让用户可调色温、字体、对比度）
 - 插件特化样式（Dataview、Templater、Excalidraw）—— 遇到再说
 
 ---
@@ -266,8 +270,9 @@ release tag：
    背景（PDF 导出时 WeasyPrint 有双层矩形 bug）。
 5. **阴影只用 ring shadow 和 whisper shadow，绝不用硬投影。** kami 规范；
    硬投影在印刷品和屏幕上都显得过重。
-6. **列表 marker 用 em-dash 短横线，不用圆点。** kami Dash List ——
-   "短横线代替圆点，更书卷气"。
+6. **Reading View 和 Live Preview 都保留原生列表 marker。** 只在 Reading
+   View 换成短横线会让编辑态和阅读态割裂；现在用更轻的 marker 颜色和更紧的
+   深层缩进来保留 kami 的克制感。
 7. **引用块：2pt 油墨蓝实线 + olive 文字，无背景，不 italic。** 克制优于装饰。
 8. **中文用 LXGW WenKai Screen，不是思源宋体。** kami 原版 仓耳今楷02 是
    楷书；思源宋体是印刷宋体。楷书保留 kami 标志性的手写温度。
@@ -315,6 +320,7 @@ kami-obsidian/
 | [0.1.0](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.0) | Phase 1：视觉系统 + 深色 variant + 原子组件 + Style Settings |
 | [0.1.1](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.1) | 兼容性：删 CSS Scrollbars spec 适配 Obsidian 1.4.5；恢复纯 MIT LICENSE |
 | [0.1.2](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.2) | Lint 合规：去掉 CodeMirror selection 和 reduced-motion 的 !important |
+| [0.1.3](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.3) | 体验打磨：统一嵌套列表层级、修复外链图标重叠，并避免已完成父任务把子内容一起划掉 |
 
 Release tag 跟 `manifest.json` version 完全一致（不带 `v` 前缀）——Obsidian 从
 manifest version 对应的 GitHub release tag 拉主题文件。

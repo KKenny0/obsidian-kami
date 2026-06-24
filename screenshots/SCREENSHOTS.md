@@ -1,8 +1,9 @@
-# Screenshot Checklist — Phase 2a
+# Screenshot Refresh Checklist
 
 This directory holds the screenshots embedded in `README.md` /
-`README.zh-CN.md`. Capture them once, save with the exact filenames below,
-and the README embeds will render automatically.
+`README.zh-CN.md`. Use this checklist when refreshing screenshots for a new
+release, and save with the exact filenames below so the README embeds keep
+working.
 
 ## Shot list (7 required)
 
@@ -73,6 +74,9 @@ representative long-form note open.
 - `graph-view.png` — graph view with kami-warm nodes (only after graph
   styling is implemented, currently not in Phase 2a)
 - `pdf-export.png` — PDF export preview (deferred to Phase 1.5)
+- `checkbox-completion.png` — Reading View screenshot from
+  `checkbox-completion-demo.md`, showing a checked parent task whose child
+  content remains readable instead of being struck through
 
 ## How to capture on macOS
 

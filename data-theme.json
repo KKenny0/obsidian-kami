@@ -78,7 +78,7 @@
         {
           "id": "info-kami-credits",
           "title": "About this theme",
-          "description": "Kami Reader 是 tw93/kami 设计系统在 Obsidian 上的衍生适配。所有视觉 token 溯源至 kami v1.1.0 (MIT)。本主题 Phase 1 已公开，Phase 2 (Theme Gallery 提交) 待验证 macOS Sequoia sandbox 兼容性后进行。",
+          "description": "Kami Reader 是 tw93/kami 设计系统在 Obsidian 上的衍生适配。所有视觉 token 溯源至 kami v1.1.0 (MIT)。主题已于 2026-06-20 上线 Obsidian Theme Gallery。",
           "type": "info-text"
         }
       ]
