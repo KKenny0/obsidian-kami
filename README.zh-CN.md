@@ -6,13 +6,13 @@
 > 未受其背书。所有视觉设计 token 均溯源至原 kami 项目（MIT 许可）；本仓库
 > 是 kami 设计系统在 Obsidian 端的衍生适配。**
 
-> 最后更新：2026-06-24 · Last updated: 2026-06-24
+> 最后更新：2026-06-25 · Last updated: 2026-06-25
 
 把 [tw93/kami](https://github.com/tw93/kami) 的印刷级排版系统——暖米纸底色、
 油墨蓝点缀、衬线主导的层级、暖调中性灰——搬到 Obsidian 编辑器上。
 
 > 当前状态：**已上线 [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader)。**
-> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.3`
+> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.4`
 
 ---
 
@@ -321,6 +321,7 @@ kami-obsidian/
 | [0.1.1](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.1) | 兼容性：删 CSS Scrollbars spec 适配 Obsidian 1.4.5；恢复纯 MIT LICENSE |
 | [0.1.2](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.2) | Lint 合规：去掉 CodeMirror selection 和 reduced-motion 的 !important |
 | [0.1.3](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.3) | 体验打磨：统一嵌套列表层级、修复外链图标重叠，并避免已完成父任务把子内容一起划掉 |
+| [0.1.4](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.4) | Lint 合规：移除已完成任务里的高成本选择器，同时保留子任务内容可读性 |
 
 Release tag 跟 `manifest.json` version 完全一致（不带 `v` 前缀）——Obsidian 从
 manifest version 对应的 GitHub release tag 拉主题文件。
