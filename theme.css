@@ -631,16 +631,13 @@ input[type="checkbox"]:checked::after {
     transform: rotate(45deg);
 }
 
-/* Completed tasks with children — keep the done style on the parent row only.
-   Obsidian applies checklist completion to the whole <li> in Reading View,
-   which otherwise strikes through every nested child item. */
-.markdown-preview-view ul > li.task-list-item:is([data-task="x"], [data-task="X"], .is-checked):has(> ul),
-.markdown-preview-view ul > li.task-list-item:is([data-task="x"], [data-task="X"], .is-checked):has(> ol) {
+/* Completed tasks — keep Reading View completion from striking through
+   nested child lists. Obsidian applies completion to the whole <li>. */
+.markdown-preview-view ul > li.task-list-item:is([data-task="x"], [data-task="X"], .is-checked) {
     color: var(--text-normal);
     text-decoration: none;
 }
-.markdown-preview-view ul > li.task-list-item:is([data-task="x"], [data-task="X"], .is-checked):has(> ul) > p:first-child,
-.markdown-preview-view ul > li.task-list-item:is([data-task="x"], [data-task="X"], .is-checked):has(> ol) > p:first-child {
+.markdown-preview-view ul > li.task-list-item:is([data-task="x"], [data-task="X"], .is-checked) > p:first-child {
     color: var(--checklist-done-color);
     text-decoration: var(--checklist-done-decoration);
 }

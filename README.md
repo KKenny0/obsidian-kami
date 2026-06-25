@@ -2,7 +2,7 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-> Last updated: 2026-06-24
+> Last updated: 2026-06-25
 
 > **Inspired by [tw93/kami](https://github.com/tw93/kami). Not affiliated with or
 > endorsed by tw93. All visual design tokens trace to the original kami project
@@ -13,7 +13,7 @@ kami's print-grade typographic system — warm parchment surface, ink-blue accen
 serif-led hierarchy, warm-gray neutrals — onto the Obsidian editor.
 
 > Status: **Published on the [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader).**
-> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.1.3`
+> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.1.4`
 
 ---
 
@@ -339,6 +339,7 @@ kami-obsidian/
 | [0.1.1](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.1) | Compat: drop CSS Scrollbars spec for Obsidian 1.4.5; restore pure MIT LICENSE |
 | [0.1.2](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.2) | Lint compliance: remove !important from CodeMirror selection + reduced-motion |
 | [0.1.3](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.3) | Polish: align nested list typography, prevent external-link icon overlap, and keep completed parent tasks from striking through child content |
+| [0.1.4](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.4) | Lint compliance: remove broad completed-task selectors while keeping child task content readable |
 
 Release tags match `manifest.json` version exactly (no `v` prefix) — Obsidian
 pulls theme files from the GitHub release tagged with the manifest version.
