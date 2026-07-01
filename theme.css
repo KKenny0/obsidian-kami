@@ -260,7 +260,7 @@ body {
     font-family: var(--font-interface-theme);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    /* Keep browser default glyph shaping for smoother long-note scrolling in Electron. */
 }
 
 ::selection {
