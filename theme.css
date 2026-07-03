@@ -41,9 +41,9 @@ settings:
   -
     id: file-line-width
     title: 笔记最大宽度 · Note max width
-    description: kami 长文档默认 820px。更窄更聚焦阅读，更宽适合双栏。
+    description: kami 长文阅读默认 700px，避免中文长段落单行过长。更宽适合双栏。
     type: variable-text
-    default: "820px"
+    default: "700px"
   -
     id: accent-heading
     title: Accent · 强调色
@@ -198,14 +198,14 @@ body.theme-light {
     --font-semibold: 500;
     --font-bold: 700;
 
-    --bold-weight: 600;  /* content emphasis must remain visible in local font stacks */
+    --bold-weight: 500;  /* restrained emphasis; avoid heavy patches in long-form reading */
     --bold-color: inherit;
     --italic-color: inherit;
 
     --line-width: 52ch;
     --line-width-wide: 72ch;
     --max-width: 90%;
-    --file-line-width: 820px;
+    --file-line-width: 700px;
 
     /* kami spec: tight 1.1-1.3 (headings) / dense 1.4-1.45 / reading 1.5-1.55 */
     --line-height-normal: 1.55;
@@ -213,7 +213,7 @@ body.theme-light {
     --line-height-readonly: 1.5;
 
     --heading-spacing: 2em;
-    --p-spacing: 1em;
+    --p-spacing: 1.1em;
 
     --list-indent: 1.55em;
     --list-indent-nested: 1.35em;
@@ -463,12 +463,12 @@ h6, .HyperMD-header-6, .cm-header-6 { font-size: 1em; color: var(--text-muted); 
     padding-left: 0.55em;
 }
 .markdown-preview-view h2 {
-    margin-top: 1.65em;
-    margin-bottom: 0.5em;
+    margin-top: 1.85em;
+    margin-bottom: 0.55em;
     color: var(--text-normal);
 }
-.markdown-preview-view h3 { margin-top: 1.45em; margin-bottom: 0.35em; }
-.markdown-preview-view h4 { margin-top: 1.1em; margin-bottom: 0.3em; }
+.markdown-preview-view h3 { margin-top: 1.6em; margin-bottom: 0.4em; }
+.markdown-preview-view h4 { margin-top: 1.25em; margin-bottom: 0.35em; }
 .markdown-preview-view h5 { margin-top: 1em; margin-bottom: 0.2em; }
 .markdown-preview-view h6 { margin-top: 1em; margin-bottom: 0.2em; text-transform: none; }
 
@@ -478,17 +478,17 @@ p,
     line-height: var(--line-height-normal);
 }
 .markdown-preview-view p {
-    margin: 0 0 1em;
+    margin: 0 0 var(--p-spacing);
 }
 .markdown-preview-view p:last-child {
     margin-bottom: 0;
 }
 .markdown-preview-view :is(ul, ol) {
     margin-top: 0.35em;
-    margin-bottom: 1.05em;
+    margin-bottom: 1.15em;
 }
 .markdown-preview-view :is(p, ul, ol) + :is(h2, h3) {
-    margin-top: 1.8em;
+    margin-top: 2em;
 }
 
 /* Bold / Italic — keep readable weights, kami forbids synthetic bold */
@@ -576,7 +576,7 @@ blockquote,
     border-left: 2pt solid var(--interactive-accent);
     background-color: transparent;
     padding: 0.35em 0 0.35em 1.1em;
-    margin: 1em 0;
+    margin: 1.15em 0 1.25em;
     color: var(--text-olive);
     font-style: normal;
 }
@@ -1152,7 +1152,7 @@ body.theme-dark {
     --text-highlight-bg:           #5a4a1f;
     --text-highlight-bg-active:    #6e5c2a;
     --text-selection:              rgba(45, 90, 138, 0.32);
-    --bold-weight:                 600;
+    --bold-weight:                 500;
     --bold-color:                  inherit;
     --italic-color:                inherit;
 

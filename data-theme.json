@@ -26,9 +26,9 @@
         {
           "id": "file-line-width",
           "title": "笔记最大宽度 · Note max width",
-          "description": "kami 长文档默认 820px。更窄更聚焦阅读，更宽更宽敞适合双栏布局。",
+          "description": "kami 长文阅读默认 700px，避免中文长段落单行过长。更宽适合双栏布局。",
           "type": "variable-text",
-          "default": "820px"
+          "default": "700px"
         }
       ]
     },

@@ -13,7 +13,7 @@ kami's print-grade typographic system — warm parchment surface, ink-blue accen
 serif-led hierarchy, warm-gray neutrals — onto the Obsidian editor.
 
 > Status: **Published on the [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader).**
-> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.1.6`
+> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.1.7`
 
 ---
 
@@ -342,6 +342,7 @@ kami-obsidian/
 | [0.1.4](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.4) | Lint compliance: remove broad completed-task selectors while keeping child task content readable |
 | [0.1.5](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.5) | Performance: remove global text rendering override to improve long-note scrolling |
 | [0.1.6](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.6) | Document reading polish: calibrate long-form typography, inline code, code blocks, tables, headings, and bold emphasis |
+| [0.1.7](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.7) | Readability calibration: restore 700px reading width, 500 emphasis, and a calmer long-form rhythm |
 
 Release tags match `manifest.json` version exactly (no `v` prefix) — Obsidian
 pulls theme files from the GitHub release tagged with the manifest version.

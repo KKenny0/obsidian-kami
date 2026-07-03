@@ -12,7 +12,7 @@
 油墨蓝点缀、衬线主导的层级、暖调中性灰——搬到 Obsidian 编辑器上。
 
 > 当前状态：**已上线 [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader)。**
-> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.6`
+> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.7`
 
 ---
 
@@ -324,6 +324,7 @@ kami-obsidian/
 | [0.1.4](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.4) | Lint 合规：移除已完成任务里的高成本选择器，同时保留子任务内容可读性 |
 | [0.1.5](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.5) | 性能：移除全局文字渲染覆盖，改善长文滚动流畅度 |
 | [0.1.6](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.6) | 长文阅读体验：校准长文排版、行内代码、代码块、表格、标题层级和加粗强调 |
+| [0.1.7](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.7) | 可读性校准：恢复 700px 阅读宽度、500 加粗约束，并放松长文阅读节奏 |
 
 Release tag 跟 `manifest.json` version 完全一致（不带 `v` 前缀）——Obsidian 从
 manifest version 对应的 GitHub release tag 拉主题文件。
