@@ -2,7 +2,7 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-> Last updated: 2026-07-03
+> Last updated: 2026-07-09
 
 > **Inspired by [tw93/kami](https://github.com/tw93/kami). Not affiliated with or
 > endorsed by tw93. All visual design tokens trace to the original kami project
@@ -64,12 +64,7 @@ the set for a new release.
 
 ## Style Settings
 
-This theme ships a [Style Settings](https://github.com/obsidianmd/obsidian-style-settings) schema exposing the highest-leverage variables for user tuning — no CSS editing required.
-
-**Dual schema mode** (both kept in sync):
-
-- **Snippet mode** (current install path on macOS Sequoia): schema embedded as `/* @settings ... */` YAML comment at the top of `theme.css`. Style Settings does not scan `.obsidian/snippets/` for standalone JSON files, so the schema must live inside the CSS.
-- **Theme mode** (after Phase 2c Gallery install): schema in root `data-theme.json`. Used when Obsidian loads the theme from `.obsidian/themes/kami-reader/`.
+This theme ships a [Style Settings](https://github.com/obsidianmd/obsidian-style-settings) schema for the variables users are most likely to tune. No CSS editing is required.
 
 After installing the Style Settings community plugin, go to **Settings → Style Settings → Kami Reader** to adjust:
 
@@ -80,7 +75,16 @@ After installing the Style Settings community plugin, go to **Settings → Style
 - **Accent color** (light + dark) — single accent swap, instantly re-themes
 - **Primary background** (light + dark) — tune parchment warmth
 
-The schema intentionally exposes only 6 high-leverage variables. Everything else stays fixed in `theme.css` to honor kami's restraint principle — over-configurability would dilute the design system.
+The schema intentionally exposes only 6 high-leverage variables. Everything else stays fixed in `theme.css` to honor kami's restraint principle: too many switches would dilute the design system.
+
+<details>
+<summary>Schema locations for maintainers</summary>
+
+- **Snippet mode**: schema embedded as `/* @settings ... */` YAML at the top of `theme.css`. Style Settings does not scan `.obsidian/snippets/` for standalone JSON files, so snippet installs need the schema inside the CSS.
+- **Theme mode**: schema in root `data-theme.json`. Obsidian reads it when the theme is installed under `.obsidian/themes/kami-reader/`.
+
+Keep both schema copies in sync when changing user-facing settings.
+</details>
 
 ---
 
@@ -122,7 +126,7 @@ Only LXGW WenKai Screen needs manual install. Without it, CJK falls back to
 2. **Browse** → search "Kami Reader" → **Install** → **Use**
 3. (Optional) Install the [Style Settings](https://obsidian.md/plugins?id=obsidian-style-settings) community plugin for the 6 tunable variables (font, line-height, width, bold emphasis, accent, background)
 
-Phase 2b verified Obsidian's own Gallery downloader writes files with Obsidian provenance — App Store users install cleanly with no macOS Sequoia sandbox issue.
+Gallery installs are unaffected by the macOS Sequoia sandbox issue described below. Obsidian writes the theme files itself, so App Store users can install Kami Reader cleanly from Browse Themes.
 
 ### Manual install / developer iteration (macOS Sequoia sandbox workaround)
 
@@ -189,73 +193,25 @@ Not covered (deferred):
 
 ---
 
-## Phase 2 — Publishing (✅ complete, theme live on Gallery)
+## Publishing Notes
 
-Phase 1 dogfooding confirmed the visual transfer holds. Phase 2 is complete;
-the theme is live at https://community.obsidian.md/themes/kami-reader.
+Kami Reader is published on the Obsidian Theme Gallery:
+https://community.obsidian.md/themes/kami-reader.
 
-### Phase 2a — Polish & docs (✅ done in this commit)
+Obsidian pulls theme files from the GitHub release tag matching
+`manifest.json.version` exactly, with no `v` prefix.
 
-- ✅ **Style Settings schema** (`data-theme.json`) — 6 high-leverage variables
-  exposed (font stack, line-height, note width, bold emphasis, accent color,
-  primary bg).
-- ✅ **Screenshot checklist** (`screenshots/SCREENSHOTS.md`) — 7-shot list
-  embedded in both READMEs. Filenames reserved; capture to render.
-- ⏸ **LXGW WenKai Screen woff2 bundling** — deferred. Needs `fonttools` /
-  `cn-font-split` toolchain + OFL license-file handling; not worth the risk
-  in a single Phase 2a session. README documents manual font install path
-  instead.
+<details>
+<summary>Maintainer history: Gallery submission and lint fixes</summary>
 
-### Phase 2b — Verify Theme Gallery sandbox compatibility (✅ passed)
+The theme was published through `community.obsidian.md` on 2026-06-20. That site
+mirrors accepted themes to `obsidianmd/obsidian-releases` through Obsidian's
+hourly mirror workflow.
 
-The single load-bearing assumption of Phase 2: **does Obsidian's own Theme
-Gallery downloader write files with Obsidian provenance, bypassing the
-macOS Sequoia sandbox wall?**
-
-**Verified 2026-06-20**: installed Shade Sanctuary from Browse Themes in a
-fresh vault, ran `xattr -l` on the downloaded `theme.css` — output was empty
-(no `com.apple.provenance`). Obsidian's own downloader writes Obsidian-provenance
-files; App Store users install cleanly from Gallery. Plan A is safe.
-
-### Phase 2c — Submit to Obsidian Theme Gallery (✅ published 2026-06-20)
-
-Live at https://community.obsidian.md/themes/kami-reader. Auto-synced to
-`obsidianmd/obsidian-releases/community-css-themes.json` via the hourly
-mirror workflow.
-
-**Plan A (preferred, in progress): submit via community.obsidian.md developer form.**
-
-The official "Submit your theme" doc on docs.obsidian.md is stale — it still
-says PR to obsidian-releases, but that repo closed PRs and switched to an hourly
-mirror workflow. The actual source of truth is
-[`community.obsidian.md`](https://community.obsidian.md), a Next.js app that
-mirrors to `obsidianmd/obsidian-releases` hourly via the
-`mirror-community-json.yml` workflow. Recent obsidian-releases commits are all
-"chore: Mirror community plugins and themes" by Obsidian Bot — no human PRs.
-
-**Submission steps:**
-1. Sign in to community.obsidian.md with an obsidian.md account.
-2. Open the developer submission form (in account menu).
-3. Submit:
-   ```
-   name: Kami Reader
-   repo: KKenny0/obsidian-kami
-   screenshot: screenshots/light-reading.png
-   modes: light, dark
-   ```
-4. Ensure a GitHub release tagged exactly with `manifest.json` version (no `v`
-   prefix). Obsidian pulls theme files from that release's tag.
-5. Obsidian team reviews (1-2 weeks typical), then auto-syncs to obsidian-releases.
-
-Phase 2b confirmed Obsidian's Gallery downloader writes files without
-`com.apple.provenance` — App Store users install cleanly with no sandbox issue.
-
-**Plan B (fallback if Plan A rejects): ship as a community plugin.**
-`onload()` injects CSS via `app.customCss`. Plugin loading mechanism is separate
-from theme loading and likely unaffected by the sandbox wall. Higher upfront
-engineering cost but unblocks App Store users if Plan A fails.
-
-### Phase 2c submission lint history
+The Theme Gallery downloader was also checked against the macOS Sequoia sandbox
+issue: a fresh Gallery install wrote `theme.css` without `com.apple.provenance`,
+so App Store users can install through Gallery cleanly. The snippet workaround
+only matters for manual developer iteration.
 
 community.obsidian.md runs automated lint on submission. Each warning required
 its own fix and a new release tag:
@@ -266,6 +222,8 @@ its own fix and a new release tag:
 | `0.1.1` | Repository has no recognized license | Restored pure MIT LICENSE (GitHub licensee strictly matches MIT template; attribution appended after standard text broke the match) |
 | `0.1.1` | `css-scrollbar` partially supported by Obsidian 1.4.5 | Dropped CSS Scrollbars spec properties (`scrollbar-width`, `scrollbar-color`); kept webkit `::-webkit-scrollbar` vendor extension |
 | `0.1.2` | Avoid `!important` at theme.css:788, 1105, 1106 | CodeMirror selection uses 0,3,0 specificity compound selector; reduced-motion uses explicit selector list instead of `* !important` |
+
+</details>
 
 ---
 
@@ -300,16 +258,15 @@ its own fix and a new release tag:
 
 ---
 
-## Fragile Assumptions to Verify in Phase 1
+## Known Tradeoffs
 
-1. **Parchment background is comfortable for long editing sessions on screen.**
-   If after a week you instinctively switch back to a cooler light or a dark
-   theme, the transfer fails. Pivot option: "Kami-Lite" — keep ink-blue accent,
-   swap parchment for ivory `#faf9f5` or near-white.
-2. **Kaiti is legible at body size on screen during active writing.** Screen
-   variant of LXGW WenKai specifically addresses this, but real verification
-   requires a week of dogfooding. If kaiti fatigues, fall back to Source Han
-   Serif via the CSS variable.
+1. **The parchment surface is warmer than most editor themes.** If it feels too
+   yellow for long sessions, tune **Primary background** in Style Settings.
+2. **Kaiti gives Kami Reader its CJK texture, but not every reader likes it for
+   daily editing.** If LXGW WenKai Screen feels tiring, switch **Body font
+   family** to a songti-style stack such as Source Han Serif SC.
+3. **Bold defaults to a restrained `500`.** If your platform or font renders it
+   too close to regular text, raise **Bold emphasis strength** to `600` or `700`.
 
 ---
 
@@ -319,7 +276,7 @@ its own fix and a new release tag:
 kami-obsidian/
 ├── manifest.json              # Theme metadata (name, version, minAppVersion)
 ├── theme.css                  # Source of truth for all kami styles + inline @settings YAML
-├── data-theme.json            # Style Settings schema for theme-folder mode (Phase 2c)
+├── data-theme.json            # Style Settings schema for theme-folder mode
 ├── sync.sh                    # Regenerates inject-kami-snippet.js from theme.css
 ├── inject-kami-snippet.js     # Generated by sync.sh — paste into Obsidian Console
 ├── screenshots/               # 7-shot set (see SCREENSHOTS.md)

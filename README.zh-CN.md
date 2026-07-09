@@ -6,7 +6,7 @@
 > 未受其背书。所有视觉设计 token 均溯源至原 kami 项目（MIT 许可）；本仓库
 > 是 kami 设计系统在 Obsidian 端的衍生适配。**
 
-> 最后更新：2026-07-03 · Last updated: 2026-07-03
+> 最后更新：2026-07-09 · Last updated: 2026-07-09
 
 把 [tw93/kami](https://github.com/tw93/kami) 的印刷级排版系统——暖米纸底色、
 油墨蓝点缀、衬线主导的层级、暖调中性灰——搬到 Obsidian 编辑器上。
@@ -62,12 +62,7 @@
 
 ## Style Settings
 
-本主题内置 [Style Settings](https://github.com/obsidianmd/obsidian-style-settings) 配置 schema，暴露最高杠杆的几个变量给用户调——无需改 CSS。
-
-**双 schema 模式**（两者通过 `sync.sh` 保持同步）：
-
-- **Snippet 模式**（macOS Sequoia 当前安装路径）：schema 内嵌为 `theme.css` 头部的 `/* @settings ... */` YAML 注释。Style Settings 不会扫描 `.obsidian/snippets/` 找独立 JSON 文件，所以 schema 必须放在 CSS 里
-- **Theme 模式**（Phase 2c Gallery 安装后）：schema 在根目录 `data-theme.json`。Obsidian 从 `.obsidian/themes/kami-reader/` 加载主题时读这个
+本主题内置 [Style Settings](https://github.com/obsidianmd/obsidian-style-settings) 配置 schema，把用户最可能调整的变量暴露出来，无需改 CSS。
 
 装好 Style Settings 社区插件后，进入 **Settings → Style Settings → Kami Reader**，可调：
 
@@ -78,7 +73,16 @@
 - **强调色**（浅色 + 深色）—— 单色替换，瞬间改变主题气质
 - **主背景**（浅色 + 深色）—— 调 parchment 暖度
 
-Schema 刻意只暴露 6 个高杠杆变量。其他保持 `theme.css` 内固定，以维护 kami 的克制原则——过度可配置会稀释设计系统的统一性。
+Schema 刻意只暴露 6 个高杠杆变量。其他保持 `theme.css` 内固定，以维护 kami 的克制原则：过度可配置会稀释设计系统的统一性。
+
+<details>
+<summary>维护者说明：schema 放在哪里</summary>
+
+- **Snippet 模式**：schema 内嵌为 `theme.css` 头部的 `/* @settings ... */` YAML 注释。Style Settings 不会扫描 `.obsidian/snippets/` 找独立 JSON 文件，所以 snippet 安装需要把 schema 放在 CSS 里。
+- **Theme 模式**：schema 在根目录 `data-theme.json`。Obsidian 从 `.obsidian/themes/kami-reader/` 加载主题时读取它。
+
+修改用户可见设置时，要保持两份 schema 同步。
+</details>
 
 ---
 
@@ -118,7 +122,7 @@ Schema 刻意只暴露 6 个高杠杆变量。其他保持 `theme.css` 内固定
 2. **Browse** → 搜索 "Kami Reader" → **Install** → **Use**
 3. （可选）装 [Style Settings](https://obsidian.md/plugins?id=obsidian-style-settings) 社区插件，启用 6 个可调变量（字体、行距、宽度、加粗强调、强调色、背景）
 
-Phase 2b 已验证 Obsidian 自己的 Gallery 下载器写出的文件无 `com.apple.provenance`——App Store 用户从 Gallery 装干净，无 macOS Sequoia 沙盒问题。
+Gallery 安装不受下面提到的 macOS Sequoia 沙盒问题影响。主题文件由 Obsidian 自己写入，所以 App Store 用户可以从 Browse Themes 正常安装 Kami Reader。
 
 ### 手动安装 / 开发者迭代（macOS Sequoia 沙盒绕过）
 
@@ -182,66 +186,24 @@ Phase 1 目标是完整的视觉覆盖：
 
 ---
 
-## Phase 2 —— 发布（✅ 完成，主题已上线 Gallery）
+## 发布说明
 
-Phase 1 dogfooding 已确认视觉迁移成立。Phase 2 已完成；主题已上线
+Kami Reader 已上线 Obsidian Theme Gallery：
 https://community.obsidian.md/themes/kami-reader。
 
-### Phase 2a —— 打磨与文档（✅ 本次提交完成）
+Obsidian 会从与 `manifest.json.version` 完全一致的 GitHub release tag 拉主题文件，
+tag 不带 `v` 前缀。
 
-- ✅ **Style Settings schema**（`data-theme.json`）—— 暴露 6 个高杠杆变量
-  （字体栈、行距、笔记宽度、加粗强调、强调色、主背景）
-- ✅ **截图清单**（`screenshots/SCREENSHOTS.md`）—— 7 张截图清单已嵌入中英
-  README。文件名预留好，按名拍完即自动渲染
-- ⏸ **LXGW WenKai Screen woff2 打包** —— 推迟。需要 `fonttools` /
-  `cn-font-split` 工具链 + OFL 许可文件处理；Phase 2a 单 session 内风险
-  过高。README 仍以手动装字体路径为主
+<details>
+<summary>维护者历史：Gallery 提交与 lint 修复</summary>
 
-### Phase 2b —— 验证 Theme Gallery 沙盒兼容性（✅ 已通过）
+主题已于 2026-06-20 通过 `community.obsidian.md` 发布。该站点会通过
+Obsidian 的每小时 mirror workflow，把通过审核的主题同步到
+`obsidianmd/obsidian-releases`。
 
-Phase 2 的命门假设：**Obsidian 自己的 Theme Gallery 下载器写出的文件
-provenance 是 Obsidian 本身，能绕过 macOS Sequoia 沙盒墙吗？**
-
-**2026-06-20 已验证**：在 fresh vault 里通过 Browse Themes 装了 Shade Sanctuary，
-对下载的 `theme.css` 跑 `xattr -l`——输出空（无 `com.apple.provenance`）。
-Obsidian 自己的下载器写出 Obsidian-provenance 文件，App Store 用户从 Gallery
-安装干净。Plan A 安全。
-
-### Phase 2c —— 提交 Obsidian Theme Gallery（✅ 2026-06-20 上线）
-
-已上线 https://community.obsidian.md/themes/kami-reader。通过每小时一次的
-mirror workflow 自动同步到 `obsidianmd/obsidian-releases/community-css-themes.json`。
-
-**Plan A（首选，进行中）：通过 community.obsidian.md 开发者表单提交。**
-
-docs.obsidian.md 上的"Submit your theme"文档过时了——它还说 PR 到 obsidian-releases，
-但那个 repo 关了 PR，改成每小时镜像工作流。真实的 source of truth 是
-[`community.obsidian.md`](https://community.obsidian.md)，一个 Next.js 应用，
-通过 `mirror-community-json.yml` workflow 每小时同步到 `obsidianmd/obsidian-releases`。
-最近 obsidian-releases 的 commit 全是 Obsidian Bot 的"chore: Mirror community
-plugins and themes"——没有人工 PR。
-
-**提交步骤：**
-1. 用 obsidian.md 账号登录 community.obsidian.md
-2. 打开开发者提交表单（账号菜单里）
-3. 提交：
-   ```
-   name: Kami Reader
-   repo: KKenny0/obsidian-kami
-   screenshot: screenshots/light-reading.png
-   modes: light, dark
-   ```
-4. 确保 GitHub 有跟 `manifest.json` version 完全一致的 release tag（不带 `v` 前缀）。Obsidian 从这个 tag 拉主题文件
-5. Obsidian 团队审核（通常 1-2 周），通过后自动同步到 obsidian-releases
-
-Phase 2b 确认 Obsidian Gallery 下载器写出的文件没有 `com.apple.provenance`——
-App Store 用户从 Gallery 装干净，无沙盒问题。
-
-**Plan B（Plan A 被拒时的备选）：做成 community plugin。**
-`onload()` 时通过 `app.customCss` 注入 CSS。Plugin 加载机制跟主题不同，可能
-不受沙盒墙影响。前期工程量更大，但 Plan A 失败时解锁 App Store 用户。
-
-### Phase 2c 提交 lint 历史
+Theme Gallery 下载路径也验证过 macOS Sequoia 沙盒问题：fresh Gallery 安装
+写出的 `theme.css` 没有 `com.apple.provenance`，所以 App Store 用户可以从
+Gallery 正常安装。snippet 绕过方案只影响开发者手动迭代。
 
 community.obsidian.md 提交时跑自动 lint。每个 warning 都需要单独修复 + 新
 release tag：
@@ -252,6 +214,8 @@ release tag：
 | `0.1.1` | Repository has no recognized license | 恢复纯 MIT LICENSE（GitHub licensee 严格匹配 MIT 模板；附加的 attribution 段落破坏了匹配） |
 | `0.1.1` | `css-scrollbar` partially supported by Obsidian 1.4.5 | 删除 CSS Scrollbars spec 属性（`scrollbar-width`、`scrollbar-color`）；保留 webkit `::-webkit-scrollbar` vendor extension |
 | `0.1.2` | Avoid `!important` at theme.css:788, 1105, 1106 | CodeMirror selection 用 0,3,0 特异性复合选择器；reduced-motion 用显式 selector list 替代 `* !important` |
+
+</details>
 
 ---
 
@@ -283,14 +247,15 @@ release tag：
 
 ---
 
-## Phase 1 需要验证的脆弱假设
+## 已知取舍
 
-1. **parchment 背景在屏幕长时间编辑场景下舒适。** 如果一周后你下意识切回
-   更冷调的浅色或深色主题，视觉迁移失败。Pivot 方案："Kami-Lite" —— 保留
-   油墨蓝 accent，把 parchment 换成 ivory `#faf9f5` 或近白色。
-2. **楷书在 16px 屏幕正文尺寸下，长时间写作不累。** LXGW WenKai 的 Screen
-   版专门处理这一点，但真正的验证需要一周 dogfooding。如果楷书让人疲劳，
-   通过 CSS 变量切回思源宋体即可。
+1. **Parchment 背景比多数编辑器主题更暖。** 如果长时间使用觉得偏黄，可以在
+   Style Settings 里调整 **主背景**。
+2. **楷书保留了 Kami Reader 的中文质感，但不是所有人都适合拿它日常写作。**
+   如果 LXGW WenKai Screen 看久了累，可以把 **正文字体栈** 换成思源宋体一类
+   的宋体组合。
+3. **加粗默认保持克制的 `500`。** 如果你的平台或字体把它渲染得接近普通正文，
+   可以把 **加粗强调强度** 调到 `600` 或 `700`。
 
 ---
 
@@ -300,7 +265,7 @@ release tag：
 kami-obsidian/
 ├── manifest.json              # 主题元数据（name, version, minAppVersion）
 ├── theme.css                  # 所有 kami 样式的唯一源文件 + 内嵌 @settings YAML
-├── data-theme.json            # Style Settings schema，theme 模式用（Phase 2c）
+├── data-theme.json            # Style Settings schema，theme 模式用
 ├── sync.sh                    # 从 theme.css 重新生成 inject-kami-snippet.js
 ├── inject-kami-snippet.js     # sync.sh 的产物 —— 粘贴到 Obsidian Console 用
 ├── screenshots/               # 7 张截图集（见 SCREENSHOTS.md）
