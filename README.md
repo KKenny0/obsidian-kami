@@ -13,7 +13,7 @@ kami's print-grade typographic system — warm parchment surface, ink-blue accen
 serif-led hierarchy, warm-gray neutrals — onto the Obsidian editor.
 
 > Status: **Published on the [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader).**
-> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.1.7`
+> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.1.8`
 
 ---
 
@@ -76,10 +76,11 @@ After installing the Style Settings community plugin, go to **Settings → Style
 - **Body font family** — swap LXGW WenKai Screen (kaiti) for Source Han Serif (songti) if kaiti fatigues
 - **Body line-height** — 1.55 default, range 1.3–1.9 (Live Preview needs Cmd+E toggle after change; Reading View updates instantly)
 - **Note max width** — 700px default
+- **Bold emphasis strength** — 500 default; raise to 600 or 700 if bold is not distinguishable in your font setup
 - **Accent color** (light + dark) — single accent swap, instantly re-themes
 - **Primary background** (light + dark) — tune parchment warmth
 
-The schema intentionally exposes only 5 variables. Everything else stays fixed in `theme.css` to honor kami's restraint principle — over-configurability would dilute the design system.
+The schema intentionally exposes only 6 high-leverage variables. Everything else stays fixed in `theme.css` to honor kami's restraint principle — over-configurability would dilute the design system.
 
 ---
 
@@ -119,7 +120,7 @@ Only LXGW WenKai Screen needs manual install. Without it, CJK falls back to
 
 1. Obsidian → **Settings → Appearance** → click **Manage** next to Themes
 2. **Browse** → search "Kami Reader" → **Install** → **Use**
-3. (Optional) Install the [Style Settings](https://obsidian.md/plugins?id=obsidian-style-settings) community plugin for the 5 tunable variables (font, line-height, width, accent, background)
+3. (Optional) Install the [Style Settings](https://obsidian.md/plugins?id=obsidian-style-settings) community plugin for the 6 tunable variables (font, line-height, width, bold emphasis, accent, background)
 
 Phase 2b verified Obsidian's own Gallery downloader writes files with Obsidian provenance — App Store users install cleanly with no macOS Sequoia sandbox issue.
 
@@ -195,8 +196,9 @@ the theme is live at https://community.obsidian.md/themes/kami-reader.
 
 ### Phase 2a — Polish & docs (✅ done in this commit)
 
-- ✅ **Style Settings schema** (`data-theme.json`) — 5 high-leverage variables
-  exposed (font stack, line-height, note width, accent color, primary bg).
+- ✅ **Style Settings schema** (`data-theme.json`) — 6 high-leverage variables
+  exposed (font stack, line-height, note width, bold emphasis, accent color,
+  primary bg).
 - ✅ **Screenshot checklist** (`screenshots/SCREENSHOTS.md`) — 7-shot list
   embedded in both READMEs. Filenames reserved; capture to render.
 - ⏸ **LXGW WenKai Screen woff2 bundling** — deferred. Needs `fonttools` /
@@ -343,6 +345,7 @@ kami-obsidian/
 | [0.1.5](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.5) | Performance: remove global text rendering override to improve long-note scrolling |
 | [0.1.6](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.6) | Document reading polish: calibrate long-form typography, inline code, code blocks, tables, headings, and bold emphasis |
 | [0.1.7](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.7) | Readability calibration: restore 700px reading width, 500 emphasis, and a calmer long-form rhythm |
+| [0.1.8](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.8) | Style Settings: add a bold emphasis strength control for font/platform readability calibration |
 
 Release tags match `manifest.json` version exactly (no `v` prefix) — Obsidian
 pulls theme files from the GitHub release tagged with the manifest version.

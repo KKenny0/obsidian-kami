@@ -12,7 +12,7 @@
 油墨蓝点缀、衬线主导的层级、暖调中性灰——搬到 Obsidian 编辑器上。
 
 > 当前状态：**已上线 [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader)。**
-> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.7`
+> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.8`
 
 ---
 
@@ -74,10 +74,11 @@
 - **正文字体栈** —— 把 LXGW WenKai Screen（楷书）换成思源宋体等印刷宋体，缓解楷书阅读疲劳
 - **正文行距** —— 默认 1.55，范围 1.3–1.9（Live Preview 改完需 Cmd+E toggle 一次；Reading View 立即生效）
 - **笔记最大宽度** —— 默认 700px
+- **加粗强调强度** —— 默认 500；如果当前字体下加粗不明显，可调高到 600 或 700
 - **强调色**（浅色 + 深色）—— 单色替换，瞬间改变主题气质
 - **主背景**（浅色 + 深色）—— 调 parchment 暖度
 
-Schema 刻意只暴露 5 个变量。其他保持 `theme.css` 内固定，以维护 kami 的克制原则——过度可配置会稀释设计系统的统一性。
+Schema 刻意只暴露 6 个高杠杆变量。其他保持 `theme.css` 内固定，以维护 kami 的克制原则——过度可配置会稀释设计系统的统一性。
 
 ---
 
@@ -115,7 +116,7 @@ Schema 刻意只暴露 5 个变量。其他保持 `theme.css` 内固定，以维
 
 1. Obsidian → **Settings → Appearance** → Themes 旁点 **Manage**
 2. **Browse** → 搜索 "Kami Reader" → **Install** → **Use**
-3. （可选）装 [Style Settings](https://obsidian.md/plugins?id=obsidian-style-settings) 社区插件，启用 5 个可调变量（字体、行距、宽度、强调色、背景）
+3. （可选）装 [Style Settings](https://obsidian.md/plugins?id=obsidian-style-settings) 社区插件，启用 6 个可调变量（字体、行距、宽度、加粗强调、强调色、背景）
 
 Phase 2b 已验证 Obsidian 自己的 Gallery 下载器写出的文件无 `com.apple.provenance`——App Store 用户从 Gallery 装干净，无 macOS Sequoia 沙盒问题。
 
@@ -188,8 +189,8 @@ https://community.obsidian.md/themes/kami-reader。
 
 ### Phase 2a —— 打磨与文档（✅ 本次提交完成）
 
-- ✅ **Style Settings schema**（`data-theme.json`）—— 暴露 5 个高杠杆变量
-  （字体栈、行距、笔记宽度、强调色、主背景）
+- ✅ **Style Settings schema**（`data-theme.json`）—— 暴露 6 个高杠杆变量
+  （字体栈、行距、笔记宽度、加粗强调、强调色、主背景）
 - ✅ **截图清单**（`screenshots/SCREENSHOTS.md`）—— 7 张截图清单已嵌入中英
   README。文件名预留好，按名拍完即自动渲染
 - ⏸ **LXGW WenKai Screen woff2 打包** —— 推迟。需要 `fonttools` /
@@ -325,6 +326,7 @@ kami-obsidian/
 | [0.1.5](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.5) | 性能：移除全局文字渲染覆盖，改善长文滚动流畅度 |
 | [0.1.6](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.6) | 长文阅读体验：校准长文排版、行内代码、代码块、表格、标题层级和加粗强调 |
 | [0.1.7](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.7) | 可读性校准：恢复 700px 阅读宽度、500 加粗约束，并放松长文阅读节奏 |
+| [0.1.8](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.8) | Style Settings：新增加粗强调强度控制，用于字体和平台差异下的可读性校准 |
 
 Release tag 跟 `manifest.json` version 完全一致（不带 `v` 前缀）——Obsidian 从
 manifest version 对应的 GitHub release tag 拉主题文件。

@@ -16,7 +16,7 @@
 /* @settings
 name: Kami Reader
 id: kami-reader
-description: 微调字体、行距、强调色和阅读宽度，无需改 CSS。
+description: 微调字体、行距、加粗强调、强调色和阅读宽度，无需改 CSS。
 settings:
   -
     id: typography-heading
@@ -44,6 +44,22 @@ settings:
     description: kami 长文阅读默认 700px，避免中文长段落单行过长。更宽适合双栏。
     type: variable-text
     default: "700px"
+  -
+    id: bold-weight
+    title: 加粗强调强度 · Bold emphasis strength
+    description: 不同平台和字体对中等/加粗字重的渲染差异很大。默认 500 保持 Kami Reader 克制的长文质感；如果当前字体下加粗不明显，可调高到 600 或 700。
+    type: variable-select
+    default: "500"
+    options:
+      -
+        label: 500 · Restrained
+        value: "500"
+      -
+        label: 600 · Stronger
+        value: "600"
+      -
+        label: 700 · High contrast
+        value: "700"
   -
     id: accent-heading
     title: Accent · 强调色
