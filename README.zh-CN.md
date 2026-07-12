@@ -6,13 +6,13 @@
 > 未受其背书。所有视觉设计 token 均溯源至原 kami 项目（MIT 许可）；本仓库
 > 是 kami 设计系统在 Obsidian 端的衍生适配。**
 
-> 最后更新：2026-07-09 · Last updated: 2026-07-09
+> 最后更新：2026-07-13 · Last updated: 2026-07-13
 
 把 [tw93/kami](https://github.com/tw93/kami) 的印刷级排版系统——暖米纸底色、
 油墨蓝点缀、衬线主导的层级、暖调中性灰——搬到 Obsidian 编辑器上。
 
 > 当前状态：**已上线 [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader)。**
-> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.8`
+> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.9`
 
 ---
 
@@ -293,6 +293,7 @@ kami-obsidian/
 | [0.1.6](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.6) | 长文阅读体验：校准长文排版、行内代码、代码块、表格、标题层级和加粗强调 |
 | [0.1.7](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.7) | 可读性校准：恢复 700px 阅读宽度、500 加粗约束，并放松长文阅读节奏 |
 | [0.1.8](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.8) | Style Settings：新增加粗强调强度控制，用于字体和平台差异下的可读性校准 |
+| [0.1.9](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.9) | 阅读体验：恢复 Reading View 原生段落节奏、校准深色加粗，并在完整 Kami snippet 与活动主题重叠时给出警告 |
 
 Release tag 跟 `manifest.json` version 完全一致（不带 `v` 前缀）——Obsidian 从
 manifest version 对应的 GitHub release tag 拉主题文件。
