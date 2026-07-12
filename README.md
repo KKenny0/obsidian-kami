@@ -71,7 +71,7 @@ After installing the Style Settings community plugin, go to **Settings → Style
 - **Body font family** — swap LXGW WenKai Screen (kaiti) for Source Han Serif (songti) if kaiti fatigues
 - **Body line-height** — 1.55 default, range 1.3–1.9 (Live Preview needs Cmd+E toggle after change; Reading View updates instantly)
 - **Note max width** — 700px default
-- **Bold emphasis strength** — 500 default; raise to 600 or 700 if bold is not distinguishable in your font setup
+- **Bold emphasis strength** — without a Style Settings override, 500 in Light and 600 in Dark by default; choose 500, 600, or 700 if your font setup needs a different calibration
 - **Accent color** (light + dark) — single accent swap, instantly re-themes
 - **Primary background** (light + dark) — tune parchment warmth
 
@@ -265,8 +265,9 @@ its own fix and a new release tag:
 2. **Kaiti gives Kami Reader its CJK texture, but not every reader likes it for
    daily editing.** If LXGW WenKai Screen feels tiring, switch **Body font
    family** to a songti-style stack such as Source Han Serif SC.
-3. **Bold defaults to a restrained `500`.** If your platform or font renders it
-   too close to regular text, raise **Bold emphasis strength** to `600` or `700`.
+3. **Bold is calibrated per theme:** without a Style Settings override, restrained
+   `500` in Light and more salient `600` in Dark. If your platform or font needs
+   a different calibration, use **Bold emphasis strength** at `500`, `600`, or `700`.
 
 ---
 

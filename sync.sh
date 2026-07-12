@@ -43,7 +43,9 @@ cat > "$OUT_PATH" << JSEOF
 // Usage:
 //   1. Copy this entire file's contents.
 //   2. In Obsidian: Cmd+Option+I → Console tab → paste → Enter.
-//   3. If you don't see changes: Settings → Appearance → CSS Snippets
+//   3. Set Settings → Appearance → Themes to Default. This snippet contains
+//      the complete Kami Reader theme and must not be combined with another theme.
+//   4. If you don't see changes: Settings → Appearance → CSS Snippets
 //      → toggle kami off then on (forces reload of modified snippet).
 //
 // Why this is needed (the short version):
@@ -57,6 +59,24 @@ const b64 = "${B64}";
 const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
 const css = new TextDecoder('utf-8').decode(bytes);
 
+async function warnIfThemeIsActive() {
+  try {
+    const appearance = JSON.parse(
+      await app.vault.adapter.read('.obsidian/appearance.json')
+    );
+    const activeTheme = appearance.cssTheme;
+    if (typeof activeTheme === 'string' && activeTheme.trim()) {
+      console.warn(
+        '⚠ "' + activeTheme + '" is active. The kami snippet contains the full '
+        + 'Kami Reader theme. Set Settings → Appearance → Themes to Default, '
+        + 'then enable only the kami snippet.'
+      );
+    }
+  } catch (e) {
+    console.warn('⚠ Kami was injected, but could not check the active theme:', e);
+  }
+}
+
 try {
   const existing = app.vault.getAbstractFileByPath('.obsidian/snippets/kami.css');
   if (existing) {
@@ -67,6 +87,7 @@ try {
     console.log('✓ kami.css created (' + css.length + ' chars)');
     console.log('  → enable it in Settings → Appearance → CSS Snippets');
   }
+  await warnIfThemeIsActive();
 } catch (e) {
   console.error('Injection failed:', e);
   throw e;
@@ -78,3 +99,4 @@ echo "  Source: theme.css ($CSS_LINES lines, $CSS_BYTES bytes)"
 echo "  Output: $(wc -c < "$OUT_PATH" | tr -d ' ') bytes"
 echo ""
 echo "Next: open the file, copy all, paste into Obsidian DevTools Console."
+echo "      Before enabling the full snippet, set Appearance → Themes to Default."

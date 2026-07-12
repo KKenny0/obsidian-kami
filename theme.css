@@ -47,7 +47,7 @@ settings:
   -
     id: bold-weight
     title: 加粗强调强度 · Bold emphasis strength
-    description: 不同平台和字体对中等/加粗字重的渲染差异很大。默认 500 保持 Kami Reader 克制的长文质感；如果当前字体下加粗不明显，可调高到 600 或 700。
+    description: 不同平台和字体对中等/加粗字重的渲染差异很大。未使用 Style Settings 覆盖时，浅色默认 500、深色默认 600，以保持长文中的克制与可辨识度；如果当前字体下加粗仍不明显，可调到 600 或 700。
     type: variable-select
     default: "500"
     options:
@@ -110,79 +110,15 @@ settings:
 */
 
 /* =========================================================================
-   1. Design Tokens — Light
+   1. Design Tokens — Shared + Light
    ========================================================================= */
-/* Use body.theme-light instead of :root. Obsidian's built-in app.css defines
-   these vars under .theme-light (specificity 0,1,0); :root is only 0,0,1 and
-   loses. body.theme-light is 0,1,1 — one element higher, wins the cascade. */
-body.theme-light {
-    /* --- Surfaces (warm parchment family) --- */
-    --background-primary:          #f5f4ed;  /* parchment — main note bg */
-    --background-primary-alt:      #f0eee4;  /* slightly darker for alt rows */
-    --background-secondary:        #faf9f5;  /* ivory — sidebars */
-    --background-secondary-alt:    #f3f1e7;
-    --background-modifier-border:  #e8e6dc;  /* warm sand */
-    --background-modifier-border-hover: #d9d6c8;
-    --background-modifier-border-focus: #c8c4b3;
-    --background-modifier-form-field: #faf9f5;
-    --background-modifier-cover:   rgba(245, 244, 237, 0.85);
-    --background-modifier-hover:   rgba(48, 48, 46, 0.05);
-    --background-modifier-active-hover: rgba(27, 54, 93, 0.08);
-    --background-modifier-success: rgba(82, 110, 54, 0.12);
-    --background-modifier-error:   rgba(140, 45, 45, 0.12);
-
-    /* --- Text (warm dark surfaces) --- */
-    --text-normal:                 #141413;  /* near-black with warm olive undertone */
-    --text-muted:                  #504e49;  /* olive */
-    --text-faint:                  #6b6a64;  /* stone */
-    --text-on-accent:              #faf9f5;
-    --text-error:                  #8c2d2d;
-    --text-success:                #526e36;
-    --text-accent:                 #1B365D;  /* ink blue */
-    --text-accent-hover:           #2a4a7a;
-    --text-highlight-bg:           #f3e3a8;  /* warm yellow highlight */
-    --text-highlight-bg-active:    #ead08a;
-    --text-selection:              rgba(27, 54, 93, 0.18);
-    --text-olive:                  #504e49;  /* quote/caption text — warmer than --text-muted */
-
-    /* --- Interactive (ink-blue family, ≤5% surface coverage) --- */
-    --interactive-normal:          #faf9f5;
-    --interactive-hover:           #f0eee4;
-    --interactive-accent:          #1B365D;
-    --interactive-accent-hover:    #2a4a7a;
-    --interactive-success:         #526e36;
-
-    /* --- Syntax (for code blocks, warm-leaning) --- */
-    --syntax-bg:                   #faf9f5;  /* kami Code Block: ivory surface */
-    --syntax-text:                 #141413;
-    --syntax-comment:              #8a8472;
-    --syntax-keyword:              #1B365D;  /* ink blue */
-    --syntax-string:               #504e49;  /* olive neutral */
-    --syntax-number:               #6b4a1f;  /* warm brown */
-    --syntax-tag:                  #3d3d3a;  /* dark warm neutral */
-    --syntax-atom:                 #1B365D;
-    --syntax-variable:             #4a463e;
-    --syntax-function:             #1B365D;
-    --syntax-property:             #504e49;
-    --syntax-punctuation:          #6b6a64;
-
-    --code-background:             var(--syntax-bg);
-    --code-normal:                 var(--syntax-text);
-    --inline-code-background:      #f8f7f1;
-    --inline-code-normal:          #504e49;
-    --code-comment:                var(--syntax-comment);
-    --code-function:               var(--syntax-function);
-    --code-important:              var(--syntax-keyword);
-    --code-keyword:                var(--syntax-keyword);
-    --code-operator:               var(--syntax-punctuation);
-    --code-property:               var(--syntax-property);
-    --code-punctuation:            var(--syntax-punctuation);
-    --code-string:                 var(--syntax-string);
-    --code-tag:                    var(--syntax-tag);
-    --code-value:                  var(--syntax-number);
-    --code-size:                   0.875em;
-    --code-white-space:            pre;
-
+/* Shared tokens must be defined for both themes. Obsidian's built-in app.css
+   defines its variables under .theme-light / .theme-dark (specificity
+   0,1,0); this compound selector is 0,1,1 and wins without relying on one
+   theme inheriting values from the other. Palette tokens stay in the theme
+   blocks below. */
+body.theme-light,
+body.theme-dark {
     /* --- Typography --- */
     /* Charter is macOS-native (/System/Library/Fonts/Charter.ttc), no install.
        Georgia is the cross-platform fallback closest to Charter's proportions.
@@ -261,16 +197,88 @@ body.theme-light {
     --icon-opacity: 0.75;
     --icon-opacity-hover: 1;
 
-    /* --- Scrollbar --- */
-    --scrollbar-bg: transparent;
-    --scrollbar-thumb-bg: rgba(48, 48, 46, 0.15);
-    --scrollbar-active-thumb-bg: rgba(48, 48, 46, 0.3);
+    /* --- Code metrics --- */
+    --code-size: 0.875em;
+    --code-white-space: pre;
 
     /* --- Misc --- */
     --checkbox-size: 16px;
     --toggle-width: 36px;
     --toggle-thumb-radius: 18px;
     --toggle-radius: 18px;
+}
+
+/* Use body.theme-light instead of :root for palette values. */
+body.theme-light {
+    /* --- Surfaces (warm parchment family) --- */
+    --background-primary:          #f5f4ed;  /* parchment — main note bg */
+    --background-primary-alt:      #f0eee4;  /* slightly darker for alt rows */
+    --background-secondary:        #faf9f5;  /* ivory — sidebars */
+    --background-secondary-alt:    #f3f1e7;
+    --background-modifier-border:  #e8e6dc;  /* warm sand */
+    --background-modifier-border-hover: #d9d6c8;
+    --background-modifier-border-focus: #c8c4b3;
+    --background-modifier-form-field: #faf9f5;
+    --background-modifier-cover:   rgba(245, 244, 237, 0.85);
+    --background-modifier-hover:   rgba(48, 48, 46, 0.05);
+    --background-modifier-active-hover: rgba(27, 54, 93, 0.08);
+    --background-modifier-success: rgba(82, 110, 54, 0.12);
+    --background-modifier-error:   rgba(140, 45, 45, 0.12);
+
+    /* --- Text (warm dark surfaces) --- */
+    --text-normal:                 #141413;  /* near-black with warm olive undertone */
+    --text-muted:                  #504e49;  /* olive */
+    --text-faint:                  #6b6a64;  /* stone */
+    --text-on-accent:              #faf9f5;
+    --text-error:                  #8c2d2d;
+    --text-success:                #526e36;
+    --text-accent:                 #1B365D;  /* ink blue */
+    --text-accent-hover:           #2a4a7a;
+    --text-highlight-bg:           #f3e3a8;  /* warm yellow highlight */
+    --text-highlight-bg-active:    #ead08a;
+    --text-selection:              rgba(27, 54, 93, 0.18);
+    --text-olive:                  #504e49;  /* quote/caption text — warmer than --text-muted */
+
+    /* --- Interactive (ink-blue family, ≤5% surface coverage) --- */
+    --interactive-normal:          #faf9f5;
+    --interactive-hover:           #f0eee4;
+    --interactive-accent:          #1B365D;
+    --interactive-accent-hover:    #2a4a7a;
+    --interactive-success:         #526e36;
+
+    /* --- Syntax (for code blocks, warm-leaning) --- */
+    --syntax-bg:                   #faf9f5;  /* kami Code Block: ivory surface */
+    --syntax-text:                 #141413;
+    --syntax-comment:              #8a8472;
+    --syntax-keyword:              #1B365D;  /* ink blue */
+    --syntax-string:               #504e49;  /* olive neutral */
+    --syntax-number:               #6b4a1f;  /* warm brown */
+    --syntax-tag:                  #3d3d3a;  /* dark warm neutral */
+    --syntax-atom:                 #1B365D;
+    --syntax-variable:             #4a463e;
+    --syntax-function:             #1B365D;
+    --syntax-property:             #504e49;
+    --syntax-punctuation:          #6b6a64;
+
+    --code-background:             var(--syntax-bg);
+    --code-normal:                 var(--syntax-text);
+    --inline-code-background:      #f8f7f1;
+    --inline-code-normal:          #504e49;
+    --code-comment:                var(--syntax-comment);
+    --code-function:               var(--syntax-function);
+    --code-important:              var(--syntax-keyword);
+    --code-keyword:                var(--syntax-keyword);
+    --code-operator:               var(--syntax-punctuation);
+    --code-property:               var(--syntax-property);
+    --code-punctuation:            var(--syntax-punctuation);
+    --code-string:                 var(--syntax-string);
+    --code-tag:                    var(--syntax-tag);
+    --code-value:                  var(--syntax-number);
+
+    /* --- Scrollbar --- */
+    --scrollbar-bg: transparent;
+    --scrollbar-thumb-bg: rgba(48, 48, 46, 0.15);
+    --scrollbar-active-thumb-bg: rgba(48, 48, 46, 0.3);
 
     /* --- Depth (kami spec: ring shadow + whisper shadow, no hard drop shadow) --- */
     --ring-warm: 0 0 0 1px var(--background-modifier-border-hover);
@@ -492,12 +500,6 @@ h6, .HyperMD-header-6, .cm-header-6 { font-size: 1em; color: var(--text-muted); 
 p,
 .HyperMD-line {
     line-height: var(--line-height-normal);
-}
-.markdown-preview-view p {
-    margin: 0 0 var(--p-spacing);
-}
-.markdown-preview-view p:last-child {
-    margin-bottom: 0;
 }
 .markdown-preview-view :is(ul, ol) {
     margin-top: 0.35em;
@@ -1168,9 +1170,7 @@ body.theme-dark {
     --text-highlight-bg:           #5a4a1f;
     --text-highlight-bg-active:    #6e5c2a;
     --text-selection:              rgba(45, 90, 138, 0.32);
-    --bold-weight:                 500;
-    --bold-color:                  inherit;
-    --italic-color:                inherit;
+    --bold-weight:                 600;  /* dark surfaces need stronger emphasis to preserve salience */
 
     /* --- Interactive --- */
     --interactive-normal:          #1d1c1a;
@@ -1207,8 +1207,6 @@ body.theme-dark {
     --code-string:                 var(--syntax-string);
     --code-tag:                    var(--syntax-tag);
     --code-value:                  var(--syntax-number);
-    --code-size:                   0.875em;
-    --code-white-space:            pre;
 
     /* --- Scrollbar --- */
     --scrollbar-bg: transparent;

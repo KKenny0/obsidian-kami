@@ -33,7 +33,7 @@
         {
           "id": "bold-weight",
           "title": "加粗强调强度 · Bold emphasis strength",
-          "description": "不同平台和字体对中等/加粗字重的渲染差异很大。默认 500 保持 Kami Reader 克制的长文质感；如果当前字体下加粗不明显，可调高到 600 或 700。",
+          "description": "不同平台和字体对中等/加粗字重的渲染差异很大。未使用 Style Settings 覆盖时，浅色默认 500、深色默认 600，以保持长文中的克制与可辨识度；如果当前字体下加粗仍不明显，可调到 600 或 700。",
           "type": "variable-select",
           "default": "500",
           "options": [
