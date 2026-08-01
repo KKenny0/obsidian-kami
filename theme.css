@@ -814,7 +814,7 @@ input[type="checkbox"]:checked::after {
     --callout-bug-color: 27, 54, 93;
     --callout-example-color: 27, 54, 93;
     --callout-quote-color: 27, 54, 93;
-    --callout-color: 27, 54, 93;
+    --callout-color: rgb(27, 54, 93);
 
     background-color: var(--background-secondary);
     border: 1px solid var(--background-modifier-border);
