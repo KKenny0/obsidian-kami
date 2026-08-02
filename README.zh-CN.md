@@ -4,12 +4,13 @@
 
 > **灵感来源于 [tw93/kami](https://github.com/tw93/kami)。本项目与 tw93 无关联、
 > 未受其背书。所有视觉设计 token 均溯源至原 kami 项目（MIT 许可）；本仓库
-> 是 kami 设计系统在 Obsidian 端的衍生适配。**
+> 是 kami 设计系统在 Obsidian 端的非官方 Workspace 适配。**
 
-> 最后更新：2026-07-13 · Last updated: 2026-07-13
+> 最后更新：2026-08-02 · Last updated: 2026-08-02
 
 把 [tw93/kami](https://github.com/tw93/kami) 的印刷级排版系统——暖米纸底色、
-油墨蓝点缀、衬线主导的层级、暖调中性灰——搬到 Obsidian 编辑器上。
+油墨蓝点缀、衬线主导的层级、暖调中性灰——延伸为完整的 Obsidian Workspace
+外壳；不改变 Obsidian 原生导航模型。
 
 > 当前状态：**已上线 [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader)。**
 > 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.1.9`
@@ -18,7 +19,9 @@
 
 ## 视觉语言
 
-对齐 [kami v1.1.0](https://kami.tw93.fun/index-zh.html) 规范。
+已于 2026-08-02 按 [Kami v1.11.0](https://kami.tw93.fun/index-zh.html) 复核。
+完整 Workspace 外壳是非官方 Obsidian 适配；深色模式有意保留
+`--bold-weight: 600` 以保证屏幕可读性，并不宣称与 Kami 的印刷强调规则完全一致。
 
 | Token | 浅色 | 深色 | 用途 |
 |---|---|---|---|
@@ -167,7 +170,7 @@ CSS Snippets 把 kami 开关 toggle 一次才能拉到新内容。
 
 ## 覆盖范围
 
-Phase 1 目标是完整的视觉覆盖：
+当前覆盖范围包含完整 Workspace 外壳：
 
 - ✅ 基础色板（60+ 变量，浅色 + 深色双套）
 - ✅ **深色模式** —— Deep Dark `#141413` + Ink Light `#2D5A8A`，保留同样的
@@ -176,8 +179,9 @@ Phase 1 目标是完整的视觉覆盖：
   （2pt 油墨蓝实线 + olive 文字，无背景）、代码、frontmatter、嵌入块
 - ✅ Editing View（CodeMirror 6）：语法 token、光标、选区、当前行高亮、
   格式化符号
-- ✅ UI 外壳：标题栏、标签页、功能区、文件管理器、状态栏、命令面板、设置
-  面板、modal、菜单、toggle、checkbox、滚动条
+- ✅ **完整 Workspace 外壳**：标题栏、根标签与侧栏标签、功能区、左右侧栏、
+  pane 分割线、文件管理器/搜索、View Header 与贴边状态栏
+- ✅ 命令面板、Quick Switcher、设置面板、modal、菜单、toggle、checkbox、滚动条
 - ✅ 尊重系统的 reduced-motion 偏好
 
 未覆盖（暂缓）：
@@ -229,8 +233,8 @@ release tag：
    Obsidian 内置 app.css 把基础变量定义在 `.theme-light` / `.theme-dark`
    （特异性 0,1,0）下。`:root`（0,0,1）层叠不过它们；`body.theme-light`
    （0,1,1）才行。
-3. **英文用 Charter，不是 Newsreader。** kami v1.1.0 明确指定 Charter；
-   它也是 macOS 自带，省了装字体这一步。
+3. **英文用 Charter，不是 Newsreader。** 已于 2026-08-02 按 Kami v1.11.0
+   复核；Charter 是其英文指定字体，也是 macOS 自带，省了装字体这一步。
 4. **标签背景用实色 `#E4ECF5`，绝不用 rgba。** kami 明确禁止 rgba 标签
    背景（PDF 导出时 WeasyPrint 有双层矩形 bug）。
 5. **阴影只用 ring shadow 和 whisper shadow，绝不用硬投影。** kami 规范；
@@ -241,7 +245,8 @@ release tag：
 7. **引用块：2pt 油墨蓝实线 + olive 文字，无背景，不 italic。** 克制优于装饰。
 8. **中文用 LXGW WenKai Screen，不是思源宋体。** kami 原版 仓耳今楷02 是
    楷书；思源宋体是印刷宋体。楷书保留 kami 标志性的手写温度。
-9. **不用合成粗体。** kami 禁止 fake bold；标题只用 500/600 实际字重。
+9. **不用合成粗体。** kami 禁止 fake bold；标题只用 500/600 实际字重。深色模式
+   有意保留 `--bold-weight: 600` 作为 Obsidian 的屏幕可读性例外。
 10. **Phase 1 以 snippet 形式发布，不是主题。** 绕过 macOS Sequoia 沙盒；
     详见"安装"章节。
 
@@ -269,7 +274,7 @@ kami-obsidian/
 ├── data-theme.json            # Style Settings schema，theme 模式用
 ├── sync.sh                    # 从 theme.css 重新生成 inject-kami-snippet.js
 ├── inject-kami-snippet.js     # sync.sh 的产物 —— 粘贴到 Obsidian Console 用
-├── screenshots/               # 7 张截图集（见 SCREENSHOTS.md）
+├── screenshots/               # 9 张截图集（见 SCREENSHOTS.md）
 ├── LICENSE                    # MIT（纯文本，让 GitHub licensee 识别 SPDX:MIT）
 ├── README.md                  # 英文文档
 └── README.zh-CN.md            # 本文件
