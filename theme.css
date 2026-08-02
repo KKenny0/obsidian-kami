@@ -795,27 +795,10 @@ input[type="checkbox"]:checked::after {
 
 /* Callout — kami monochrome document note.
    Obsidian ships rainbow callouts by default; kami's single-accent rule
-   forbids that. We override every type color to ink-blue (RGB triple for
-   Obsidian's alpha-compositing usage) and encode severity in border-left
-   thickness instead. Lucide icons retain their shape; only color is unified. */
+   forbids that. Keep Obsidian's version-specific --callout-color contract,
+   and encode severity in border-left thickness instead. Lucide icons retain
+   their shape; only color is unified. */
 .callout {
-    /* Single ink-blue for all types — kami restraint */
-    --callout-default-color: 27, 54, 93;
-    --callout-note-color: 27, 54, 93;
-    --callout-abstract-color: 27, 54, 93;
-    --callout-info-color: 27, 54, 93;
-    --callout-todo-color: 27, 54, 93;
-    --callout-tip-color: 27, 54, 93;
-    --callout-success-color: 27, 54, 93;
-    --callout-question-color: 27, 54, 93;
-    --callout-warning-color: 27, 54, 93;
-    --callout-failure-color: 27, 54, 93;
-    --callout-danger-color: 27, 54, 93;
-    --callout-bug-color: 27, 54, 93;
-    --callout-example-color: 27, 54, 93;
-    --callout-quote-color: 27, 54, 93;
-    --callout-color: rgb(27, 54, 93);
-
     background-color: var(--background-secondary);
     border: 1px solid var(--background-modifier-border);
     border-left: 2pt solid var(--text-accent);
@@ -826,12 +809,13 @@ input[type="checkbox"]:checked::after {
 }
 .callout-title,
 .callout-icon,
+.callout-icon .svg-icon,
 .callout-title-inner,
 .callout-fold {
     color: var(--text-accent);
 }
 .callout-title {
-    background-color: transparent;  /* override Obsidian's rgba(--callout-color, 0.1) tint that would re-introduce color */
+    background-color: transparent;  /* suppress Obsidian's callout-color tint */
     font-family: var(--font-interface-theme);
     font-size: 1em;
     font-weight: var(--font-semibold);
