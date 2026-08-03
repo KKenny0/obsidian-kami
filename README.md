@@ -2,7 +2,7 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-> Last updated: 2026-08-02
+> Last updated: 2026-08-03
 
 > **Inspired by [tw93/kami](https://github.com/tw93/kami). Not affiliated with or
 > endorsed by tw93. All visual design tokens trace to the original kami project
@@ -15,7 +15,7 @@ hierarchy, warm-gray neutrals — onto the Obsidian editor without changing
 Obsidian's navigation model.
 
 > Status: **Published on the [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader).**
-> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.1.9`
+> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.2.0`
 
 ---
 
@@ -315,6 +315,7 @@ kami-obsidian/
 | [0.1.7](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.7) | Readability calibration: restore 700px reading width, 500 emphasis, and a calmer long-form rhythm |
 | [0.1.8](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.8) | Style Settings: add a bold emphasis strength control for font/platform readability calibration |
 | [0.1.9](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.9) | Reading View: restore native paragraph rhythm, calibrate dark bold emphasis, and warn when the full Kami snippet overlaps an active theme |
+| [0.2.0](https://github.com/KKenny0/obsidian-kami/releases/tag/0.2.0) | Workspace shell: extend Kami's visual language across navigation, sidebars, panes, headers, status surfaces, and core overlays |
 
 Release tags match `manifest.json` version exactly (no `v` prefix) — Obsidian
 pulls theme files from the GitHub release tagged with the manifest version.
@@ -339,6 +340,8 @@ Fonts referenced but not bundled:
 
 ## Credits
 
-- Visual system & design tokens: [tw93/kami](https://github.com/tw93/kami) — MIT
+- Visual style & design tokens: [tw93/kami](https://github.com/tw93/kami) — MIT.
+  This is an unofficial third-party adaptation; see the
+  [upstream maintainer's response](https://github.com/tw93/Kami/issues/42#issuecomment-5158906154).
 - Fonts: Charter (OFL, macOS-native), LXGW WenKai (OFL), JetBrains Mono (OFL),
   Inter (OFL)
