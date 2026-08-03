@@ -4,7 +4,10 @@
  * Visual language: warm parchment background, ink-blue accent, serif-led
  * typography, warm-gray undertone across all neutrals.
  *
- * Published theme, with full coverage of Reading + Editing views.
+ * Published theme, with a complete Workspace shell plus Reading + Editing views.
+ * Workspace styling is an unofficial Obsidian adaptation, reviewed against
+ * Kami v1.11.0 on 2026-08-02. Dark mode intentionally keeps --bold-weight:
+ * 600 for screen readability; this is not a claim of exact print conformance.
  *
  * Source of design tokens: https://github.com/tw93/kami  (MIT)
  * Fonts: Charter (macOS-native, OFL), LXGW WenKai Screen (OFL, user-installed),
@@ -105,7 +108,7 @@ settings:
   -
     id: info-kami-credits
     title: About this theme
-    description: Kami Reader 是 tw93/kami 设计系统在 Obsidian 上的衍生适配。所有视觉 token 溯源至 kami v1.1.0 (MIT)。主题已于 2026-06-20 上线 Obsidian Theme Gallery。
+    description: Kami Reader 是 tw93/kami 设计系统在 Obsidian 上的非官方 Workspace 适配。所有视觉 token 溯源至 Kami v1.11.0（已于 2026-08-02 复核，MIT）。深色模式的 --bold-weight: 600 是为屏幕可读性保留的有意例外。主题已于 2026-06-20 上线 Obsidian Theme Gallery。
     type: info-text
 */
 
@@ -190,6 +193,25 @@ body.theme-dark {
     --header-height: 40px;
     --drag-height: 28px;
 
+    /* --- Workspace geometry --- */
+    --divider-width: 1px;
+    --divider-width-hover: 2px;
+    --titlebar-border-width: var(--divider-width);
+    --tab-outline-width: 0px;
+    --tab-radius: var(--radius-s);
+    --tab-radius-active: var(--radius-s) var(--radius-s) 0 0;
+    --nav-item-weight: var(--font-normal);
+    --nav-item-weight-active: var(--font-medium);
+    --status-bar-border-width: var(--divider-width) 0 0 var(--divider-width);
+    --status-bar-font-size: var(--font-smallest);
+    --status-bar-radius: var(--radius-s) 0 0 0;
+    --modal-border-width: var(--divider-width);
+    --modal-radius: var(--radius-l);
+    --file-header-font: var(--font-interface-theme);
+    --file-header-font-size: var(--font-small);
+    --file-header-font-weight: var(--font-medium);
+    --file-header-border: var(--divider-width) solid var(--divider-color);
+
     /* --- Iconography --- */
     --icon-color: var(--text-muted);
     --icon-color-hover: var(--text-normal);
@@ -245,6 +267,36 @@ body.theme-light {
     --interactive-accent:          #1B365D;
     --interactive-accent-hover:    #2a4a7a;
     --interactive-success:         #526e36;
+
+    /* --- Workspace shell --- */
+    --titlebar-background:         var(--background-secondary-alt);
+    --titlebar-background-focused: var(--background-secondary);
+    --titlebar-border-color:       var(--divider-color);
+    --tab-container-background:    var(--background-secondary);
+    --tab-background-active:       var(--background-primary);
+    --tab-text-color:              #6b6a64;
+    --tab-text-color-active:       var(--text-normal);
+    --tab-text-color-focused:      #6b6a64;
+    --tab-text-color-focused-active: var(--text-normal);
+    --tab-text-color-focused-active-current: var(--text-normal);
+    --tab-divider-color:           var(--divider-color);
+    --tab-outline-color:           var(--background-modifier-border);
+    --ribbon-background:           var(--background-secondary);
+    --ribbon-background-collapsed: var(--background-secondary);
+    --divider-color:               #eeece4;
+    --divider-color-hover:         var(--background-modifier-border-hover);
+    --nav-item-color:              #6b6a64;
+    --nav-item-color-hover:        var(--text-normal);
+    --nav-item-color-active:       var(--text-normal);
+    --nav-item-color-selected:     var(--text-normal);
+    --nav-item-background-hover:   var(--background-modifier-hover);
+    --nav-item-background-active:  var(--background-modifier-active-hover);
+    --nav-item-background-selected: var(--background-modifier-active-hover);
+    --status-bar-background:       var(--background-secondary);
+    --status-bar-border-color:     var(--divider-color);
+    --status-bar-text-color:       #6b6a64;
+    --modal-background:            var(--background-secondary);
+    --modal-border-color:          var(--background-modifier-border);
 
     /* --- Syntax (for code blocks, warm-leaning) --- */
     --syntax-bg:                   #faf9f5;  /* kami Code Block: ivory surface */
@@ -338,8 +390,8 @@ input, textarea, button {
    3. App Frame — titlebar, workspace tabs, ribbon, sidebars
    ========================================================================= */
 .titlebar {
-    background-color: var(--background-secondary);
-    border-bottom: 1px solid var(--background-modifier-border);
+    background-color: var(--titlebar-background);
+    border-bottom: var(--titlebar-border-width) solid var(--titlebar-border-color);
 }
 
 .workspace {
@@ -347,77 +399,118 @@ input, textarea, button {
 }
 
 .workspace-ribbon {
-    background-color: var(--background-secondary);
-    border-right: 1px solid var(--background-modifier-border);
+    background-color: var(--ribbon-background);
+    border-right: var(--divider-width) solid var(--divider-color);
 }
 .workspace-ribbon.mod-right {
     border-right: none;
-    border-left: 1px solid var(--background-modifier-border);
+    border-left: var(--divider-width) solid var(--divider-color);
 }
 
-.workspace-split.mod-vertical > .workspace-leaf,
-.workspace-split.mod-horizontal > .workspace-leaf {
-    background-color: var(--background-primary);
+/* Quiet Chrome: keep passive controls available without competing with notes. */
+body:not(.is-mobile) .workspace-ribbon .clickable-icon {
+    opacity: 0.58;
+    transition: opacity 120ms ease;
+}
+body:not(.is-mobile) .view-actions .clickable-icon,
+body:not(.is-mobile) .workspace-tab-header-tab-list .clickable-icon,
+body:not(.is-mobile) .workspace-tab-header-new-tab .clickable-icon,
+body:not(.is-mobile) .nav-header .clickable-icon {
+    opacity: 0.62;
+    transition: opacity 120ms ease;
+}
+body:not(.is-mobile) .workspace-ribbon .clickable-icon:hover,
+body:not(.is-mobile) .workspace-ribbon .clickable-icon.is-active,
+body:not(.is-mobile) .workspace-ribbon .clickable-icon:focus-visible,
+body:not(.is-mobile) .workspace-ribbon:focus-within .clickable-icon,
+body:not(.is-mobile) .view-actions .clickable-icon:hover,
+body:not(.is-mobile) .view-actions .clickable-icon.is-active,
+body:not(.is-mobile) .view-actions .clickable-icon:focus-visible,
+body:not(.is-mobile) .view-actions:focus-within .clickable-icon,
+body:not(.is-mobile) .workspace-tab-header-tab-list .clickable-icon:hover,
+body:not(.is-mobile) .workspace-tab-header-tab-list .clickable-icon.is-active,
+body:not(.is-mobile) .workspace-tab-header-tab-list .clickable-icon:focus-visible,
+body:not(.is-mobile) .workspace-tab-header-tab-list:focus-within .clickable-icon,
+body:not(.is-mobile) .workspace-tab-header-new-tab .clickable-icon:hover,
+body:not(.is-mobile) .workspace-tab-header-new-tab .clickable-icon.is-active,
+body:not(.is-mobile) .workspace-tab-header-new-tab .clickable-icon:focus-visible,
+body:not(.is-mobile) .workspace-tab-header-new-tab:focus-within .clickable-icon,
+body:not(.is-mobile) .nav-header .clickable-icon:hover,
+body:not(.is-mobile) .nav-header .clickable-icon.is-active,
+body:not(.is-mobile) .nav-header .clickable-icon:focus-visible,
+body:not(.is-mobile) .nav-header:focus-within .clickable-icon {
+    opacity: 1;
 }
 
-/* Tabs */
-.workspace-tab-header-container {
-    background-color: var(--background-secondary);
-    border-bottom: 1px solid var(--background-modifier-border);
-}
-.workspace-tab-header {
-    color: var(--text-muted);
-    transition: color 120ms ease, background-color 120ms ease;
-}
-.workspace-tab-header:hover {
-    color: var(--text-normal);
-    background-color: var(--background-modifier-hover);
-}
-.workspace-tab-header.is-active {
+/* Keep Ribbon state inside Kami's ink-blue language. */
+body:not(.is-mobile) .workspace-ribbon .clickable-icon.is-active {
     color: var(--text-accent);
+    background-color: var(--background-modifier-active-hover);
+}
+
+.workspace-split.mod-root > .workspace-leaf,
+.workspace-split.mod-root .workspace-tabs > .workspace-leaf {
     background-color: var(--background-primary);
+}
+
+/* Sidebar planes stay continuous with the shell, including non-file leaves. */
+.workspace-split.mod-left-split,
+.workspace-split.mod-right-split,
+.workspace-split.mod-left-split .workspace-tab-header-container,
+.workspace-split.mod-right-split .workspace-tab-header-container,
+.workspace-split.mod-left-split .workspace-leaf,
+.workspace-split.mod-right-split .workspace-leaf,
+.workspace-split.mod-left-split .workspace-leaf-content,
+.workspace-split.mod-right-split .workspace-leaf-content {
+    background-color: var(--background-secondary);
+}
+
+/* Root tabs use the canvas plus one stable current-tab edge, not browser chrome. */
+.workspace-split.mod-root .workspace-tab-header.is-active {
+    color: var(--tab-text-color-focused-active-current);
+    background-color: var(--tab-background-active);
     box-shadow: inset 0 -2px 0 var(--interactive-accent);
 }
-.workspace-tab-header.is-active .workspace-tab-header-inner-icon {
-    color: var(--text-accent);
+.workspace-split.mod-root .workspace-tab-header.is-active::before,
+.workspace-split.mod-root .workspace-tab-header.is-active::after {
+    display: none;
 }
-
-/* Sidebar leaves (file explorer, search, etc.) */
-.workspace-leaf-content[data-type="file-explorer"],
-.workspace-leaf-content[data-type="search"] {
-    background-color: var(--background-secondary);
-}
-
-.nav-folder-title,
-.nav-file-title {
+.workspace-tab-header-new-tab .clickable-icon:hover,
+.workspace-tab-header-tab-list .clickable-icon:hover,
+.workspace-split.mod-root .workspace-tab-header-inner-close-button:hover {
+    background-color: var(--background-modifier-hover);
     color: var(--text-normal);
 }
-.nav-folder-title:hover,
-.nav-file-title:hover {
-    color: var(--text-accent);
-    background-color: var(--background-modifier-hover);
+
+/* Sidebar tabs keep the shell tint and use the same compact active edge. */
+.workspace-split.mod-left-split .workspace-tab-header.is-active,
+.workspace-split.mod-right-split .workspace-tab-header.is-active {
+    color: var(--tab-text-color-focused-active-current);
+    background-color: var(--nav-item-background-active);
+    box-shadow: inset 0 -2px 0 var(--interactive-accent);
 }
-.nav-folder-title.is-being-dragged-over,
-.nav-file-title.is-being-dragged-over {
-    background-color: var(--background-modifier-active-hover);
-}
-.nav-file-title.is-active,
-.nav-folder-title.is-active {
-    color: var(--text-accent);
-    background-color: var(--background-modifier-active-hover);
+.workspace-split.mod-left-split .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
+.workspace-split.mod-right-split .workspace-tab-header.is-active .workspace-tab-header-inner-icon {
+    color: var(--tab-text-color-focused-active-current);
 }
 
-/* Status bar */
-.status-bar {
-    background-color: var(--background-secondary);
-    color: var(--text-muted);
-    border-top: 1px solid var(--background-modifier-border);
-    font-size: var(--font-smallest);
+/* Semantic nav variables carry normal and hover states; these edges mark targets. */
+.workspace-split.mod-left-split .tree-item-self.is-active,
+.workspace-split.mod-left-split .nav-file-title.is-active,
+.workspace-split.mod-left-split .nav-folder-title.is-active {
+    box-shadow: inset 2px 0 0 var(--interactive-accent);
+}
+
+.workspace-split.mod-left-split .tree-item-self.is-being-dragged-over,
+.workspace-split.mod-left-split .nav-file-title.is-being-dragged-over,
+.workspace-split.mod-left-split .nav-folder-title.is-being-dragged-over {
+    color: var(--nav-item-color-active);
+    background-color: var(--nav-item-background-active);
+    box-shadow: inset 2px 0 0 var(--interactive-accent);
 }
 
 /* View header (note title bar) */
 .view-header {
-    border-bottom: 1px solid var(--background-modifier-border);
     background-color: var(--background-primary);
 }
 .view-header-title-container .view-header-title {
@@ -446,6 +539,24 @@ input, textarea, button {
     max-width: var(--file-line-width);
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Wide rendered blocks scroll locally instead of widening the note pane. */
+.markdown-preview-view .markdown-preview-sizer > div,
+.markdown-preview-view .mermaid,
+.markdown-source-view .cm-embed-block .mermaid {
+    min-width: 0;
+    max-width: 100%;
+}
+.markdown-preview-view .mermaid,
+.markdown-source-view .cm-embed-block .mermaid {
+    overflow-x: auto;
+}
+.markdown-preview-view .mermaid > svg,
+.markdown-source-view .cm-embed-block .mermaid > svg {
+    display: block;
+    max-width: none;
+    height: auto;
 }
 
 /* Headings — serif-led, restrained weights (no synthetic bold).
@@ -947,7 +1058,7 @@ button {
     background-color: var(--background-modifier-border);  /* warm-sand #e8e6dc */
     color: var(--text-normal);  /* charcoal */
     border: 1px solid transparent;
-    border-radius: 8pt;  /* kami Button spec */
+    border-radius: var(--radius-m);
     padding: 0.4em 0.9em;
     font-size: var(--font-small);
     font-family: var(--font-interface-theme);
@@ -1012,10 +1123,10 @@ textarea:focus,
 .modal-container .modal,
 .prompt,
 .suggestion-container {
-    background-color: var(--background-secondary);
-    border: 1px solid var(--background-modifier-border);
-    border-radius: var(--radius-l);
-    box-shadow: var(--shadow-l);
+    background-color: var(--modal-background);
+    border: var(--modal-border-width) solid var(--modal-border-color);
+    border-radius: var(--modal-radius);
+    box-shadow: var(--whisper-shadow);
 }
 .modal .modal-title,
 .prompt .prompt-title {
@@ -1035,10 +1146,10 @@ textarea:focus,
 
 /* Right-click menu */
 .menu {
-    background-color: var(--background-secondary);
-    border: 1px solid var(--background-modifier-border);
+    background-color: var(--modal-background);
+    border: var(--modal-border-width) solid var(--modal-border-color);
     border-radius: var(--radius-m);
-    box-shadow: var(--shadow-l);
+    box-shadow: var(--whisper-shadow);
     padding: 4px;
 }
 .menu-item {
@@ -1071,22 +1182,22 @@ textarea:focus,
 
 /* Settings panel — vertical tabs */
 .vertical-tab-header {
-    background-color: var(--background-secondary);
-    border-right: 1px solid var(--background-modifier-border);
+    background-color: var(--modal-background);
+    border-right: var(--divider-width) solid var(--divider-color);
 }
 .vertical-tab-nav-item {
-    color: var(--text-muted);
+    color: var(--nav-item-color);
     padding: 0.5em 1em;
     font-family: var(--font-interface-theme);
     transition: background-color 120ms ease, color 120ms ease;
 }
 .vertical-tab-nav-item:hover {
-    background-color: var(--background-modifier-hover);
-    color: var(--text-normal);
+    background-color: var(--nav-item-background-hover);
+    color: var(--nav-item-color-hover);
 }
 .vertical-tab-nav-item.is-active {
-    color: var(--text-accent);
-    background-color: var(--background-modifier-active-hover);
+    color: var(--nav-item-color-active);
+    background-color: var(--nav-item-background-active);
     box-shadow: inset 2px 0 0 var(--interactive-accent);
 }
 .vertical-tab-content-container {
@@ -1119,12 +1230,14 @@ textarea:focus,
 /* =========================================================================
    7. Dark Variant — Deep Dark (#141413) + Ink Light (#2D5A8A)
    ========================================================================= */
-/* Aligned to kami v1.1.0 spec:
+/* Reviewed against Kami v1.11.0 on 2026-08-02:
    - Background uses Deep Dark #141413 (near-black with olive undertone, not
      pure black) instead of the warmer #26241F we had before.
    - Accent uses Ink Light #2D5A8A on dark surfaces — the same blue lineage
      as the light Ink Blue #1B365D, not a lifted periwinkle. Keeps the
-     restrained single-accent rule intact in dark mode. */
+     restrained single-accent rule intact in dark mode.
+   - --bold-weight: 600 is an intentional screen-readability exception in
+     this unofficial Obsidian adaptation. */
 body.theme-dark {
     /* --- Surfaces --- */
     --background-primary:          #141413;  /* Deep Dark, olive undertone */
@@ -1162,6 +1275,36 @@ body.theme-dark {
     --interactive-accent:          #2D5A8A;
     --interactive-accent-hover:    #3a6a9a;
     --interactive-success:         #a3b878;
+
+    /* --- Workspace shell --- */
+    --titlebar-background:         var(--background-secondary-alt);
+    --titlebar-background-focused: var(--background-secondary);
+    --titlebar-border-color:       var(--divider-color);
+    --tab-container-background:    var(--background-secondary);
+    --tab-background-active:       var(--background-primary);
+    --tab-text-color:              #8a8578;
+    --tab-text-color-active:       var(--text-normal);
+    --tab-text-color-focused:      #8a8578;
+    --tab-text-color-focused-active: var(--text-normal);
+    --tab-text-color-focused-active-current: var(--text-normal);
+    --tab-divider-color:           var(--divider-color);
+    --tab-outline-color:           var(--background-modifier-border);
+    --ribbon-background:           var(--background-secondary);
+    --ribbon-background-collapsed: var(--background-secondary);
+    --divider-color:               #2b2a27;
+    --divider-color-hover:         var(--background-modifier-border-hover);
+    --nav-item-color:              #8a8578;
+    --nav-item-color-hover:        var(--text-normal);
+    --nav-item-color-active:       var(--text-normal);
+    --nav-item-color-selected:     var(--text-normal);
+    --nav-item-background-hover:   var(--background-modifier-hover);
+    --nav-item-background-active:  var(--background-modifier-active-hover);
+    --nav-item-background-selected: var(--background-modifier-active-hover);
+    --status-bar-background:       var(--background-secondary);
+    --status-bar-border-color:     var(--divider-color);
+    --status-bar-text-color:       #8a8578;
+    --modal-background:            var(--background-secondary);
+    --modal-border-color:          var(--background-modifier-border);
 
     /* --- Syntax --- */
     --syntax-bg:                   #1a1917;
@@ -1229,6 +1372,11 @@ body.theme-dark {
     .suggestion-item,
     .vertical-tab-nav-item,
     .menu-item,
+    body:not(.is-mobile) .workspace-ribbon .clickable-icon,
+    body:not(.is-mobile) .view-actions .clickable-icon,
+    body:not(.is-mobile) .workspace-tab-header-tab-list .clickable-icon,
+    body:not(.is-mobile) .workspace-tab-header-new-tab .clickable-icon,
+    body:not(.is-mobile) .nav-header .clickable-icon,
     a,
     .cm-hmd-internal-link,
     .cm-link {

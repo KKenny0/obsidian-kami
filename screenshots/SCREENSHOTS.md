@@ -5,7 +5,7 @@ This directory holds the screenshots embedded in `README.md` /
 release, and save with the exact filenames below so the README embeds keep
 working.
 
-## Shot list (7 required)
+## Shot list (9 required)
 
 All screenshots should be **1440px wide** (or retina equivalent), PNG, no
 annotations or watermarks. Capture on a clean vault with at least one
@@ -69,6 +69,22 @@ representative long-form note open.
 - Demonstrate warm-sand Secondary buttons + ink-blue Primary CTA + Default
   theme selected
 
+### 8. `workspace-light.png` — Light mode, complete Workspace shell
+
+- Theme: Light mode with Kami Reader applied
+- Capture the **full Obsidian window** at 1440px wide
+- Keep both left and right sidebars open, with multiple root tabs visible
+- Show an active file, the View Header, and the attached status bar
+- Use the same representative long-form note as the other reading/editing shots
+
+### 9. `workspace-dark.png` — Dark mode, complete Workspace shell
+
+- Theme: Dark mode with Kami Reader applied
+- Capture the **full Obsidian window** at 1440px wide
+- Keep both left and right sidebars open, with multiple root tabs visible
+- Show an active file, the View Header, and the attached status bar
+- Use the same representative long-form note as `workspace-light.png`
+
 ## Optional (defer)
 
 - `graph-view.png` — graph view with kami-warm nodes (only after graph
@@ -90,3 +106,34 @@ screencapture -i -o ./screenshots/light-reading.png
 Save filenames must match the list exactly (lowercase, hyphen-separated).
 README embeds use these paths and will break silently if a file is missing
 or renamed.
+
+## Workspace-shell acceptance — 2026-08-02
+
+Tested in Obsidian 1.13.4 on macOS with the generated `kami.css` injected
+into an isolated temporary vault. The fixture was the same 8,995-word note in
+both modes; the source vault was read-only and was not used as the test vault.
+
+| Check | Result | Evidence / boundary |
+| --- | --- | --- |
+| Light and dark modes | Pass | `workspace-light.png`, `workspace-dark.png` |
+| Focused and unfocused window | Partial | Focused state passed; unfocused styling was not retained as release evidence |
+| Left and right sidebars open | Pass | Both screenshots show continuous sidebar planes |
+| Sidebars collapsed | Not run | Avoided changing the final screenshot scene |
+| Single and multiple tabs | Pass | Single-tab startup and the final two-tab scene were both exercised |
+| Split panes and stacked tabs | Not run | No safe non-persistent run in this pass |
+| File default and active states | Pass | File explorer shown in both screenshots |
+| File hover, selected, and drag-over states | Not run | Transient drag state not retained as release evidence |
+| Text inputs | Pass | Frontmatter text, date, and tag controls shown in both screenshots |
+| Ribbon and collapsed-sidebar Ribbon | Partial | Expanded Ribbon passed; collapsed-sidebar state not run |
+| View Header and actions | Pass | Title, navigation, edit, and overflow actions shown |
+| Status bar short and long metadata | Partial | Long metadata passed at 8,995 words / 24,305 characters; short state not run |
+| Settings and normal modal | Pass | Appearance settings and external-link confirmation modal were exercised and dismissed |
+| Command palette, quick switcher, context menu | Not run | Deferred; no release screenshot depends on these overlays |
+| Reading View and Live Preview | Partial | Reading View passed; Live Preview not run against this fixture |
+| Keyboard-only focus traversal | Not run | Requires a dedicated accessibility pass |
+| Reduced motion | Static only | CSS media-query coverage checked; OS preference was not changed |
+| Narrow desktop window | Not run | Full-window 1440px release shots were the acceptance target |
+| Mobile / tablet | Unverified | No real mobile or tablet environment was available |
+
+`Pass` means observed in the real Obsidian renderer. `Static only`, `Partial`,
+`Not run`, and `Unverified` are deliberately not treated as runtime proof.
