@@ -6,7 +6,7 @@
 > 未受其背书。所有视觉设计 token 均溯源至原 kami 项目（MIT 许可）；本仓库
 > 是 kami 设计系统在 Obsidian 端的非官方 Workspace 适配。**
 
-> 最后更新：2026-08-03 · Last updated: 2026-08-03
+> 最后更新：2026-08-08 · Last updated: 2026-08-08
 
 把 [tw93/kami](https://github.com/tw93/kami) 的印刷级排版系统——暖米纸底色、
 油墨蓝点缀、衬线主导的层级、暖调中性灰——延伸为完整的 Obsidian Workspace
@@ -126,6 +126,13 @@ Schema 刻意只暴露 6 个高杠杆变量。其他保持 `theme.css` 内固定
 3. （可选）装 [Style Settings](https://obsidian.md/plugins?id=obsidian-style-settings) 社区插件，启用 6 个可调变量（字体、行距、宽度、加粗强调、强调色、背景）
 
 Gallery 安装不受下面提到的 macOS Sequoia 沙盒问题影响。主题文件由 Obsidian 自己写入，所以 App Store 用户可以从 Browse Themes 正常安装 Kami Reader。
+
+### 可选的沉浸式 Workspace 层
+
+如果希望 New Tab、Reading、Editing、侧栏、Outline、Ribbon 与 Reading Stage
+共享更连续的 Folio Shell，可选安装
+[Kami Reader Companion](https://github.com/KKenny0/kami-reader-companion)。
+Kami Reader 可独立使用，Companion 也支持 Obsidian Default Theme。
 
 ### 手动安装 / 开发者迭代（macOS Sequoia 沙盒绕过）
 
