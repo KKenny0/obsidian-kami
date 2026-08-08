@@ -2,6 +2,14 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
+### Optional immersive workspace layer
+
+For a more continuous Folio Shell across New Tab, Reading, Editing, sidebars,
+Outline, Ribbon, and Reading Stage, optionally install
+[Kami Reader Companion](https://github.com/KKenny0/kami-reader-companion).
+Kami Reader works independently, and Companion also supports Obsidian's Default
+Theme.
+
 > Last updated: 2026-08-08
 
 > **Inspired by [tw93/kami](https://github.com/tw93/kami). Not affiliated with or
@@ -132,14 +140,6 @@ Only LXGW WenKai Screen needs manual install. Without it, CJK falls back to
 3. (Optional) Install the [Style Settings](https://obsidian.md/plugins?id=obsidian-style-settings) community plugin for the 6 tunable variables (font, line-height, width, bold emphasis, accent, background)
 
 Gallery installs are unaffected by the macOS Sequoia sandbox issue described below. Obsidian writes the theme files itself, so App Store users can install Kami Reader cleanly from Browse Themes.
-
-### Optional immersive workspace layer
-
-For a more continuous Folio Shell across New Tab, Reading, Editing, sidebars,
-Outline, Ribbon, and Reading Stage, optionally install
-[Kami Reader Companion](https://github.com/KKenny0/kami-reader-companion).
-Kami Reader works independently, and Companion also supports Obsidian's Default
-Theme.
 
 ### Manual install / developer iteration (macOS Sequoia sandbox workaround)
 
