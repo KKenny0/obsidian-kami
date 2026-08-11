@@ -32,9 +32,16 @@ if [[ ! -f "$CSS_PATH" ]]; then
     exit 1
 fi
 
-CSS_LINES=$(wc -l < "$CSS_PATH" | tr -d ' ')
-CSS_BYTES=$(wc -c < "$CSS_PATH" | tr -d ' ')
-B64=$(base64 -i "$CSS_PATH" | tr -d '\n')
+# Git stores text with LF, but Windows worktrees may materialize CRLF. Normalize
+# before measuring and encoding so the generated injector is byte-for-byte
+# reproducible on Windows, macOS, and Linux.
+NORMALIZED_CSS=$(mktemp)
+trap 'rm -f "$NORMALIZED_CSS"' EXIT
+sed 's/\r$//' "$CSS_PATH" > "$NORMALIZED_CSS"
+
+CSS_LINES=$(wc -l < "$NORMALIZED_CSS" | tr -d ' ')
+CSS_BYTES=$(wc -c < "$NORMALIZED_CSS" | tr -d ' ')
+B64=$(base64 -i "$NORMALIZED_CSS" | tr -d '\n')
 
 cat > "$OUT_PATH" << JSEOF
 // === Kami Reader CSS Snippet Injector ===

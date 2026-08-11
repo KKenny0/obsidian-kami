@@ -13,14 +13,14 @@ Kami Reader 可独立使用，Companion 也支持 Obsidian Default Theme。
 > 未受其背书。所有视觉设计 token 均溯源至原 kami 项目（MIT 许可）；本仓库
 > 是 kami 设计系统在 Obsidian 端的非官方 Workspace 适配。**
 
-> 最后更新：2026-08-08 · Last updated: 2026-08-08
+> 最后更新：2026-08-11 · Last updated: 2026-08-11
 
 把 [tw93/kami](https://github.com/tw93/kami) 的印刷级排版系统——暖米纸底色、
 油墨蓝点缀、衬线主导的层级、暖调中性灰——延伸为完整的 Obsidian Workspace
 外壳；不改变 Obsidian 原生导航模型。
 
 > 当前状态：**已上线 [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader)。**
-> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.2.0`
+> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.2.1`
 
 ---
 
@@ -66,7 +66,8 @@ Kami Reader 可独立使用，Companion 也支持 Obsidian Default Theme。
 | ![嵌套列表任务完成态](./screenshots/checkbox-completion.png) |
 
 截图已保存在 [`screenshots/`](./screenshots/)。后续发布前如需重拍，按
-[`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) 的清单刷新。
+[`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) 的清单刷新。发布截图
+必须使用其中定义的合成 fixture vault，禁止捕获个人或生产知识库。
 
 ---
 
@@ -307,6 +308,7 @@ kami-obsidian/
 | [0.1.8](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.8) | Style Settings：新增加粗强调强度控制，用于字体和平台差异下的可读性校准 |
 | [0.1.9](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.9) | 阅读体验：恢复 Reading View 原生段落节奏、校准深色加粗，并在完整 Kami snippet 与活动主题重叠时给出警告 |
 | [0.2.0](https://github.com/KKenny0/obsidian-kami/releases/tag/0.2.0) | Workspace 外壳：把 Kami 视觉语言延伸到导航、侧栏、pane、页头、状态区与核心浮层 |
+| [0.2.1](https://github.com/KKenny0/obsidian-kami/releases/tag/0.2.1) | Style Settings：修复内嵌 YAML 元数据，确保 Kami Reader 配置区在 Windows 上可靠加载 |
 
 Release tag 跟 `manifest.json` version 完全一致（不带 `v` 前缀）——Obsidian 从
 manifest version 对应的 GitHub release tag 拉主题文件。

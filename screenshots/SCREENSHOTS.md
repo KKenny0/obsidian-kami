@@ -8,8 +8,11 @@ working.
 ## Shot list (9 required)
 
 All screenshots should be **1440px wide** (or retina equivalent), PNG, no
-annotations or watermarks. Capture on a clean vault with at least one
-representative long-form note open.
+annotations or watermarks. Capture only from the synthetic visual fixture vault
+in `kami-reader-companion/tests/fixtures/visual-vault`. Never use a personal,
+customer, or production vault. Before publishing, verify that every visible
+vault name, path, note title, body line, tab, and sidebar item comes from that
+fixture.
 
 ### 1. `light-reading.png` — Light mode, Reading View
 

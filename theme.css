@@ -108,7 +108,7 @@ settings:
   -
     id: info-kami-credits
     title: About this theme
-    description: Kami Reader 是 tw93/kami 设计系统在 Obsidian 上的非官方 Workspace 适配。所有视觉 token 溯源至 Kami v1.11.0（已于 2026-08-02 复核，MIT）。深色模式的 --bold-weight: 600 是为屏幕可读性保留的有意例外。主题已于 2026-06-20 上线 Obsidian Theme Gallery。
+    description: "Kami Reader 是 tw93/kami 设计系统在 Obsidian 上的非官方 Workspace 适配。所有视觉 token 溯源至 Kami v1.11.0（已于 2026-08-02 复核，MIT）。深色模式的 --bold-weight: 600 是为屏幕可读性保留的有意例外。主题已于 2026-06-20 上线 Obsidian Theme Gallery。"
     type: info-text
 */
 
@@ -1134,6 +1134,7 @@ textarea:focus,
     font-weight: var(--font-semibold);
     font-family: var(--font-interface-theme);
 }
+
 .suggestion-item {
     color: var(--text-normal);
     border-radius: var(--radius-s);

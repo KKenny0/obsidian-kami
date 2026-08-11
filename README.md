@@ -10,7 +10,7 @@ Outline, Ribbon, and Reading Stage, optionally install
 Kami Reader works independently, and Companion also supports Obsidian's Default
 Theme.
 
-> Last updated: 2026-08-08
+> Last updated: 2026-08-11
 
 > **Inspired by [tw93/kami](https://github.com/tw93/kami). Not affiliated with or
 > endorsed by tw93. All visual design tokens trace to the original kami project
@@ -23,7 +23,7 @@ hierarchy, warm-gray neutrals — onto the Obsidian editor without changing
 Obsidian's navigation model.
 
 > Status: **Published on the [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader).**
-> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.2.0`
+> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.2.1`
 
 ---
 
@@ -71,7 +71,8 @@ is relaxed for the editor context but the intent holds: accent only, never chrom
 
 Screenshots are captured in [`screenshots/`](./screenshots/). See
 [`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) when refreshing
-the set for a new release.
+the set for a new release. Release screenshots must use the synthetic fixture
+vault described there; never capture a personal or production vault.
 
 ---
 
@@ -324,6 +325,7 @@ kami-obsidian/
 | [0.1.8](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.8) | Style Settings: add a bold emphasis strength control for font/platform readability calibration |
 | [0.1.9](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.9) | Reading View: restore native paragraph rhythm, calibrate dark bold emphasis, and warn when the full Kami snippet overlaps an active theme |
 | [0.2.0](https://github.com/KKenny0/obsidian-kami/releases/tag/0.2.0) | Workspace shell: extend Kami's visual language across navigation, sidebars, panes, headers, status surfaces, and core overlays |
+| [0.2.1](https://github.com/KKenny0/obsidian-kami/releases/tag/0.2.1) | Style Settings: fix the embedded YAML metadata so the Kami Reader section loads reliably on Windows |
 
 Release tags match `manifest.json` version exactly (no `v` prefix) — Obsidian
 pulls theme files from the GitHub release tagged with the manifest version.

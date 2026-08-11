@@ -1,0 +1,15 @@
+{
+  "name": "obsidian-kami-theme",
+  "version": "0.2.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "sync": "bash ./sync.sh",
+    "check:generated": "node scripts/check-generated.mjs",
+    "check": "npm test && npm run check:generated"
+  },
+  "devDependencies": {
+    "yaml": "2.9.0"
+  }
+}
