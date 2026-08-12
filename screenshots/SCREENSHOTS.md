@@ -5,7 +5,7 @@ This directory holds the screenshots embedded in `README.md` /
 release, and save with the exact filenames below so the README embeds keep
 working.
 
-## Shot list (9 required)
+## Shot list (10 required)
 
 All screenshots should be **1440px wide** (or retina equivalent), PNG, no
 annotations or watermarks. Capture only from the synthetic visual fixture vault
@@ -88,11 +88,22 @@ fixture.
 - Show an active file, the View Header, and the attached status bar
 - Use the same representative long-form note as `workspace-light.png`
 
+### 10. `pdf-export-white.png` — White-paper PDF export
+
+- Start once from Light mode and once from Dark mode; both exports must render
+  the page white with the same dark ink text and Ink Blue accents
+- Include headings, Latin and CJK body text, callouts, task items, a code block,
+  inline code, and a table with at least two body rows
+- Treat Obsidian's decision to omit the Properties block from PDF export as app
+  behavior; verify editable metadata separately in the on-screen white preview
+- Verify warm parchment remains only inside document surfaces and even table
+  rows; the outer page must not inherit the screen theme
+- Do not change page size or printer margins as part of theme verification
+
 ## Optional (defer)
 
 - `graph-view.png` — graph view with kami-warm nodes (only after graph
   styling is implemented, currently not in Phase 2a)
-- `pdf-export.png` — PDF export preview (deferred to Phase 1.5)
 - `checkbox-completion.png` — Reading View screenshot from
   `checkbox-completion-demo.md`, showing a checked parent task whose child
   content remains readable instead of being struck through
@@ -109,6 +120,10 @@ screencapture -i -o ./screenshots/light-reading.png
 Save filenames must match the list exactly (lowercase, hyphen-separated).
 README embeds use these paths and will break silently if a file is missing
 or renamed.
+
+On Windows, use Obsidian's native **Export to PDF** command and capture the
+fixture-only PDF preview or exported page. The same privacy boundary applies:
+never include a personal vault, Windows account path, or unrelated app window.
 
 ## Workspace-shell acceptance — 2026-08-02
 

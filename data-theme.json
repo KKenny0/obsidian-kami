@@ -9,7 +9,7 @@
         {
           "id": "font-text-theme",
           "title": "正文字体栈 · Body font family",
-          "description": "整体标题和正文使用的字体栈。默认：Charter (EN serif) + LXGW WenKai Screen (CJK 楷书)。如果楷书阅读疲劳，可改成 Charter + Source Han Serif SC（思源宋体）等印刷宋体。",
+          "description": "正文使用的字体栈；不影响标题。默认：Charter / Georgia（英文）+ Source Han Sans SC / Noto Sans CJK SC / 系统黑体（中文）。标题保留独立的书卷气字体栈，可用高级 CSS 覆盖 --font-heading-theme。",
           "type": "variable-text",
           "default": ""
         },
@@ -99,7 +99,7 @@
         {
           "id": "info-kami-credits",
           "title": "About this theme",
-          "description": "Kami Reader 是 tw93/kami 设计系统在 Obsidian 上的非官方 Workspace 适配。所有视觉 token 溯源至 Kami v1.11.0（已于 2026-08-02 复核，MIT）。深色模式的 --bold-weight: 600 是为屏幕可读性保留的有意例外。主题已于 2026-06-20 上线 Obsidian Theme Gallery。",
+          "description": "Kami Reader 是 tw93/kami 设计系统在 Obsidian 上的非官方 Workspace 适配。视觉 token 溯源至上游 Kami（MIT）。深色模式的 --bold-weight: 600 是为屏幕可读性保留的有意例外。主题已于 2026-06-20 上线 Obsidian Theme Gallery。",
           "type": "info-text"
         }
       ]

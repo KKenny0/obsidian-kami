@@ -13,27 +13,28 @@ Kami Reader 可独立使用，Companion 也支持 Obsidian Default Theme。
 > 未受其背书。所有视觉设计 token 均溯源至原 kami 项目（MIT 许可）；本仓库
 > 是 kami 设计系统在 Obsidian 端的非官方 Workspace 适配。**
 
-> 最后更新：2026-08-11 · Last updated: 2026-08-11
+> 最后更新：2026-08-12 · Last updated: 2026-08-12
 
 把 [tw93/kami](https://github.com/tw93/kami) 的印刷级排版系统——暖米纸底色、
-油墨蓝点缀、衬线主导的层级、暖调中性灰——延伸为完整的 Obsidian Workspace
+油墨蓝点缀、衬线标题、适合屏幕长读的正文、暖调中性灰——延伸为完整的 Obsidian Workspace
 外壳；不改变 Obsidian 原生导航模型。
 
 > 当前状态：**已上线 [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader)。**
-> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最新 release：`0.2.1`
+> 公开仓库：https://github.com/KKenny0/obsidian-kami · 开发版本：`0.3.0`（尚未发布）
 
 ---
 
 ## 视觉语言
 
-已于 2026-08-02 按 [Kami v1.11.0](https://kami.tw93.fun/index-zh.html) 复核。
+视觉系统源自上游 [Kami](https://kami.tw93.fun/index-zh.html)。
 完整 Workspace 外壳是非官方 Obsidian 适配；深色模式有意保留
 `--bold-weight: 600` 以保证屏幕可读性，并不宣称与 Kami 的印刷强调规则完全一致。
 
 | Token | 浅色 | 深色 | 用途 |
 |---|---|---|---|
 | Parchment / Deep Dark | `#f5f4ed` | `#141413` | 笔记主背景 |
-| Ivory / Dark Ivory | `#faf9f5` | `#1a1917` | 侧栏、卡片表面 |
+| Ivory / Dark Ivory | `#faf9f5` | `#1a1917` | 卡片、Callout、浮层 |
+| Shell Parchment | `#f0eee4` | `#1d1c1a` | 侧栏、Ribbon、标签条、状态栏 |
 | Warm Sand | `#e8e6dc` | `#353330` | 边框、分割线 |
 | Dark Surface / Warm Ivory | `#30302e` | `#e8e3d2` | 正文文字 |
 | Ink Blue / Ink Light | `#1B365D` | `#2D5A8A` | 强调色：标题、链接、选区、CTA |
@@ -65,6 +66,10 @@ Kami Reader 可独立使用，Companion 也支持 Obsidian Default Theme。
 |---|
 | ![嵌套列表任务完成态](./screenshots/checkbox-completion.png) |
 
+| PDF 导出白纸版 |
+|---|
+| ![PDF 导出白纸版](./screenshots/pdf-export-white.png) |
+
 截图已保存在 [`screenshots/`](./screenshots/)。后续发布前如需重拍，按
 [`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) 的清单刷新。发布截图
 必须使用其中定义的合成 fixture vault，禁止捕获个人或生产知识库。
@@ -77,7 +82,7 @@ Kami Reader 可独立使用，Companion 也支持 Obsidian Default Theme。
 
 装好 Style Settings 社区插件后，进入 **Settings → Style Settings → Kami Reader**，可调：
 
-- **正文字体栈** —— 把 LXGW WenKai Screen（楷书）换成思源宋体等印刷宋体，缓解楷书阅读疲劳
+- **正文字体栈** —— 只控制正文；标题继续使用独立的编辑排版字体栈
 - **正文行距** —— 默认 1.55，范围 1.3–1.9（Live Preview 改完需 Cmd+E toggle 一次；Reading View 立即生效）
 - **笔记最大宽度** —— 默认 700px
 - **加粗强调强度** —— 未使用 Style Settings 覆盖时，浅色默认 500、深色默认 600；可按当前字体需要选择 500、600 或 700
@@ -101,22 +106,27 @@ Schema 刻意只暴露 6 个高杠杆变量。其他保持 `theme.css` 内固定
 
 ```css
 --font-text-theme: "Charter", "Georgia",
-                   "LXGW WenKai Screen", "LXGW WenKai",
-                   "Source Han Serif SC", "Noto Serif CJK SC",
-                   "Songti SC", "STSong", "SimSun", serif;
+                   "Source Han Sans SC", "Noto Sans CJK SC",
+                   "PingFang SC", "Microsoft YaHei", sans-serif;
+
+--font-heading-theme: "Charter", "Georgia",
+                      "TsangerJinKai02",
+                      "LXGW WenKai Screen", "LXGW WenKai",
+                      "Source Han Serif SC", "Noto Serif CJK SC", serif;
 ```
 
 - **Charter** — 英文衬线。macOS 自带（`/System/Library/Fonts/Charter.ttc`），
   无需安装。其他平台 fallback 到 Georgia。这也是 kami 原版为英文指定的字体。
-- **LXGW WenKai Screen** — 中文楷书，OFL 1.1。Screen 版专为低 DPI 屏幕优化，
-  缩小了与 kami 原版 仓耳今楷02（商用需付费）之间的气质差距。
+- **思源黑体 / 系统黑体** —— 中文正文默认栈，优先照顾 Windows 长时间阅读。
+- **LXGW WenKai Screen** —— 中文标题字体，OFL 1.1；保留 Kami 的手写温度，
+  但不再让每一段正文都使用楷书。
 - **JetBrains Mono** — 代码字体，OFL 1.1。
 - **Inter** — UI / 界面字体，OFL 1.1。
 
 ### 可选字体安装
 
-只有 LXGW WenKai Screen 需要手动装。不装的话，中文 fallback 到
-`Songti SC`（macOS）/ `SimSun`（Windows）——能读，但丢了楷书的书卷气。
+只有可选的标题质感需要手动安装 LXGW WenKai Screen；正文会直接回退到平台
+自带的中文黑体，不需要额外配置。
 
 - **LXGW WenKai Screen** — https://github.com/lxgw/LxgwWenKai-Screen/releases
   （下载 `LXGWWenKaiScreen-Regular.ttf` + `Bold.ttf`，双击安装）
@@ -190,10 +200,11 @@ CSS Snippets 把 kami 开关 toggle 一次才能拉到新内容。
 - ✅ **完整 Workspace 外壳**：标题栏、根标签与侧栏标签、功能区、左右侧栏、
   pane 分割线、文件管理器/搜索、View Header 与贴边状态栏
 - ✅ 命令面板、Quick Switcher、设置面板、modal、菜单、toggle、checkbox、滚动条
+- ✅ 打印 / PDF 导出：浅色与深色主题都输出白纸，卡片、代码、frontmatter、
+  嵌入、Callout 与表格偶数行保留暖米纸层级
 - ✅ 尊重系统的 reduced-motion 偏好
 
 未覆盖（暂缓）：
-- PDF 导出样式（kami 本身是印刷优先；这是 Phase 1.5 候选）
 - 插件特化样式（Dataview、Templater、Excalidraw）—— 遇到再说
 
 ---
@@ -241,8 +252,8 @@ release tag：
    Obsidian 内置 app.css 把基础变量定义在 `.theme-light` / `.theme-dark`
    （特异性 0,1,0）下。`:root`（0,0,1）层叠不过它们；`body.theme-light`
    （0,1,1）才行。
-3. **英文用 Charter，不是 Newsreader。** 已于 2026-08-02 按 Kami v1.11.0
-   复核；Charter 是其英文指定字体，也是 macOS 自带，省了装字体这一步。
+3. **正文与标题分成两个契约。** `--font-text-theme` 继续作为用户可见的正文
+   控制；`--font-heading-theme` 负责 H1–H6 与 inline title，不增加新的设置项。
 4. **标签背景用实色 `#E4ECF5`，绝不用 rgba。** kami 明确禁止 rgba 标签
    背景（PDF 导出时 WeasyPrint 有双层矩形 bug）。
 5. **阴影只用 ring shadow 和 whisper shadow，绝不用硬投影。** kami 规范；
@@ -251,8 +262,8 @@ release tag：
    View 换成短横线会让编辑态和阅读态割裂；现在用更轻的 marker 颜色和更紧的
    深层缩进来保留 kami 的克制感。
 7. **引用块：2pt 油墨蓝实线 + olive 文字，无背景，不 italic。** 克制优于装饰。
-8. **中文用 LXGW WenKai Screen，不是思源宋体。** kami 原版 仓耳今楷02 是
-   楷书；思源宋体是印刷宋体。楷书保留 kami 标志性的手写温度。
+8. **中文正文用黑体，标题用楷书/衬线。** 长段落更适合屏幕阅读，标题仍保留
+   Kami 标志性的手写温度。
 9. **不用合成粗体。** kami 禁止 fake bold；标题只用 500/600 实际字重。深色模式
    有意保留 `--bold-weight: 600` 作为 Obsidian 的屏幕可读性例外。
 10. **Phase 1 以 snippet 形式发布，不是主题。** 绕过 macOS Sequoia 沙盒；
@@ -264,9 +275,8 @@ release tag：
 
 1. **Parchment 背景比多数编辑器主题更暖。** 如果长时间使用觉得偏黄，可以在
    Style Settings 里调整 **主背景**。
-2. **楷书保留了 Kami Reader 的中文质感，但不是所有人都适合拿它日常写作。**
-   如果 LXGW WenKai Screen 看久了累，可以把 **正文字体栈** 换成思源宋体一类
-   的宋体组合。
+2. **标题仍比正文更有书卷气。** 如果希望整篇都使用无衬线，可在 CSS snippet
+   中覆盖 `--font-heading-theme`。
 3. **加粗按主题校准：** 未使用 Style Settings 覆盖时，浅色保持克制的 `500`，
    深色使用更易辨识的 `600`。如果你的平台或字体需要不同校准，可在 **加粗强调强度**
    中选择 `500`、`600` 或 `700`。
@@ -282,7 +292,7 @@ kami-obsidian/
 ├── data-theme.json            # Style Settings schema，theme 模式用
 ├── sync.sh                    # 从 theme.css 重新生成 inject-kami-snippet.js
 ├── inject-kami-snippet.js     # sync.sh 的产物 —— 粘贴到 Obsidian Console 用
-├── screenshots/               # 9 张截图集（见 SCREENSHOTS.md）
+├── screenshots/               # 发布证据集（见 SCREENSHOTS.md）
 ├── LICENSE                    # MIT（纯文本，让 GitHub licensee 识别 SPDX:MIT）
 ├── README.md                  # 英文文档
 └── README.zh-CN.md            # 本文件
@@ -309,6 +319,7 @@ kami-obsidian/
 | [0.1.9](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.9) | 阅读体验：恢复 Reading View 原生段落节奏、校准深色加粗，并在完整 Kami snippet 与活动主题重叠时给出警告 |
 | [0.2.0](https://github.com/KKenny0/obsidian-kami/releases/tag/0.2.0) | Workspace 外壳：把 Kami 视觉语言延伸到导航、侧栏、pane、页头、状态区与核心浮层 |
 | [0.2.1](https://github.com/KKenny0/obsidian-kami/releases/tag/0.2.1) | Style Settings：修复内嵌 YAML 元数据，确保 Kami Reader 配置区在 Windows 上可靠加载 |
+| `0.3.0`（未发布） | 字体分层、收敛 Workspace 层级、提升被动图标可见性，并加入白纸 PDF 导出 |
 
 Release tag 跟 `manifest.json` version 完全一致（不带 `v` 前缀）——Obsidian 从
 manifest version 对应的 GitHub release tag 拉主题文件。

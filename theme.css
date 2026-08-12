@@ -2,11 +2,11 @@
  * Kami Reader — an Obsidian theme inspired by tw93/kami
  *
  * Visual language: warm parchment background, ink-blue accent, serif-led
- * typography, warm-gray undertone across all neutrals.
+ * headings, readable body copy, and warm-gray undertones across all neutrals.
  *
  * Published theme, with a complete Workspace shell plus Reading + Editing views.
  * Workspace styling is an unofficial Obsidian adaptation, reviewed against
- * Kami v1.11.0 on 2026-08-02. Dark mode intentionally keeps --bold-weight:
+ * the upstream Kami design system. Dark mode intentionally keeps --bold-weight:
  * 600 for screen readability; this is not a claim of exact print conformance.
  *
  * Source of design tokens: https://github.com/tw93/kami  (MIT)
@@ -29,7 +29,7 @@ settings:
   -
     id: font-text-theme
     title: 正文字体栈 · Body font family
-    description: 整体标题和正文使用的字体栈。默认 Charter (EN serif) + LXGW WenKai Screen (CJK 楷书)。楷书阅读疲劳可改 Charter + Source Han Serif SC（思源宋体）。
+    description: 正文使用的字体栈；不影响标题。默认 Charter / Georgia（英文）+ Source Han Sans SC / Noto Sans CJK SC / 系统黑体（中文）。标题保留独立的书卷气字体栈，可用高级 CSS 覆盖 --font-heading-theme。
     type: variable-text
     default: ""
   -
@@ -108,7 +108,7 @@ settings:
   -
     id: info-kami-credits
     title: About this theme
-    description: "Kami Reader 是 tw93/kami 设计系统在 Obsidian 上的非官方 Workspace 适配。所有视觉 token 溯源至 Kami v1.11.0（已于 2026-08-02 复核，MIT）。深色模式的 --bold-weight: 600 是为屏幕可读性保留的有意例外。主题已于 2026-06-20 上线 Obsidian Theme Gallery。"
+    description: "Kami Reader 是 tw93/kami 设计系统在 Obsidian 上的非官方 Workspace 适配。视觉 token 溯源至上游 Kami（MIT）。深色模式的 --bold-weight: 600 是为屏幕可读性保留的有意例外。主题已于 2026-06-20 上线 Obsidian Theme Gallery。"
     type: info-text
 */
 
@@ -123,15 +123,18 @@ settings:
 body.theme-light,
 body.theme-dark {
     /* --- Typography --- */
-    /* Charter is macOS-native (/System/Library/Fonts/Charter.ttc), no install.
-       Georgia is the cross-platform fallback closest to Charter's proportions.
-       TsangerJinKai02 is the upstream Kami face; LXGW WenKai Screen is the
-       open fallback with a similar warm handwritten-serif tone. */
+    /* Body copy keeps Charter's English texture while using screen-optimized
+       CJK sans fallbacks. Headings preserve Kami's handwritten-serif voice.
+       --font-heading-theme is the only Reader/Companion typography contract
+       added in 0.3.0 and remains available to advanced CSS overrides. */
     --font-text-theme: "Charter", "Georgia",
-                       "TsangerJinKai02",
-                       "LXGW WenKai Screen", "LXGW WenKai",
-                       "Source Han Serif SC", "Noto Serif CJK SC",
-                       "Songti SC", "STSong", "SimSun", serif;
+                       "Source Han Sans SC", "Noto Sans CJK SC",
+                       "PingFang SC", "Microsoft YaHei", sans-serif;
+    --font-heading-theme: "Charter", "Georgia",
+                          "TsangerJinKai02",
+                          "LXGW WenKai Screen", "LXGW WenKai",
+                          "Source Han Serif SC", "Noto Serif CJK SC",
+                          "Songti SC", "STSong", "SimSun", serif;
     --font-interface-theme: "Inter", -apple-system, BlinkMacSystemFont,
                             "Segoe UI", "PingFang SC", "Microsoft YaHei",
                             sans-serif;
@@ -213,10 +216,10 @@ body.theme-dark {
     --file-header-border: var(--divider-width) solid var(--divider-color);
 
     /* --- Iconography --- */
-    --icon-color: var(--text-muted);
+    --icon-color: var(--text-faint);
     --icon-color-hover: var(--text-normal);
     --icon-color-active: var(--text-accent);
-    --icon-opacity: 0.75;
+    --icon-opacity: 1;
     --icon-opacity-hover: 1;
 
     /* --- Code metrics --- */
@@ -269,10 +272,10 @@ body.theme-light {
     --interactive-success:         #526e36;
 
     /* --- Workspace shell --- */
-    --titlebar-background:         var(--background-secondary-alt);
-    --titlebar-background-focused: var(--background-secondary);
+    --titlebar-background:         var(--background-primary-alt);
+    --titlebar-background-focused: var(--background-primary-alt);
     --titlebar-border-color:       var(--divider-color);
-    --tab-container-background:    var(--background-secondary);
+    --tab-container-background:    var(--background-primary-alt);
     --tab-background-active:       var(--background-primary);
     --tab-text-color:              #6b6a64;
     --tab-text-color-active:       var(--text-normal);
@@ -281,8 +284,8 @@ body.theme-light {
     --tab-text-color-focused-active-current: var(--text-normal);
     --tab-divider-color:           var(--divider-color);
     --tab-outline-color:           var(--background-modifier-border);
-    --ribbon-background:           var(--background-secondary);
-    --ribbon-background-collapsed: var(--background-secondary);
+    --ribbon-background:           var(--background-primary-alt);
+    --ribbon-background-collapsed: var(--background-primary-alt);
     --divider-color:               #eeece4;
     --divider-color-hover:         var(--background-modifier-border-hover);
     --nav-item-color:              #6b6a64;
@@ -290,9 +293,9 @@ body.theme-light {
     --nav-item-color-active:       var(--text-normal);
     --nav-item-color-selected:     var(--text-normal);
     --nav-item-background-hover:   var(--background-modifier-hover);
-    --nav-item-background-active:  var(--background-modifier-active-hover);
-    --nav-item-background-selected: var(--background-modifier-active-hover);
-    --status-bar-background:       var(--background-secondary);
+    --nav-item-background-active:  transparent;
+    --nav-item-background-selected: transparent;
+    --status-bar-background:       var(--background-primary-alt);
     --status-bar-border-color:     var(--divider-color);
     --status-bar-text-color:       #6b6a64;
     --modal-background:            var(--background-secondary);
@@ -407,17 +410,15 @@ input, textarea, button {
     border-left: var(--divider-width) solid var(--divider-color);
 }
 
-/* Quiet Chrome: keep passive controls available without competing with notes. */
-body:not(.is-mobile) .workspace-ribbon .clickable-icon {
-    opacity: 0.58;
-    transition: opacity 120ms ease;
-}
+/* Quiet Chrome: use semantic faint color without reducing hit-target opacity. */
+body:not(.is-mobile) .workspace-ribbon .clickable-icon,
 body:not(.is-mobile) .view-actions .clickable-icon,
 body:not(.is-mobile) .workspace-tab-header-tab-list .clickable-icon,
 body:not(.is-mobile) .workspace-tab-header-new-tab .clickable-icon,
 body:not(.is-mobile) .nav-header .clickable-icon {
-    opacity: 0.62;
-    transition: opacity 120ms ease;
+    color: var(--text-faint);
+    opacity: 1;
+    transition: color 120ms ease, background-color 120ms ease;
 }
 body:not(.is-mobile) .workspace-ribbon .clickable-icon:hover,
 body:not(.is-mobile) .workspace-ribbon .clickable-icon.is-active,
@@ -439,7 +440,7 @@ body:not(.is-mobile) .nav-header .clickable-icon:hover,
 body:not(.is-mobile) .nav-header .clickable-icon.is-active,
 body:not(.is-mobile) .nav-header .clickable-icon:focus-visible,
 body:not(.is-mobile) .nav-header:focus-within .clickable-icon {
-    opacity: 1;
+    color: var(--text-normal);
 }
 
 /* Keep Ribbon state inside Kami's ink-blue language. */
@@ -462,7 +463,7 @@ body:not(.is-mobile) .workspace-ribbon .clickable-icon.is-active {
 .workspace-split.mod-right-split .workspace-leaf,
 .workspace-split.mod-left-split .workspace-leaf-content,
 .workspace-split.mod-right-split .workspace-leaf-content {
-    background-color: var(--background-secondary);
+    background-color: var(--background-primary-alt);
 }
 
 /* Root tabs use the canvas plus one stable current-tab edge, not browser chrome. */
@@ -498,6 +499,9 @@ body:not(.is-mobile) .workspace-ribbon .clickable-icon.is-active {
 .workspace-split.mod-left-split .tree-item-self.is-active,
 .workspace-split.mod-left-split .nav-file-title.is-active,
 .workspace-split.mod-left-split .nav-folder-title.is-active {
+    color: var(--nav-item-color-active);
+    background-color: transparent;
+    font-weight: var(--nav-item-weight-active);
     box-shadow: inset 2px 0 0 var(--interactive-accent);
 }
 
@@ -528,6 +532,11 @@ body:not(.is-mobile) .workspace-ribbon .clickable-icon.is-active {
     color: var(--text-normal);
     font-size: var(--font-text-size);
     line-height: var(--line-height-normal);
+}
+
+.markdown-source-view .inline-title,
+.markdown-preview-view .inline-title {
+    font-family: var(--font-heading-theme);
 }
 
 .markdown-preview-view {
@@ -570,7 +579,7 @@ h1, h2, h3, h4, h5, h6,
 .HyperMD-header-4, .HyperMD-header-5, .HyperMD-header-6,
 .cm-header-1, .cm-header-2, .cm-header-3,
 .cm-header-4, .cm-header-5, .cm-header-6 {
-    font-family: var(--font-text-theme);
+    font-family: var(--font-heading-theme);
     color: var(--text-normal);
     font-weight: var(--font-medium);
     line-height: var(--line-height-tight);
@@ -835,6 +844,7 @@ input[type="checkbox"]:checked::after {
 
 /* Tables — restrained document rows, no default Markdown grid */
 .markdown-preview-view table {
+    font-family: var(--font-text-theme);
     border-collapse: collapse;
     width: 100%;
     margin: 1.25em 0 1.65em;
@@ -1278,10 +1288,10 @@ body.theme-dark {
     --interactive-success:         #a3b878;
 
     /* --- Workspace shell --- */
-    --titlebar-background:         var(--background-secondary-alt);
-    --titlebar-background-focused: var(--background-secondary);
+    --titlebar-background:         var(--background-primary-alt);
+    --titlebar-background-focused: var(--background-primary-alt);
     --titlebar-border-color:       var(--divider-color);
-    --tab-container-background:    var(--background-secondary);
+    --tab-container-background:    var(--background-primary-alt);
     --tab-background-active:       var(--background-primary);
     --tab-text-color:              #8a8578;
     --tab-text-color-active:       var(--text-normal);
@@ -1290,8 +1300,8 @@ body.theme-dark {
     --tab-text-color-focused-active-current: var(--text-normal);
     --tab-divider-color:           var(--divider-color);
     --tab-outline-color:           var(--background-modifier-border);
-    --ribbon-background:           var(--background-secondary);
-    --ribbon-background-collapsed: var(--background-secondary);
+    --ribbon-background:           var(--background-primary-alt);
+    --ribbon-background-collapsed: var(--background-primary-alt);
     --divider-color:               #2b2a27;
     --divider-color-hover:         var(--background-modifier-border-hover);
     --nav-item-color:              #8a8578;
@@ -1299,9 +1309,9 @@ body.theme-dark {
     --nav-item-color-active:       var(--text-normal);
     --nav-item-color-selected:     var(--text-normal);
     --nav-item-background-hover:   var(--background-modifier-hover);
-    --nav-item-background-active:  var(--background-modifier-active-hover);
-    --nav-item-background-selected: var(--background-modifier-active-hover);
-    --status-bar-background:       var(--background-secondary);
+    --nav-item-background-active:  transparent;
+    --nav-item-background-selected: transparent;
+    --status-bar-background:       var(--background-primary-alt);
     --status-bar-border-color:     var(--divider-color);
     --status-bar-text-color:       #8a8578;
     --modal-background:            var(--background-secondary);
@@ -1353,7 +1363,85 @@ body.theme-dark {
 }
 
 /* =========================================================================
-   9. Reduced motion — respect user OS preference
+   9. Print / PDF export — white paper with warm document surfaces
+   ========================================================================= */
+@media print {
+    @page {
+        background: #ffffff;
+    }
+
+    body.theme-light,
+    body.theme-dark {
+        --background-primary: #ffffff;
+        --background-primary-alt: #f5f4ed;
+        --background-secondary: #f5f4ed;
+        --background-secondary-alt: #f0eee4;
+        --background-modifier-border: #e8e6dc;
+        --background-modifier-border-hover: #d9d6c8;
+        --background-modifier-form-field: #f5f4ed;
+        --text-normal: #141413;
+        --text-muted: #504e49;
+        --text-faint: #6b6a64;
+        --text-olive: #504e49;
+        --text-accent: #1b365d;
+        --text-accent-hover: #2a4a7a;
+        --interactive-accent: #1b365d;
+        --divider-color: #e8e6dc;
+        --code-background: #f5f4ed;
+        --code-normal: #141413;
+        --inline-code-background: #f5f4ed;
+        --inline-code-normal: #504e49;
+        color: #141413;
+        background: #ffffff;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    body,
+    .print,
+    .print-container,
+    .markdown-preview-view,
+    .markdown-preview-view .markdown-preview-sizer,
+    .markdown-source-view,
+    .cm-s-obsidian {
+        color: #141413;
+        background-color: #ffffff;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .callout,
+    .markdown-embed,
+    .file-embed,
+    .frontmatter-container,
+    .metadata-container,
+    pre,
+    .markdown-preview-view pre,
+    code:not(pre > code),
+    .cm-inline-code,
+    .cm-s-obsidian .HyperMD-codeblock,
+    .cm-s-obsidian .cm-hmd-frontmatter {
+        color: #141413;
+        background-color: #f5f4ed;
+        border-color: #e8e6dc;
+        box-shadow: none;
+    }
+
+    .markdown-preview-view tbody tr:nth-child(even) {
+        background-color: #f5f4ed;
+    }
+
+    .markdown-preview-view :is(th, td),
+    blockquote,
+    .HyperMD-quote,
+    hr,
+    .HyperMD-hr {
+        border-color: #e8e6dc;
+    }
+}
+
+/* =========================================================================
+   10. Reduced motion — respect user OS preference
    ========================================================================= */
 /* Scoped to elements where kami itself defines transitions (120ms ease
    etc.). Avoids universal `* { ... !important }` pattern flagged by

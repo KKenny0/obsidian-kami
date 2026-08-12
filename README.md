@@ -10,7 +10,7 @@ Outline, Ribbon, and Reading Stage, optionally install
 Kami Reader works independently, and Companion also supports Obsidian's Default
 Theme.
 
-> Last updated: 2026-08-11
+> Last updated: 2026-08-12
 
 > **Inspired by [tw93/kami](https://github.com/tw93/kami). Not affiliated with or
 > endorsed by tw93. All visual design tokens trace to the original kami project
@@ -19,25 +19,26 @@ Theme.
 An unofficial Obsidian Workspace adaptation inspired by
 [tw93/kami](https://github.com/tw93/kami). It translates kami's print-grade
 typographic system — warm parchment surface, ink-blue accent, serif-led
-hierarchy, warm-gray neutrals — onto the Obsidian editor without changing
+headings, screen-readable body copy, warm-gray neutrals — onto the Obsidian editor without changing
 Obsidian's navigation model.
 
 > Status: **Published on the [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader).**
-> Public repo: https://github.com/KKenny0/obsidian-kami · Latest release: `0.2.1`
+> Public repo: https://github.com/KKenny0/obsidian-kami · Development version: `0.3.0` (not released)
 
 ---
 
 ## Visual Language
 
-Reviewed against [Kami v1.11.0](https://kami.tw93.fun/index-zh.html) on
-2026-08-02. The complete Workspace shell is an unofficial Obsidian adaptation.
+Derived from the upstream [Kami](https://kami.tw93.fun/index-zh.html) design
+system. The complete Workspace shell is an unofficial Obsidian adaptation.
 Dark mode intentionally retains `--bold-weight: 600` for screen readability; it
 is an exception to Kami's print-emphasis rule, not a claim of exact conformance.
 
 | Token | Light | Dark | Role |
 |---|---|---|---|
 | Parchment / Deep Dark | `#f5f4ed` | `#141413` | Primary note background |
-| Ivory / Dark Ivory | `#faf9f5` | `#1a1917` | Sidebars, surfaces |
+| Ivory / Dark Ivory | `#faf9f5` | `#1a1917` | Cards, callouts, overlays |
+| Shell Parchment | `#f0eee4` | `#1d1c1a` | Sidebars, Ribbon, tab strip, status bar |
 | Warm Sand | `#e8e6dc` | `#353330` | Borders, dividers |
 | Dark Surface / Warm Ivory | `#30302e` | `#e8e3d2` | Body text |
 | Ink Blue / Ink Light | `#1B365D` | `#2D5A8A` | Accent: headings, links, selection, CTA |
@@ -69,6 +70,10 @@ is relaxed for the editor context but the intent holds: accent only, never chrom
 |---|
 | ![Task completion in nested lists](./screenshots/checkbox-completion.png) |
 
+| PDF Export (White Paper) |
+|---|
+| ![PDF export with white paper](./screenshots/pdf-export-white.png) |
+
 Screenshots are captured in [`screenshots/`](./screenshots/). See
 [`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) when refreshing
 the set for a new release. Release screenshots must use the synthetic fixture
@@ -82,7 +87,7 @@ This theme ships a [Style Settings](https://github.com/obsidianmd/obsidian-style
 
 After installing the Style Settings community plugin, go to **Settings → Style Settings → Kami Reader** to adjust:
 
-- **Body font family** — swap LXGW WenKai Screen (kaiti) for Source Han Serif (songti) if kaiti fatigues
+- **Body font family** — controls body copy only; headings keep their separate editorial stack
 - **Body line-height** — 1.55 default, range 1.3–1.9 (Live Preview needs Cmd+E toggle after change; Reading View updates instantly)
 - **Note max width** — 700px default
 - **Bold emphasis strength** — without a Style Settings override, 500 in Light and 600 in Dark by default; choose 500, 600, or 700 if your font setup needs a different calibration
@@ -106,24 +111,29 @@ Keep both schema copies in sync when changing user-facing settings.
 
 ```css
 --font-text-theme: "Charter", "Georgia",
-                   "LXGW WenKai Screen", "LXGW WenKai",
-                   "Source Han Serif SC", "Noto Serif CJK SC",
-                   "Songti SC", "STSong", "SimSun", serif;
+                   "Source Han Sans SC", "Noto Sans CJK SC",
+                   "PingFang SC", "Microsoft YaHei", sans-serif;
+
+--font-heading-theme: "Charter", "Georgia",
+                      "TsangerJinKai02",
+                      "LXGW WenKai Screen", "LXGW WenKai",
+                      "Source Han Serif SC", "Noto Serif CJK SC", serif;
 ```
 
 - **Charter** — English serif. macOS-native (`/System/Library/Fonts/Charter.ttc`),
   no install needed. Falls back to Georgia on other platforms. This is the font
   kami itself uses for English.
-- **LXGW WenKai Screen** — CJK 楷书, OFL 1.1. Screen variant optimized for
-  low-DPI displays. Closes the gap with kami's original 仓耳今楷02 (which is
-  commercial-restricted).
+- **Source Han Sans SC / system sans** — the default CJK body stack, chosen for
+  long Windows reading sessions.
+- **LXGW WenKai Screen** — CJK heading face, OFL 1.1. It preserves the
+  handwritten warmth of Kami without making every paragraph kaiti.
 - **JetBrains Mono** — Code, OFL 1.1.
 - **Inter** — UI / interface, OFL 1.1.
 
 ### Optional font install
 
-Only LXGW WenKai Screen needs manual install. Without it, CJK falls back to
-`Songti SC` (macOS) / `SimSun` (Windows) — readable but loses the kaiti warmth.
+Only LXGW WenKai Screen needs manual install, and only for the optional heading
+texture. Body copy falls back to the platform CJK sans without extra setup.
 
 - **LXGW WenKai Screen** — https://github.com/lxgw/LxgwWenKai-Screen/releases
   (grab `LXGWWenKaiScreen-Regular.ttf` + `Bold.ttf`)
@@ -201,10 +211,11 @@ Current coverage includes a complete Workspace shell:
   attached status bar
 - ✅ Command palette, quick switcher, settings panel, modals, menus, toggles,
   checkboxes, and scrollbars
+- ✅ Print / PDF export: white paper in both app themes, with warm parchment
+  retained inside cards, code, frontmatter, embeds, callouts, and even table rows
 - ✅ Reduced-motion preference respected
 
 Not covered (deferred):
-- PDF Export stylesheet (kami is print-native; this is a Phase 1.5 candidate)
 - Plugin-specific overrides (Dataview, Templater, Excalidraw) — verify as
   encountered
 
@@ -254,9 +265,9 @@ its own fix and a new release tag:
    Obsidian's built-in app.css defines base vars under `.theme-light` /
    `.theme-dark` (specificity 0,1,0). `:root` (0,0,1) loses the cascade;
    `body.theme-light` (0,1,1) wins.
-3. **Charter, not Newsreader.** Kami v1.11.0 was reviewed on 2026-08-02 and
-   specifies Charter for English; it's also macOS-native, removing a font-install
-   step.
+3. **Separate body and heading contracts.** `--font-text-theme` remains the
+   user-facing body control. `--font-heading-theme` preserves the editorial
+   serif/kaiti voice for H1–H6 and inline titles without adding another setting.
 4. **Tag backgrounds use solid `#E4ECF5`, never rgba.** kami explicitly bans
    rgba tag backgrounds (WeasyPrint double-rect bug in PDF export).
 5. **Ring + whisper shadows, never hard drop shadows.** kami spec; hard
@@ -266,9 +277,8 @@ its own fix and a new release tag:
    restraint now comes from quiet marker color and tighter nested spacing.
 7. **Blockquote: 2pt ink-blue rail + olive text, no background, no italic.**
    Restraint over decoration.
-8. **LXGW WenKai Screen over Source Han Serif.** Kami's original (仓耳今楷02)
-   is a kaiti; Source Han Serif is a print songti. The kaiti keeps the
-   calligraphic warmth that defines kami's character.
+8. **CJK sans body, kaiti/serif headings.** Long paragraphs get a calmer screen
+   texture while titles retain the calligraphic warmth that defines Kami.
 9. **No synthetic bold weights.** Kami forbids fake bold; headings use 500/600
    actual weights only. Dark mode intentionally keeps `--bold-weight: 600` for
    screen readability as an Obsidian-specific exception.
@@ -281,9 +291,8 @@ its own fix and a new release tag:
 
 1. **The parchment surface is warmer than most editor themes.** If it feels too
    yellow for long sessions, tune **Primary background** in Style Settings.
-2. **Kaiti gives Kami Reader its CJK texture, but not every reader likes it for
-   daily editing.** If LXGW WenKai Screen feels tiring, switch **Body font
-   family** to a songti-style stack such as Source Han Serif SC.
+2. **Headings remain more literary than body copy.** Advanced users can override
+   `--font-heading-theme` in a CSS snippet if they prefer a fully sans document.
 3. **Bold is calibrated per theme:** without a Style Settings override, restrained
    `500` in Light and more salient `600` in Dark. If your platform or font needs
    a different calibration, use **Bold emphasis strength** at `500`, `600`, or `700`.
@@ -299,7 +308,7 @@ kami-obsidian/
 ├── data-theme.json            # Style Settings schema for theme-folder mode
 ├── sync.sh                    # Regenerates inject-kami-snippet.js from theme.css
 ├── inject-kami-snippet.js     # Generated by sync.sh — paste into Obsidian Console
-├── screenshots/               # 9-shot set (see SCREENSHOTS.md)
+├── screenshots/               # Release evidence set (see SCREENSHOTS.md)
 ├── LICENSE                    # MIT (pure text so GitHub licensee detects SPDX:MIT)
 ├── README.md                  # English docs (this file)
 └── README.zh-CN.md            # 简体中文文档
@@ -326,6 +335,7 @@ kami-obsidian/
 | [0.1.9](https://github.com/KKenny0/obsidian-kami/releases/tag/0.1.9) | Reading View: restore native paragraph rhythm, calibrate dark bold emphasis, and warn when the full Kami snippet overlaps an active theme |
 | [0.2.0](https://github.com/KKenny0/obsidian-kami/releases/tag/0.2.0) | Workspace shell: extend Kami's visual language across navigation, sidebars, panes, headers, status surfaces, and core overlays |
 | [0.2.1](https://github.com/KKenny0/obsidian-kami/releases/tag/0.2.1) | Style Settings: fix the embedded YAML metadata so the Kami Reader section loads reliably on Windows |
+| `0.3.0` (unreleased) | Typography split, calmer shell hierarchy, accessible passive icons, and white-paper PDF export |
 
 Release tags match `manifest.json` version exactly (no `v` prefix) — Obsidian
 pulls theme files from the GitHub release tagged with the manifest version.
