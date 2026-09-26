@@ -70,7 +70,7 @@ test("print export forces white paper while retaining warm document surfaces", (
   assert.doesNotMatch(print, /@page\s*\{[^}]*(?:size|margin)\s*:/s);
 });
 
-test("README ships the reviewed 1440px PDF export evidence", () => {
+test("retains historical PDF evidence outside the current screenshot gallery", () => {
   const preview = readFileSync(
     new URL("../screenshots/pdf-export-white.png", import.meta.url)
   );
@@ -80,5 +80,8 @@ test("README ships the reviewed 1440px PDF export evidence", () => {
   assert.deepEqual([...preview.subarray(0, 8)], pngSignature);
   assert.equal(preview.readUInt32BE(16), 1440);
   assert.ok(preview.readUInt32BE(20) > 2000, "evidence must retain both rendered PDF pages");
-  assert.match(readme, /screenshots\/pdf-export-white\.png/);
+  assert.doesNotMatch(readme, /screenshots\/pdf-export-white\.png/);
+  for (const name of ["light-reading", "dark-reading", "light-editing", "callouts-and-table"]) {
+    assert.ok(readme.includes(`output/playwright/showcase-0.3.1/${name}.png`));
+  }
 });

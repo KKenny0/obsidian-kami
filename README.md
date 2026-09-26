@@ -34,8 +34,7 @@ locally. With Companion, normal reading and Stage inherit user font, width, back
 and accent choices.
 
 The maintainer confirmed macOS acceptance on 2026-09-26. This release has an explicitly approved macOS-only acceptance exception; Windows
-and Linux are not validated. Existing screenshots show earlier versions and do not establish
-cross-platform acceptance for these changes.
+and Linux are not validated. The current macOS examples below do not establish cross-platform acceptance.
 
 ---
 
@@ -66,30 +65,14 @@ is relaxed for the editor context but the intent holds: accent only, never chrom
 
 ## Screenshots
 
-| Reading View (Light) | Editing View (Light) |
+Current macOS captures using synthetic example notes. Obsidian 1.13.7, Kami Reader 0.3.1 without Companion.
+
+| Reading and layout | Interaction and detail |
 |---|---|
-| ![Light Reading](./screenshots/light-reading.png) | ![Light Editing](./screenshots/light-editing.png) |
+| **Light reading**<br>![Light reading](./output/playwright/showcase-0.3.1/light-reading.png) | **Dark reading**<br>![Dark reading](./output/playwright/showcase-0.3.1/dark-reading.png) |
+| **Live Preview editing**<br>![Live Preview editing](./output/playwright/showcase-0.3.1/light-editing.png) | **Callouts and tables**<br>![Callouts and tables](./output/playwright/showcase-0.3.1/callouts-and-table.png) |
 
-| Reading View (Dark) | Callout Severity Ladder |
-|---|---|
-| ![Dark Reading](./screenshots/dark-reading.png) | ![Callouts](./screenshots/callouts.png) |
-
-| Featured Card Embed | Command Palette | Settings Panel |
-|---|---|---|
-| ![Embed](./screenshots/embed-featured-card.png) | ![Command Palette](./screenshots/command-palette.png) | ![Settings](./screenshots/settings-panel.png) |
-
-| Task Completion in Nested Lists |
-|---|
-| ![Task completion in nested lists](./screenshots/checkbox-completion.png) |
-
-| PDF Export (White Paper) |
-|---|
-| ![PDF export with white paper](./screenshots/pdf-export-white.png) |
-
-Screenshots are captured in [`screenshots/`](./screenshots/). See
-[`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) when refreshing
-the set for a new release. Release screenshots must use the synthetic fixture
-vault described there; never capture a personal or production vault.
+[Capture record](./output/playwright/showcase-0.3.1/README.md). These examples do not establish Windows acceptance.
 
 ---
 

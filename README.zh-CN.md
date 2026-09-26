@@ -29,7 +29,7 @@ Kami Reader 可独立使用，Companion 也支持 Obsidian Default Theme。
 搭配 Companion 时，普通阅读和 Stage 都继承用户的字体、宽度、背景与强调色。
 
 2026-09-26：维护者确认 macOS 实机验收通过。本次按明确授权的 macOS 验收例外发布，Windows 和 Linux 尚未验收；
-现有截图属于历史版本，不作为本轮跨平台验收证据。
+下方当前版本截图不作为 Windows 验收证据。
 
 ---
 
@@ -59,29 +59,14 @@ Kami Reader 可独立使用，Companion 也支持 Obsidian Default Theme。
 
 ## 截图预览
 
-| 浅色 Reading View | 浅色 Editing View |
+以下为当前版本的 macOS 实机截图，使用合成示例笔记。Obsidian 1.13.7，Kami Reader 0.3.1，未启用 Companion。
+
+| 阅读与布局 | 交互与细节 |
 |---|---|
-| ![Light Reading](./screenshots/light-reading.png) | ![Light Editing](./screenshots/light-editing.png) |
+| **浅色阅读**<br>![浅色阅读](./output/playwright/showcase-0.3.1/light-reading.png) | **深色阅读**<br>![深色阅读](./output/playwright/showcase-0.3.1/dark-reading.png) |
+| **Live Preview 编辑**<br>![Live Preview 编辑](./output/playwright/showcase-0.3.1/light-editing.png) | **Callout 与表格**<br>![Callout 与表格](./output/playwright/showcase-0.3.1/callouts-and-table.png) |
 
-| 深色 Reading View | Callout 严重度梯度 |
-|---|---|
-| ![Dark Reading](./screenshots/dark-reading.png) | ![Callouts](./screenshots/callouts.png) |
-
-| Featured Card 嵌入 | 命令面板 | 设置面板 |
-|---|---|---|
-| ![Embed](./screenshots/embed-featured-card.png) | ![Command Palette](./screenshots/command-palette.png) | ![Settings](./screenshots/settings-panel.png) |
-
-| 嵌套列表任务完成态 |
-|---|
-| ![嵌套列表任务完成态](./screenshots/checkbox-completion.png) |
-
-| PDF 导出白纸版 |
-|---|
-| ![PDF 导出白纸版](./screenshots/pdf-export-white.png) |
-
-截图已保存在 [`screenshots/`](./screenshots/)。后续发布前如需重拍，按
-[`screenshots/SCREENSHOTS.md`](./screenshots/SCREENSHOTS.md) 的清单刷新。发布截图
-必须使用其中定义的合成 fixture vault，禁止捕获个人或生产知识库。
+[截图记录](./output/playwright/showcase-0.3.1/README.md)。这些展示图不替代 Windows 验收。
 
 ---
 
