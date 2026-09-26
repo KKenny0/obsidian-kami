@@ -3,6 +3,6 @@
 
 **Validation:** Maintainer-accepted on macOS. Windows and Linux have not been validated for this release. Published with an explicitly approved macOS-only acceptance exception.
 
-Optional companion: [Kami Reader Companion 0.4.0](https://github.com/KKenny0/kami-reader-companion/releases/tag/0.4.0).
+Optional companion: [Kami Reader Companion 0.4.1](https://github.com/KKenny0/kami-reader-companion/releases/tag/0.4.1).
 
 **Full Changelog**: https://github.com/KKenny0/obsidian-kami/compare/0.3.0...0.3.1
