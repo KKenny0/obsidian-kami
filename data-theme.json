@@ -59,7 +59,7 @@
         {
           "id": "text-accent",
           "title": "强调色 · Accent color",
-          "description": "标题、链接、选区、CTA 按钮的统一色。kami 默认 Light: 油墨蓝 #1B365D，Dark: Ink Light #2D5A8A。改成其他单色（如森林绿 #2d4a2b）可瞬间换主题气质，但破坏 kami 单色克制原则。",
+          "description": "链接、强调标识和 CTA 按钮的统一色。kami 默认 Light: 油墨蓝 #1B365D，Dark: Ink Light #2D5A8A。改成其他单色（如森林绿 #2d4a2b）可瞬间换主题气质，但破坏 kami 单色克制原则。",
           "type": "variable-themed-color",
           "format": "hex",
           "opacity": false,

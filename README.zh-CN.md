@@ -13,14 +13,23 @@ Kami Reader 可独立使用，Companion 也支持 Obsidian Default Theme。
 > 未受其背书。所有视觉设计 token 均溯源至原 kami 项目（MIT 许可）；本仓库
 > 是 kami 设计系统在 Obsidian 端的非官方 Workspace 适配。**
 
-> 最后更新：2026-08-12 · Last updated: 2026-08-12
+> 最后更新：2026-09-26 · Last updated: 2026-09-26
 
 把 [tw93/kami](https://github.com/tw93/kami) 的印刷级排版系统——暖米纸底色、
 油墨蓝点缀、衬线标题、适合屏幕长读的正文、暖调中性灰——延伸为完整的 Obsidian Workspace
 外壳；不改变 Obsidian 原生导航模型。
 
 > 当前状态：**已上线 [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader)。**
-> 公开仓库：https://github.com/KKenny0/obsidian-kami · 开发版本：`0.3.0`（尚未发布）
+> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最近发布版本：`0.3.0`；下述工作空间改进尚未发布。
+
+## 当前工作空间改进
+
+正文继承 Obsidian 字体设置，强调色同步到交互控件；留白随 pane 宽度调整，
+正文宽度保持用户上限。窄 pane 优先保留正文空间，宽表格和嵌套内容局部滚动。
+搭配 Companion 时，普通阅读和 Stage 都继承用户的字体、宽度、背景与强调色。
+
+2026-09-26：维护者确认 macOS 实机验收通过。Windows 当前候选仍待验收；
+现有截图属于历史版本，不作为本轮跨平台验收证据。
 
 ---
 

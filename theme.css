@@ -71,7 +71,7 @@ settings:
   -
     id: text-accent
     title: 强调色 · Accent color
-    description: 标题、链接、选区、CTA 按钮的统一色。默认 Light 油墨蓝 #1B365D，Dark Ink Light #2D5A8A。改色瞬间换主题气质，但破坏 kami 单色克制。
+    description: 链接、强调标识和 CTA 按钮的统一色。默认 Light 油墨蓝 #1B365D，Dark Ink Light #2D5A8A。改色瞬间换主题气质，但破坏 kami 单色克制。
     type: variable-themed-color
     format: hex
     opacity: false
@@ -267,7 +267,7 @@ body.theme-light {
     /* --- Interactive (ink-blue family, ≤5% surface coverage) --- */
     --interactive-normal:          #faf9f5;
     --interactive-hover:           #f0eee4;
-    --interactive-accent:          #1B365D;
+    --interactive-accent:          var(--text-accent);
     --interactive-accent-hover:    #2a4a7a;
     --interactive-success:         #526e36;
 
@@ -528,7 +528,7 @@ body:not(.is-mobile) .workspace-ribbon .clickable-icon.is-active {
 .markdown-source-view,
 .markdown-preview-view,
 .cm-s-obsidian {
-    font-family: var(--font-text-theme);
+    font-family: var(--font-text, var(--font-text-theme));
     color: var(--text-normal);
     font-size: var(--font-text-size);
     line-height: var(--line-height-normal);
@@ -540,7 +540,7 @@ body:not(.is-mobile) .workspace-ribbon .clickable-icon.is-active {
 }
 
 .markdown-preview-view {
-    padding: clamp(36px, 6vw, 88px) clamp(24px, 5vw, 64px) 120px;
+    padding: clamp(24px, 6%, 88px) clamp(16px, 4%, 48px) 80px;
     font-variant-numeric: lining-nums tabular-nums;
 }
 
@@ -557,6 +557,7 @@ body:not(.is-mobile) .workspace-ribbon .clickable-icon.is-active {
     min-width: 0;
     max-width: 100%;
 }
+.markdown-preview-view .el-table,
 .markdown-preview-view .mermaid,
 .markdown-source-view .cm-embed-block .mermaid {
     overflow-x: auto;
@@ -566,6 +567,15 @@ body:not(.is-mobile) .workspace-ribbon .clickable-icon.is-active {
     display: block;
     max-width: none;
     height: auto;
+}
+
+/* Nested wide content scrolls inside its list/callout instead of the pane. */
+.markdown-preview-view :is(li, .callout-content) :is(table, pre, .mermaid, .internal-embed) {
+    max-width: 100%;
+    overflow-x: auto;
+}
+.markdown-preview-view :is(li, .callout-content) table {
+    display: block;
 }
 
 /* Headings — serif-led, restrained weights (no synthetic bold).
@@ -592,6 +602,16 @@ h3, .HyperMD-header-3, .cm-header-3 { font-size: 1.22em; }
 h4, .HyperMD-header-4, .cm-header-4 { font-size: 1.1em; }
 h5, .HyperMD-header-5, .cm-header-5 { font-size: 1em; color: var(--text-muted); }
 h6, .HyperMD-header-6, .cm-header-6 { font-size: 1em; color: var(--text-muted); font-weight: var(--font-normal); }
+
+@supports (container-type: inline-size) {
+    .workspace-leaf-content[data-type="markdown"] {
+        container-type: inline-size;
+    }
+    .workspace-leaf-content[data-type="markdown"] :is(h1, .inline-title) {
+        font-size: clamp(1.5em, 5cqi, 1.9em);
+        overflow-wrap: anywhere;
+    }
+}
 
 /* Reading-View-only heading rhythm */
 .markdown-preview-view h1 {
@@ -787,7 +807,7 @@ ul li::marker {
 }
 ol li::marker {
     color: var(--list-marker-color);
-    font-family: var(--font-text-theme);
+    font-family: var(--font-text, var(--font-text-theme));
     font-size: var(--font-smaller);
     font-weight: var(--font-medium);
 }
@@ -844,7 +864,7 @@ input[type="checkbox"]:checked::after {
 
 /* Tables — restrained document rows, no default Markdown grid */
 .markdown-preview-view table {
-    font-family: var(--font-text-theme);
+    font-family: var(--font-text, var(--font-text-theme));
     border-collapse: collapse;
     width: 100%;
     margin: 1.25em 0 1.65em;
@@ -860,7 +880,7 @@ input[type="checkbox"]:checked::after {
     background-color: transparent;
 }
 .markdown-preview-view th {
-    font-family: var(--font-text-theme);
+    font-family: var(--font-text, var(--font-text-theme));
     font-weight: var(--font-medium);
     text-align: left;
     padding: 0.6em 0.8em;
@@ -1283,7 +1303,7 @@ body.theme-dark {
     /* --- Interactive --- */
     --interactive-normal:          #1d1c1a;
     --interactive-hover:           #2a2926;
-    --interactive-accent:          #2D5A8A;
+    --interactive-accent:          var(--text-accent);
     --interactive-accent-hover:    #3a6a9a;
     --interactive-success:         #a3b878;
 

@@ -10,7 +10,7 @@ Outline, Ribbon, and Reading Stage, optionally install
 Kami Reader works independently, and Companion also supports Obsidian's Default
 Theme.
 
-> Last updated: 2026-08-12
+> Last updated: 2026-09-26
 
 > **Inspired by [tw93/kami](https://github.com/tw93/kami). Not affiliated with or
 > endorsed by tw93. All visual design tokens trace to the original kami project
@@ -23,7 +23,19 @@ headings, screen-readable body copy, warm-gray neutrals — onto the Obsidian ed
 Obsidian's navigation model.
 
 > Status: **Published on the [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader).**
-> Public repo: https://github.com/KKenny0/obsidian-kami · Development version: `0.3.0` (not released)
+> Public repo: https://github.com/KKenny0/obsidian-kami · Latest published version: `0.3.0`; the workspace changes below are not released yet.
+
+## Current workspace improvements
+
+Body text follows Obsidian font settings, and interactive controls follow the accent
+color. Whitespace adapts to pane width while the user's text width stays an upper
+limit. Narrow panes preserve reading space; wide tables and nested content scroll
+locally. With Companion, normal reading and Stage inherit user font, width, background,
+and accent choices.
+
+The maintainer confirmed macOS acceptance on 2026-09-26. Current-candidate Windows
+acceptance is pending. Existing screenshots show earlier versions and do not establish
+cross-platform acceptance for these changes.
 
 ---
 

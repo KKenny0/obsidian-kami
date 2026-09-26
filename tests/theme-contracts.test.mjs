@@ -38,7 +38,7 @@ test("body and heading typography stay separate without adding a setting", () =>
   assert.match(css, /--font-heading-theme:\s*"Charter", "Georgia",[\s\S]*?"LXGW WenKai Screen", "LXGW WenKai",[\s\S]*?"Source Han Serif SC"/);
   assert.match(css, /h1, h2, h3, h4, h5, h6,[\s\S]*?font-family:\s*var\(--font-heading-theme\);/);
   assert.match(css, /\.markdown-source-view \.inline-title,[\s\S]*?font-family:\s*var\(--font-heading-theme\);/);
-  assert.match(css, /\.markdown-preview-view table\s*\{[\s\S]*?font-family:\s*var\(--font-text-theme\);/);
+  assert.match(css, /\.markdown-preview-view table\s*\{[\s\S]*?font-family:\s*var\(--font-text, var\(--font-text-theme\)\);/);
 
   const ids = dataTheme.sections.flatMap((section) => section.settings).map((setting) => setting.id);
   assert.ok(ids.includes("font-text-theme"));
