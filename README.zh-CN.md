@@ -20,7 +20,7 @@ Kami Reader 可独立使用，Companion 也支持 Obsidian Default Theme。
 外壳；不改变 Obsidian 原生导航模型。
 
 > 当前状态：**已上线 [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader)。**
-> 公开仓库：https://github.com/KKenny0/obsidian-kami · 最近发布版本：`0.3.0`；下述工作空间改进尚未发布。
+> 公开仓库：https://github.com/KKenny0/obsidian-kami · 版本：`0.3.1`。
 
 ## 当前工作空间改进
 
@@ -28,7 +28,7 @@ Kami Reader 可独立使用，Companion 也支持 Obsidian Default Theme。
 正文宽度保持用户上限。窄 pane 优先保留正文空间，宽表格和嵌套内容局部滚动。
 搭配 Companion 时，普通阅读和 Stage 都继承用户的字体、宽度、背景与强调色。
 
-2026-09-26：维护者确认 macOS 实机验收通过。Windows 当前候选仍待验收；
+2026-09-26：维护者确认 macOS 实机验收通过。本次按明确授权的 macOS 验收例外发布，Windows 和 Linux 尚未验收；
 现有截图属于历史版本，不作为本轮跨平台验收证据。
 
 ---

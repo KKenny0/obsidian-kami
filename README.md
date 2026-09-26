@@ -23,7 +23,7 @@ headings, screen-readable body copy, warm-gray neutrals — onto the Obsidian ed
 Obsidian's navigation model.
 
 > Status: **Published on the [Obsidian Theme Gallery](https://community.obsidian.md/themes/kami-reader).**
-> Public repo: https://github.com/KKenny0/obsidian-kami · Latest published version: `0.3.0`; the workspace changes below are not released yet.
+> Public repo: https://github.com/KKenny0/obsidian-kami · Version: `0.3.1`.
 
 ## Current workspace improvements
 
@@ -33,8 +33,8 @@ limit. Narrow panes preserve reading space; wide tables and nested content scrol
 locally. With Companion, normal reading and Stage inherit user font, width, background,
 and accent choices.
 
-The maintainer confirmed macOS acceptance on 2026-09-26. Current-candidate Windows
-acceptance is pending. Existing screenshots show earlier versions and do not establish
+The maintainer confirmed macOS acceptance on 2026-09-26. This release has an explicitly approved macOS-only acceptance exception; Windows
+and Linux are not validated. Existing screenshots show earlier versions and do not establish
 cross-platform acceptance for these changes.
 
 ---
